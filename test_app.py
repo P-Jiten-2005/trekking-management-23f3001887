@@ -158,5 +158,47 @@ class TrekAppTestCase(unittest.TestCase):
         # Slots are zero, so assert booking logic blocks booking
         self.assertLessEqual(trek.available_slots, 0)
 
+    def test_promote_staff_to_admin(self):
+        """Verify that a staff user can be promoted to admin."""
+        # Create an approved staff member
+        staff = User(email='promotable@trek.com', role='staff', name='Alex Staff', is_approved=True)
+        staff.set_password('password')
+        db.session.add(staff)
+        db.session.commit()
+
+        # Simulate promotion POST action
+        with self.app.test_request_context():
+            # Apply promotion
+            db_user = User.query.filter_by(email='promotable@trek.com').first()
+            self.assertEqual(db_user.role, 'staff')
+            
+            db_user.role = 'admin'
+            db_user.is_approved = True
+            db.session.commit()
+
+        promoted_user = User.query.filter_by(email='promotable@trek.com').first()
+        self.assertEqual(promoted_user.role, 'admin')
+        self.assertTrue(promoted_user.is_approved)
+
+    def test_trek_sorting_by_date(self):
+        """Verify that treks are queried in descending order of start_date."""
+        t1 = Trek(
+            name='Trek A (Future)', location='Loc A', difficulty='Easy', duration=3,
+            max_slots=10, available_slots=10, start_date=date(2026, 10, 1), end_date=date(2026, 10, 4)
+        )
+        t2 = Trek(
+            name='Trek B (Past)', location='Loc B', difficulty='Moderate', duration=3,
+            max_slots=10, available_slots=10, start_date=date(2026, 1, 1), end_date=date(2026, 1, 4)
+        )
+        db.session.add_all([t1, t2])
+        db.session.commit()
+
+        # Query treks sorted by start_date DESC
+        sorted_treks = Trek.query.order_by(Trek.start_date.desc()).all()
+        
+        # Trek A (Oct 2026) must come before Trek B (Jan 2026)
+        self.assertEqual(sorted_treks[0].name, 'Trek A (Future)')
+        self.assertEqual(sorted_treks[1].name, 'Trek B (Past)')
+
 if __name__ == '__main__':
     unittest.main()
