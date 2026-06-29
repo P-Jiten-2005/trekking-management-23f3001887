@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from extensions import db
 from models import User, Trek, Booking
@@ -71,13 +71,12 @@ def manage_treks():
 
     search = request.args.get('search', '')
     if search:
-        # Search by name or exact ID match
-        treks = Trek.query.filter((Trek.name.like(f"%{search}%")) | (Trek.id == search)).all()
+        treks = Trek.query.filter((Trek.name.like(f"%{search}%")) | (Trek.id == search)).order_by(Trek.start_date.desc()).all()
     else:
-        treks = Trek.query.all()
+        treks = Trek.query.order_by(Trek.start_date.desc()).all()
 
     staff_members = User.query.filter_by(role='staff', is_approved=True).all()
-    return render_template('manage_treks.html', treks=treks, staff_members=staff_members, search=search)
+    return render_template('manage_treks.html', treks=treks, staff_members=staff_members, search=search, today=date.today())
 
 @admin_bp.route('/admin/users', methods=['GET', 'POST'])
 @role_required('admin')
@@ -91,6 +90,14 @@ def user_management():
             user.is_approved = True
             db.session.commit()
             flash(f'Staff {user.name} approved successfully.', 'success')
+        elif action == 'promote_to_admin':
+            if user.role != 'staff':
+                flash('Only staff members can be promoted to Admin.', 'danger')
+            else:
+                user.role = 'admin'
+                user.is_approved = True
+                db.session.commit()
+                flash(f'Staff member {user.name} has been promoted to Admin.', 'success')
         elif action == 'toggle_blacklist':
             user.is_blacklisted = not user.is_blacklisted
             db.session.commit()
@@ -100,11 +107,13 @@ def user_management():
 
     search = request.args.get('search', '')
     if search:
-        users = User.query.filter(
+        query = User.query.filter(
             ((User.name.like(f"%{search}%")) | (User.email.like(f"%{search}%")) | (User.id == search)) & (User.role != 'admin')
-        ).all()
+        )
     else:
-        users = User.query.filter(User.role != 'admin').all()
+        query = User.query.filter(User.role != 'admin')
+
+    users = query.order_by(User.name.asc()).all()
 
     return render_template('user_management.html', users=users, search=search)
 
