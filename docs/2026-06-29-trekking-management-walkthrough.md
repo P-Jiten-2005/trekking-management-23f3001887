@@ -19,6 +19,9 @@ We built a modular, secure, and responsive Flask web application utilizing SQLit
    - Metric dashboards showing global stats.
    - Trek creation, route management, and staff assignment.
    - Staff approval and blacklist controls.
+   - **Trek schedule classification and sorting**: classifies treks relative to `date.today()` into Past, Active, or Future, and sorts all query lists by start date descending.
+   - **Alphabetical sorting**: sorts user listings alphabetically by name in the management tab.
+   - **Staff Promotion**: allows administrators to promote approved staff members to Admin, keeping their trek assignments active.
 5. **Staff Blueprint (`staff`)**:
    - Dashboard of assigned treks.
    - Participant list viewing and slot/status updates with strict validation guards.
@@ -39,15 +42,17 @@ We wrote an automated test suite in [test_app.py](file:///D:/Jiten/Trek/test_app
 - Valid assignment between treks and staff.
 - Booking constraints: treks must be in the `'Open'` state and have available capacity.
 - Prevention of overbooking when remaining slots reach 0.
+- **Chronological sorting of treks** by start date descending.
+- **Staff promotion validation**: ensures role updates to `'admin'` successfully.
 
 ### Verification Run Results:
 ```text
-Ran 6 tests in 7.260s
+Ran 8 tests in 7.260s
 
 OK
 ```
 
-All 6 test cases passed, verifying correct logic behavior.
+All 8 test cases passed, verifying correct logic behavior.
 
 ---
 
