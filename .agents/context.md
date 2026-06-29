@@ -9,7 +9,7 @@ This file tracks the current system architecture, database schema, active branch
 - **Database Engine**: SQLite
 - **Database File Location**: `instance/trekking.db` (locally created, ignored by Git)
 - **Unit Test File**: `test_app.py`
-- **Verification Status**: ✅ 6/6 tests passing (OK)
+- **Verification Status**: ✅ 8/8 tests passing (OK)
 
 ## 2. Directory Structure
 ```text
@@ -65,8 +65,11 @@ D:\Jiten\Trek/
 └── docs/                   # Project documentation
     ├── 2026-06-29-trekking-management-plan.md
     ├── 2026-06-29-trekking-management-walkthrough.md
+    ├── 2026-06-29-admin-search-and-promote-plan.md
     └── superpowers/specs/
-        └── 2026-06-29-trekking-management-design.md
+        ├── 2026-06-29-trekking-management-design.md
+        ├── 2026-06-29-promote-staff-to-admin-design.md
+        └── 2026-06-29-admin-search-and-promote-design.md
 ```
 
 ## 3. Database Schema (SQLite)
@@ -75,7 +78,7 @@ D:\Jiten\Trek/
 - `id` (INTEGER, PK)
 - `email` (VARCHAR(150), Unique, Not Null)
 - `password_hash` (VARCHAR(256), Not Null)
-- `role` (VARCHAR(20), Not Null)
+- `role` (VARCHAR(20), Not Null) - Admin, Trek Staff, or Trekker.
 - `name` (VARCHAR(100), Not Null)
 - `contact_details` (VARCHAR(200), Nullable)
 - `is_approved` (BOOLEAN, Default: True) - False for registered staff.
@@ -105,7 +108,9 @@ D:\Jiten\Trek/
 - Seeding: Verified that `init_db.py` populates `admin@trek.com` (password: `admin123`).
 - Security guards: Checked that blacklisted or unapproved accounts are restricted correctly.
 - Slot operations: Atomic decrements on booking are covered and fail when slots run out.
+- Promotion validation: Verified that promoting a staff member updates their database role to `'admin'` successfully.
+- Chronological marking: Verified that treks correctly class as Past, Active, or Future, and order by start date descending.
 
 ## 5. Next Steps / Actions
-- Stage `.agents/changelog.md` and `.agents/context.md`, commit them, and push them to the GitHub remote repository.
+- Stage all new spec, plan, and agent docs, and push them to the GitHub remote repository.
 - Await any instructions or feature enhancements from the user.

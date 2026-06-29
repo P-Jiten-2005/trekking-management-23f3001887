@@ -23,6 +23,9 @@ This file tracks all changes made by the AI agent during the project development
   - Staff whitelisting, approval, and user/staff deactivation/blacklisting.
   - Booking list views.
   - Search engine for treks, staff, and users.
+  - **Added "Promote Staff to Admin" capability** in `user_management` with confirmation gating.
+  - **Added sorting and chronological classification for treks** (Past, Active, Future) based on dates compared to `date.today()`, ordered by `start_date` descending.
+  - **Added sorting for users** in the Management view (alphabetically by name).
 - Created `staff` Blueprint (`staff/routes.py` and templates):
   - Assigned treks overview.
   - Registered trekkers contacts list.
@@ -37,7 +40,12 @@ This file tracks all changes made by the AI agent during the project development
   - `templates/base.html`: Common container header, navigation bar with role-specific items, alert flashes, and standard bootstrap bundle.
   - `templates/index.html`: Dynamic welcome page showing dashboard links if logged in, otherwise auth choices.
 - Created database seed script `init_db.py` to create tables and pre-populate the default Admin account (`admin@trek.com` / `admin123`).
-- Created `test_app.py` containing automated unit test suites for database relationships, access levels, slot rules, and overbooking checks.
+- Created `test_app.py` containing automated unit test suites:
+  - Database relationships and model creation.
+  - Access controls and approval limits.
+  - Overbooking checks.
+  - **Added `test_promote_staff_to_admin`** unit test.
+  - **Added `test_trek_sorting_by_date`** unit test.
 - Initialized local git repository, added all code and documents, and committed them to `master`.
 - Created `.gitignore` file to ignore build folders, environment files, and local SQLite databases.
 - Configured git remote pointing to `https://github.com/P-Jiten-2005/trekking-management-23f3001887`.
