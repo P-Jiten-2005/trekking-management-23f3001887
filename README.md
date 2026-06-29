@@ -1,11 +1,5 @@
 # 🏔️ TrekManager - Trekking Management System
 
-[![Python Version](https://img.shields.ly/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![Framework](https://img.shields.ly/badge/framework-Flask-lightgrey.svg)](https://flask.palletsprojects.com/)
-[![Database](https://img.shields.ly/badge/database-SQLite-green.svg)](https://www.sqlite.org/)
-[![Style](https://img.shields.ly/badge/styling-Bootstrap%205-purple.svg)](https://getbootstrap.com/)
-[![Build Status](https://img.shields.ly/badge/tests-8%2F8%20passed-success.svg)](https://github.com/)
-
 **TrekManager** is a premium, feature-rich web portal designed for trekking agencies, guides, and adventure enthusiasts. It streamlines booking workflows, trek assignments, guide coordinations, and participant tracking, replacing messy spreadsheets and manual planning with a unified, role-based dashboard system.
 
 ---
