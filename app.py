@@ -1,10 +1,6 @@
 from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
 from config import Config
-
-db = SQLAlchemy()
-login_manager = LoginManager()
+from extensions import db, login_manager
 
 def create_app():
     app = Flask(__name__)

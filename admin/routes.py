@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import Blueprint, render_template, redirect, url_for, flash, request
-from app import db
+from extensions import db
 from models import User, Trek, Booking
 from decorators import role_required
 

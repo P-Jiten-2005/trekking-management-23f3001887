@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import current_user
-from app import db
+from extensions import db
 from models import Trek, Booking, User
 from decorators import role_required
 
