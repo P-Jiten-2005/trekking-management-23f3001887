@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}TrekManager - Welcome{% endblock %}
+{% block content %}
+<div class="row align-items-center py-5">
+    <div class="col-md-6">
+        <h1 class="display-3 fw-bold text-success mb-3">TrekManager 🏔️</h1>
+        <p class="lead text-muted mb-4">Empowering trekking organizations to coordinate seamlessly. Track schedules, register participants, and explore breathtaking destinations with ease.</p>
+        
+        {% if current_user.is_authenticated %}
+            {% if current_user.role == 'admin' %}
+                <a href="{{ url_for('admin.dashboard') }}" class="btn btn-success btn-lg shadow-sm me-2">Go to Admin Dashboard</a>
+            {% elif current_user.role == 'staff' %}
+                <a href="{{ url_for('staff.dashboard') }}" class="btn btn-primary btn-lg shadow-sm me-2">Go to Staff Dashboard</a>
+            {% else %}
+                <a href="{{ url_for('trekker.dashboard') }}" class="btn btn-success btn-lg shadow-sm me-2">Find a Trek Route</a>
+            {% endif %}
+        {% else %}
+            <div class="d-flex flex-wrap gap-3">
+                <a href="{{ url_for('auth.login') }}" class="btn btn-success btn-lg shadow-sm">Log In</a>
+                <a href="{{ url_for('auth.register_trekker') }}" class="btn btn-outline-dark btn-lg">Register as Trekker</a>
+                <a href="{{ url_for('auth.register_staff') }}" class="btn btn-outline-primary btn-lg">Register as Staff</a>
+            </div>
+        {% endif %}
+    </div>
+    <div class="col-md-6 text-center py-4">
+        <span style="font-size: 8rem; display: block; filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.15));">🥾⛺🌲</span>
+    </div>
+</div>
+{% endblock %}

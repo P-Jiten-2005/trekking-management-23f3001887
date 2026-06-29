@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% block title %}Manage Treks{% endblock %}
+{% block content %}
+<div class="row align-items-center mb-4">
+    <div class="col-md-8">
+        <h2 class="fw-bold">Manage Treks</h2>
+    </div>
+    <div class="col-md-4 text-end">
+        <button type="button" class="btn btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#createTrekModal">➕ Create New Trek</button>
+    </div>
+</div>
+
+<div class="card p-3 mb-4">
+    <form method="GET" action="{{ url_for('admin.manage_treks') }}" class="row g-3">
+        <div class="col-md-10">
+            <input type="text" name="search" class="form-control" placeholder="Search treks by name or ID" value="{{ search }}">
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-secondary w-100">Search</button>
+        </div>
+    </form>
+</div>
+
+<div class="card p-4">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Trek Name</th>
+                    <th>Location</th>
+                    <th>Difficulty</th>
+                    <th>Duration</th>
+                    <th>Slots Available</th>
+                    <th>Status</th>
+                    <th>Assigned Staff</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trek in treks %}
+                <tr>
+                    <td><strong>#{{ trek.id }}</strong></td>
+                    <td>{{ trek.name }}</td>
+                    <td>{{ trek.location }}</td>
+                    <td>
+                        {% if trek.difficulty == 'Easy' %}
+                        <span class="badge bg-success text-white">{{ trek.difficulty }}</span>
+                        {% elif trek.difficulty == 'Moderate' %}
+                        <span class="badge bg-warning text-dark">{{ trek.difficulty }}</span>
+                        {% else %}
+                        <span class="badge bg-danger text-white">{{ trek.difficulty }}</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ trek.duration }} Days</td>
+                    <td>{{ trek.available_slots }} / {{ trek.max_slots }}</td>
+                    <td>
+                        {% if trek.status == 'Pending' %}
+                        <span class="badge bg-warning text-dark">Pending</span>
+                        {% elif trek.status == 'Approved' %}
+                        <span class="badge bg-primary">Approved</span>
+                        {% elif trek.status == 'Open' %}
+                        <span class="badge bg-success">Open</span>
+                        {% elif trek.status == 'Closed' %}
+                        <span class="badge bg-secondary">Closed</span>
+                        {% else %}
+                        <span class="badge bg-info">Completed</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if trek.staff %}
+                        <span class="text-dark font-monospace">{{ trek.staff.name }}</span>
+                        {% else %}
+                        <span class="text-muted italic">Unassigned</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            {% if trek.status == 'Pending' %}
+                            <form method="POST" action="{{ url_for('admin.manage_treks') }}">
+                                <input type="hidden" name="action" value="approve">
+                                <input type="hidden" name="trek_id" value="{{ trek.id }}">
+                                <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                            </form>
+                            {% endif %}
+                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#assignModal{{ trek.id }}">Assign Staff</button>
+                            <form method="POST" action="{{ url_for('admin.manage_treks') }}" onsubmit="return confirm('Are you sure you want to delete this trek? This will remove all associated bookings.');">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="trek_id" value="{{ trek.id }}">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Assign Modal -->
+                <div class="modal fade" id="assignModal{{ trek.id }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form method="POST" action="{{ url_for('admin.manage_treks') }}">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Assign Staff for {{ trek.name }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="hidden" name="action" value="assign">
+                                    <input type="hidden" name="trek_id" value="{{ trek.id }}">
+                                    <div class="mb-3">
+                                        <label class="form-label">Trek Staff Member</label>
+                                        <select name="assigned_staff_id" class="form-select">
+                                            <option value="">None (Unassign)</option>
+                                            {% for staff in staff_members %}
+                                            <option value="{{ staff.id }}" {% if trek.assigned_staff_id == staff.id %}selected{% endif %}>{{ staff.name }} ({{ staff.email }})</option>
+                                            {% endfor %}
+                                        </select>
+                                        <small class="text-muted">Only approved staff members are listed here.</small>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save Assignment</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <tr>
+                    <td colspan="9" class="text-center py-4 text-muted">No treks found. Create one to get started!</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Create Trek Modal -->
+<div class="modal fade" id="createTrekModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ url_for('admin.manage_treks') }}">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Trek Route</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="action" value="create">
+                    <div class="mb-3">
+                        <label class="form-label">Trek Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="e.g. Everest Base Camp" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Location</label>
+                        <input type="text" name="location" class="form-control" placeholder="e.g. Nepal Himalayas" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Difficulty</label>
+                        <select name="difficulty" class="form-select">
+                            <option value="Easy">Easy 🟢</option>
+                            <option value="Moderate">Moderate 🟡</option>
+                            <option value="Hard">Hard 🔴</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Duration (in Days)</label>
+                        <input type="number" name="duration" class="form-control" min="1" placeholder="e.g. 12" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Maximum Slots</label>
+                        <input type="number" name="max_slots" class="form-control" min="1" placeholder="e.g. 15" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Start Date</label>
+                        <input type="date" name="start_date" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">End Date</label>
+                        <input type="date" name="end_date" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Assign Staff (Optional)</label>
+                        <select name="assigned_staff_id" class="form-select">
+                            <option value="">None</option>
+                            {% for staff in staff_members %}
+                            <option value="{{ staff.id }}">{{ staff.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create Route</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

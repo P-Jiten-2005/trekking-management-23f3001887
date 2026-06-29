@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Staff Dashboard - TrekManager{% endblock %}
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h2 class="fw-bold">Staff Dashboard</h2>
+        <p class="text-muted">Manage your assigned trekking expeditions.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card p-4">
+            <h4 class="fw-bold mb-3">Your Assigned Treks</h4>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Trek ID</th>
+                            <th>Trek Name</th>
+                            <th>Location</th>
+                            <th>Date Range</th>
+                            <th>Available Slots / Capacity</th>
+                            <th>Active Registrations</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in treks_data %}
+                        <tr>
+                            <td><strong>#{{ data.trek.id }}</strong></td>
+                            <td>{{ data.trek.name }}</td>
+                            <td>{{ data.trek.location }}</td>
+                            <td>{{ data.trek.start_date.strftime('%Y-%m-%d') }} to {{ data.trek.end_date.strftime('%Y-%m-%d') }}</td>
+                            <td>{{ data.trek.available_slots }} / {{ data.trek.max_slots }}</td>
+                            <td>{{ data.booking_count }}</td>
+                            <td>
+                                {% if data.trek.status == 'Pending' %}
+                                <span class="badge bg-warning text-dark">Pending</span>
+                                {% elif data.trek.status == 'Approved' %}
+                                <span class="badge bg-primary">Approved</span>
+                                {% elif data.trek.status == 'Open' %}
+                                <span class="badge bg-success">Open</span>
+                                {% elif data.trek.status == 'Closed' %}
+                                <span class="badge bg-secondary">Closed</span>
+                                {% else %}
+                                <span class="badge bg-info">Completed</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a href="{{ url_for('staff.edit_trek', trek_id=data.trek.id) }}" class="btn btn-sm btn-primary">Update Details</a>
+                                    <a href="{{ url_for('staff.view_participants', trek_id=data.trek.id) }}" class="btn btn-sm btn-outline-secondary">View Trekkers</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="8" class="text-center py-4 text-muted">You have no treks assigned by the Administrator.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

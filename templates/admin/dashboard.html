@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard - TrekManager{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-12 mb-4">
+        <h1 class="fw-bold">Admin Dashboard</h1>
+        <p class="text-muted">Overview of the Trekking Management System</p>
+    </div>
+</div>
+<div class="row g-4">
+    <div class="col-md-3">
+        <div class="card p-4 text-center bg-primary text-white h-100">
+            <h5 class="opacity-75">Total Treks</h5>
+            <h2 class="display-4 fw-bold my-2">{{ total_treks }}</h2>
+            <a href="{{ url_for('admin.manage_treks') }}" class="btn btn-sm btn-light mt-3">Manage Treks</a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-4 text-center bg-success text-white h-100">
+            <h5 class="opacity-75">Total Trekkers</h5>
+            <h2 class="display-4 fw-bold my-2">{{ total_users }}</h2>
+            <a href="{{ url_for('admin.user_management') }}" class="btn btn-sm btn-light mt-3">View Users</a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-4 text-center bg-info text-white h-100">
+            <h5 class="opacity-75">Total Staff</h5>
+            <h2 class="display-4 fw-bold my-2">{{ total_staff }}</h2>
+            <a href="{{ url_for('admin.user_management') }}" class="btn btn-sm btn-light mt-3">Manage Staff</a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-4 text-center bg-warning text-dark h-100">
+            <h5 class="opacity-75">Total Bookings</h5>
+            <h2 class="display-4 fw-bold my-2">{{ total_bookings }}</h2>
+            <a href="{{ url_for('admin.view_bookings') }}" class="btn btn-sm btn-dark mt-3">View Bookings</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
