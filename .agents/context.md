@@ -26,6 +26,8 @@ D:\Jiten\Trek/
 ├── test_app.py             # Unit tests suite
 ├── requirements.txt        # Package dependencies
 ├── .gitignore              # Files gitignore file
+├── logfile.md              # Turn-by-turn chat and changes log
+├── README.md               # Visual system documentation
 │
 ├── auth/                   # Authentication Blueprint
 │   └── routes.py
@@ -112,5 +114,5 @@ D:\Jiten\Trek/
 - Chronological marking: Verified that treks correctly class as Past, Active, or Future, and order by start date descending.
 
 ## 5. Next Steps / Actions
-- Stage all new spec, plan, and agent docs, and push them to the GitHub remote repository.
+- Stage new changes (README, logfile, context) and push them to the GitHub remote repository.
 - Await any instructions or feature enhancements from the user.

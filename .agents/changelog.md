@@ -50,6 +50,7 @@ This file tracks all changes made by the AI agent during the project development
 - Created `.gitignore` file to ignore build folders, environment files, and local SQLite databases.
 - Configured git remote pointing to `https://github.com/P-Jiten-2005/trekking-management-23f3001887`.
 - Renamed default branch to `main` and pushed codebase to remote.
+- **Created a visually rich and detailed `README.md`** file in the root directory.
 
 ### Fixed
 - Fixed a `RuntimeError` regarding SQLAlchemy registry bindings by moving `db` to a standalone `extensions.py` module, removing circular import chains.
