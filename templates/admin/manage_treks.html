@@ -33,6 +33,7 @@
                     <th>Duration</th>
                     <th>Slots Available</th>
                     <th>Status</th>
+                    <th>Trek Schedule</th>
                     <th>Assigned Staff</th>
                     <th>Actions</th>
                 </tr>
@@ -65,6 +66,15 @@
                         <span class="badge bg-secondary">Closed</span>
                         {% else %}
                         <span class="badge bg-info">Completed</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if trek.end_date < today %}
+                        <span class="badge bg-secondary text-white">Past 🕰️</span>
+                        {% elif trek.start_date <= today and today <= trek.end_date %}
+                        <span class="badge bg-success text-white">Active 🏃♂️</span>
+                        {% else %}
+                        <span class="badge bg-info text-dark">Future 📅</span>
                         {% endif %}
                     </td>
                     <td>
@@ -126,7 +136,7 @@
                 </div>
                 {% else %}
                 <tr>
-                    <td colspan="9" class="text-center py-4 text-muted">No treks found. Create one to get started!</td>
+                    <td colspan="10" class="text-center py-4 text-muted">No treks found. Create one to get started!</td>
                 </tr>
                 {% endfor %}
             </tbody>

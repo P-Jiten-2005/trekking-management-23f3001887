@@ -73,6 +73,13 @@
                                 <button type="submit" class="btn btn-sm btn-success">Approve Staff</button>
                             </form>
                             {% endif %}
+                            {% if user.role == 'staff' and user.is_approved %}
+                            <form method="POST" action="{{ url_for('admin.user_management') }}" onsubmit="return confirm('Are you sure you want to promote {{ user.name }} to Admin? This action cannot be undone.');" style="display:inline;">
+                                <input type="hidden" name="user_id" value="{{ user.id }}">
+                                <input type="hidden" name="action" value="promote_to_admin">
+                                <button type="submit" class="btn btn-sm btn-outline-warning">Promote to Admin 👑</button>
+                            </form>
+                            {% endif %}
                             <form method="POST" action="{{ url_for('admin.user_management') }}">
                                 <input type="hidden" name="user_id" value="{{ user.id }}">
                                 <input type="hidden" name="action" value="toggle_blacklist">
