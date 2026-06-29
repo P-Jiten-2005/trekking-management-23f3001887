@@ -3,16 +3,20 @@
 This file tracks the current system architecture, database schema, active branch, verification status, and next steps for the Trekking Management Application.
 
 ## 1. Environment Details
-- **Active Git Branch**: `master`
+- **Active Git Branch**: `main`
+- **Git Remote Origin**: `https://github.com/P-Jiten-2005/trekking-management-23f3001887`
 - **Application Port**: `5000` (Default)
 - **Database Engine**: SQLite
-- **Database File Location**: `instance/trekking.db`
+- **Database File Location**: `instance/trekking.db` (locally created, ignored by Git)
 - **Unit Test File**: `test_app.py`
 - **Verification Status**: ✅ 6/6 tests passing (OK)
 
 ## 2. Directory Structure
 ```text
 D:\Jiten\Trek/
+├── .agents/                # Agent logs and workspace contexts
+│   ├── changelog.md
+│   └── context.md
 ├── app.py                  # App factory and entry point
 ├── config.py               # Database and key configurations
 ├── extensions.py           # Shared SQLAlchemy & LoginManager instances
@@ -21,6 +25,7 @@ D:\Jiten\Trek/
 ├── init_db.py              # DB creation & Admin seeding script
 ├── test_app.py             # Unit tests suite
 ├── requirements.txt        # Package dependencies
+├── .gitignore              # Files gitignore file
 │
 ├── auth/                   # Authentication Blueprint
 │   └── routes.py
@@ -102,5 +107,5 @@ D:\Jiten\Trek/
 - Slot operations: Atomic decrements on booking are covered and fail when slots run out.
 
 ## 5. Next Steps / Actions
-- Stage `.agents/changelog.md` and `.agents/context.md` and commit them to Git.
+- Stage `.agents/changelog.md` and `.agents/context.md`, commit them, and push them to the GitHub remote repository.
 - Await any instructions or feature enhancements from the user.

@@ -39,7 +39,11 @@ This file tracks all changes made by the AI agent during the project development
 - Created database seed script `init_db.py` to create tables and pre-populate the default Admin account (`admin@trek.com` / `admin123`).
 - Created `test_app.py` containing automated unit test suites for database relationships, access levels, slot rules, and overbooking checks.
 - Initialized local git repository, added all code and documents, and committed them to `master`.
+- Created `.gitignore` file to ignore build folders, environment files, and local SQLite databases.
+- Configured git remote pointing to `https://github.com/P-Jiten-2005/trekking-management-23f3001887`.
+- Renamed default branch to `main` and pushed codebase to remote.
 
 ### Fixed
 - Fixed a `RuntimeError` regarding SQLAlchemy registry bindings by moving `db` to a standalone `extensions.py` module, removing circular import chains.
 - Fixed a test runner `IntegrityError` by calling `trekker.set_password('password')` on mock users during test creation, ensuring the NOT NULL constraint is satisfied.
+- Removed build cache files (`__pycache__`) and local database files (`instance/trekking.db`) from git index tracking so they are ignored under new `.gitignore` rules.
