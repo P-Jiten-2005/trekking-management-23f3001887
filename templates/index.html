@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% block title %}TrekManager - Welcome{% endblock %}
+{% block title %}HikerHub - Welcome{% endblock %}
 {% block content %}
 <div class="row align-items-center py-5">
     <div class="col-md-6">
-        <h1 class="display-3 fw-bold text-success mb-3">TrekManager 🏔️</h1>
-        <p class="lead text-muted mb-4">Empowering trekking organizations to coordinate seamlessly. Track schedules, register participants, and explore breathtaking destinations with ease.</p>
+        <h1 class="display-3 fw-bold text-success mb-3">HikerHub 🏔️</h1>
+        <p class="lead text-muted mb-4">Your next adventure starts with the right community</p>
         
         {% if current_user.is_authenticated %}
             {% if current_user.role == 'admin' %}

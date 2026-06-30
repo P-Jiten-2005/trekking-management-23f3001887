@@ -1,6 +1,6 @@
-# 🏔️ TrekManager - Trekking Management System
+# 🏔️ HikerHub - Trekking Management System
 
-**TrekManager** is a premium, feature-rich web portal designed for trekking agencies, guides, and adventure enthusiasts. It streamlines booking workflows, trek assignments, guide coordinations, and participant tracking, replacing messy spreadsheets and manual planning with a unified, role-based dashboard system.
+**HikerHub** is a premium, feature-rich web portal designed for trekking agencies, guides, and adventure enthusiasts. It streamlines booking workflows, trek assignments, guide coordinations, and participant tracking, replacing messy spreadsheets and manual planning with a unified, role-based dashboard system.
 
 ---
 
