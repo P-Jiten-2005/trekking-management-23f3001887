@@ -93,3 +93,10 @@ This file documents the chronological conversation history and technical changes
   - Replaced `templates/index.html` with a standalone responsive marketing layout featuring the logo, sticky top navbar, full-screen viewport hero, and sections for "What We Do", "Get Involved" (with login links), and "About".
 - **Verification**: Ran the automated unit tests and verified all **8/8 unit tests passed successfully**.
 - **Git Actions**: Staged all assets (including design specification and plan) and committed them.
+
+## Turn 13 (Landing Page Portal Simplification)
+- **User Prompt**: Requested changing the two guest registration cards in the "Get Involved" section of the landing page to a single, centered "Log In" button.
+- **Agent Action**:
+  - Replaced the dual-column card layouts in the guest block of `templates/index.html` with a single centered card block housing a prominent "Log In" button.
+- **Verification**: Verified that all 8 unit tests passed successfully (`OK`).
+- **Git Actions**: Staged, committed, and pushed the template layout changes to the remote repository `main` branch.

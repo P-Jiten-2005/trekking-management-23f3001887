@@ -116,8 +116,8 @@ D:\Jiten\Trek/
 - Slot operations: Atomic decrements on booking are covered and fail when slots run out.
 - Promotion validation: Verified that promoting a staff member updates their database role to `'admin'` successfully.
 - Chronological marking: Verified that treks correctly class as Past, Active, or Future, and order by start date descending.
-- Landing page display: Standalone page with fixed transparent nav and background image overlay works cleanly.
+- Landing page display: Standalone page with fixed transparent nav, centered Get Involved "Log In" button, and background image overlay works cleanly.
 
 ## 5. Next Steps / Actions
-- Stage all landing page commits and push them to the GitHub remote repository.
+- Stage new changes (index.html simplification, changelog/context) and push them to the remote GitHub repository.
 - Await any instructions or feature enhancements from the user.

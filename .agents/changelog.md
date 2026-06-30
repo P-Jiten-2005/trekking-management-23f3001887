@@ -12,6 +12,7 @@ This file tracks all changes made by the AI agent during the project development
 - Changed default seeded Admin email from `admin@trek.com` to `Jiten@trek.com` and password from `admin123` to `Jiten@123` across `app.py`, `init_db.py`, `test_app.py`, and `README.md`.
 - **Renamed application brand name to HikerHub** across all HTML templates and documentation layout.
 - **Updated application caption** in `index.html` to *"Your next adventure starts with the right community"*.
+- **Simplified guest access block** on the landing page to render a single, centered **Log In** button instead of dual columns for registering.
 
 ### Fixed
 - Fixed a template namespace collision where Flask resolved `dashboard.html` to the admin version for other roles by removing `template_folder` overrides from blueprints and prefixing all `render_template` calls with their subdirectory (e.g. `render_template('trekker/dashboard.html')`).

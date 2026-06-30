@@ -95,29 +95,9 @@
                     {% endif %}
                 </div>
             {% else %}
-                <div class="row g-4 justify-content-center mt-3">
-                    <div class="col-md-5">
-                        <div class="card border-0 shadow-sm p-4 h-100 rounded-4 text-center">
-                            <span class="fs-1 mb-2">🏕️</span>
-                            <h4 class="fw-bold">For Trekkers</h4>
-                            <p class="text-muted flex-grow-1">Book open treks, manage registrations, and discover new peaks.</p>
-                            <div class="d-grid gap-2">
-                                <a href="{{ url_for('auth.register_trekker') }}" class="btn btn-success py-2 shadow-sm">Register as Trekker</a>
-                                <a href="{{ url_for('auth.login') }}" class="btn btn-outline-success py-2">Log In</a>
-                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="card border-0 shadow-sm p-4 h-100 rounded-4 text-center">
-                            <span class="fs-1 mb-2">🏔️</span>
-                            <h4 class="fw-bold">For Trek Staff</h4>
-                            <p class="text-muted flex-grow-1">Manage assigned treks, view participants lists, and update capacities.</p>
-                            <div class="d-grid gap-2">
-                                <a href="{{ url_for('auth.register_staff') }}" class="btn btn-primary py-2 shadow-sm">Register as Staff</a>
-                                <a href="{{ url_for('auth.login') }}" class="btn btn-outline-primary py-2">Log In</a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="text-center py-4 bg-white rounded-4 shadow-sm col-md-6 mx-auto">
+                    <p class="lead mb-4">Access the portal to register, book treks, manage schedules, or coordinate routes.</p>
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-success btn-lg px-5 py-3 shadow-sm">Log In</a>
                 </div>
             {% endif %}
         </div>
