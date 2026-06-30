@@ -57,3 +57,83 @@ body {
     font-size: 0.85em;
     border-radius: 8px;
 }
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Landing Navbar */
+.landing-nav {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(10px);
+}
+
+.landing-nav .navbar-brand {
+    font-weight: 700;
+    color: #1a330e !important;
+}
+
+.landing-nav .nav-link {
+    color: #2b4c1e !important;
+    font-weight: 600;
+}
+
+.landing-nav .nav-link:hover {
+    color: #7ba662 !important;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    background: url('/static/images/himalayan_mountains.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 38, 12, 0.45); /* Dark forest overlay */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 35px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* responsive hero scaling */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+}
