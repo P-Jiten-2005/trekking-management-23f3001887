@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from extensions import db
 from models import User
 
-auth_bp = Blueprint('auth', __name__, template_folder='../templates/auth')
+auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -40,7 +40,7 @@ def login():
         else:
             return redirect(url_for('trekker.dashboard'))
 
-    return render_template('login.html')
+    return render_template('auth/login.html')
 
 @auth_bp.route('/logout')
 @login_required
@@ -68,7 +68,7 @@ def register_trekker():
         flash('Registration successful. Please log in.', 'success')
         return redirect(url_for('auth.login'))
 
-    return render_template('register_user.html')
+    return render_template('auth/register_user.html')
 
 @auth_bp.route('/register/staff', methods=['GET', 'POST'])
 def register_staff():
@@ -89,10 +89,10 @@ def register_staff():
         flash('Registration submitted. Waiting for admin approval.', 'warning')
         return redirect(url_for('auth.login'))
 
-    return render_template('register_staff.html')
+    return render_template('auth/register_staff.html')
 
 @auth_bp.route('/pending-approval')
 def pending_approval():
     if current_user.is_authenticated and current_user.role == 'staff' and current_user.is_approved:
         return redirect(url_for('staff.dashboard'))
-    return render_template('pending_approval.html')
+    return render_template('auth/pending_approval.html')

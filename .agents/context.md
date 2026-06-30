@@ -114,5 +114,5 @@ D:\Jiten\Trek/
 - Chronological marking: Verified that treks correctly class as Past, Active, or Future, and order by start date descending.
 
 ## 5. Next Steps / Actions
-- Stage new changes (app.py, init_db.py, test_app.py, README.md, logfile.md, context trackers) and push them to the GitHub remote repository.
+- Stage new changes (template path fix commits) and push them to the GitHub remote repository.
 - Await any instructions or feature enhancements from the user.

@@ -66,3 +66,12 @@ This file documents the chronological conversation history and technical changes
   - Executed a migration script on the active SQLite database to update the existing `admin@trek.com` user to `Jiten@trek.com` with the new password hash.
 - **Verification**: Verified that all 8 unit tests passed successfully (`OK`).
 - **Git Actions**: Staged, committed, and pushed all changes to the remote repository `main` branch.
+
+## Turn 10 (Blueprint Template Namespace Collision Fix)
+- **User Prompt**: Reported that logging in as a trekker displayed the Admin dashboard instead of the Trekker dashboard.
+- **Agent Action**:
+  - Diagnosed a template path lookup collision because multiple blueprints used a file named `dashboard.html` with flat registration.
+  - Removed the `template_folder` override parameters from all four blueprints (`admin`, `auth`, `staff`, `trekker`).
+  - Prefixed all `render_template` calls with their namespace folder (e.g. `render_template('trekker/dashboard.html')` or `render_template('admin/dashboard.html')`).
+- **Verification**: Verified that all 8 unit tests passed successfully (`OK`).
+- **Git Actions**: Staged, committed, and pushed all updates to the remote repository `main` branch.

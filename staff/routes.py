@@ -4,7 +4,7 @@ from extensions import db
 from models import Trek, Booking
 from decorators import role_required
 
-staff_bp = Blueprint('staff', __name__, template_folder='../templates/staff')
+staff_bp = Blueprint('staff', __name__)
 
 @staff_bp.route('/staff/dashboard')
 @role_required('staff')
@@ -17,7 +17,7 @@ def dashboard():
             'trek': trek,
             'booking_count': booking_count
         })
-    return render_template('dashboard.html', treks_data=treks_data)
+    return render_template('staff/dashboard.html', treks_data=treks_data)
 
 @staff_bp.route('/staff/trek/<int:trek_id>/edit', methods=['GET', 'POST'])
 @role_required('staff')
@@ -45,11 +45,11 @@ def edit_trek(trek_id):
         flash('Trek details updated successfully.', 'success')
         return redirect(url_for('staff.dashboard'))
 
-    return render_template('edit_trek.html', trek=trek, bookings_count=bookings_count)
+    return render_template('staff/edit_trek.html', trek=trek, bookings_count=bookings_count)
 
 @staff_bp.route('/staff/trek/<int:trek_id>/participants')
 @role_required('staff')
 def view_participants(trek_id):
     trek = Trek.query.filter_by(id=trek_id, assigned_staff_id=current_user.id).first_or_404()
     bookings = Booking.query.filter_by(trek_id=trek.id).all()
-    return render_template('view_participants.html', trek=trek, bookings=bookings)
+    return render_template('staff/view_participants.html', trek=trek, bookings=bookings)

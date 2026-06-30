@@ -4,7 +4,7 @@ from extensions import db
 from models import Trek, Booking, User
 from decorators import role_required
 
-trekker_bp = Blueprint('trekker', __name__, template_folder='../templates/trekker')
+trekker_bp = Blueprint('trekker', __name__)
 
 @trekker_bp.route('/trekker/dashboard')
 @role_required('trekker')
@@ -21,7 +21,7 @@ def dashboard():
         query = query.filter(Trek.difficulty == difficulty)
 
     treks = query.all()
-    return render_template('dashboard.html', treks=treks, search=search, difficulty=difficulty)
+    return render_template('trekker/dashboard.html', treks=treks, search=search, difficulty=difficulty)
 
 @trekker_bp.route('/trekker/book/<int:trek_id>', methods=['POST'])
 @role_required('trekker')
@@ -57,7 +57,7 @@ def book_trek(trek_id):
 @role_required('trekker')
 def my_bookings():
     bookings = Booking.query.filter_by(user_id=current_user.id).all()
-    return render_template('my_bookings.html', bookings=bookings)
+    return render_template('trekker/my_bookings.html', bookings=bookings)
 
 @trekker_bp.route('/trekker/profile', methods=['GET', 'POST'])
 @role_required('trekker')
@@ -72,4 +72,4 @@ def edit_profile():
         flash('Profile updated successfully.', 'success')
         return redirect(url_for('trekker.edit_profile'))
 
-    return render_template('edit_profile.html')
+    return render_template('trekker/edit_profile.html')

@@ -4,7 +4,7 @@ from extensions import db
 from models import User, Trek, Booking
 from decorators import role_required
 
-admin_bp = Blueprint('admin', __name__, template_folder='../templates/admin')
+admin_bp = Blueprint('admin', __name__)
 
 @admin_bp.route('/admin/dashboard')
 @role_required('admin')
@@ -13,7 +13,7 @@ def dashboard():
     total_users = User.query.filter_by(role='trekker').count()
     total_staff = User.query.filter_by(role='staff').count()
     total_bookings = Booking.query.count()
-    return render_template('dashboard.html', total_treks=total_treks, total_users=total_users, total_staff=total_staff, total_bookings=total_bookings)
+    return render_template('admin/dashboard.html', total_treks=total_treks, total_users=total_users, total_staff=total_staff, total_bookings=total_bookings)
 
 @admin_bp.route('/admin/treks', methods=['GET', 'POST'])
 @role_required('admin')
@@ -76,7 +76,7 @@ def manage_treks():
         treks = Trek.query.order_by(Trek.start_date.desc()).all()
 
     staff_members = User.query.filter_by(role='staff', is_approved=True).all()
-    return render_template('manage_treks.html', treks=treks, staff_members=staff_members, search=search, today=date.today())
+    return render_template('admin/manage_treks.html', treks=treks, staff_members=staff_members, search=search, today=date.today())
 
 @admin_bp.route('/admin/users', methods=['GET', 'POST'])
 @role_required('admin')
@@ -115,10 +115,10 @@ def user_management():
 
     users = query.order_by(User.name.asc()).all()
 
-    return render_template('user_management.html', users=users, search=search)
+    return render_template('admin/user_management.html', users=users, search=search)
 
 @admin_bp.route('/admin/bookings')
 @role_required('admin')
 def view_bookings():
     bookings = Booking.query.all()
-    return render_template('view_bookings.html', bookings=bookings)
+    return render_template('admin/view_bookings.html', bookings=bookings)
