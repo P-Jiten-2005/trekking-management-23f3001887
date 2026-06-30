@@ -1,6 +1,6 @@
 # 🏔️ HikerHub - Trekking Management System
 
-**HikerHub** is a premium, feature-rich web portal designed for trekking agencies, guides, and adventure enthusiasts. It streamlines booking workflows, trek assignments, guide coordinations, and participant tracking, replacing messy spreadsheets and manual planning with a unified, role-based dashboard system.
+**HikerHub** is a web application that helps manage trekking activities. It allows users to book treks, agencies to organize trips, guides to manage assigned treks, and participants to track their bookings. The system brings all these features together in one place, making trek management easier and more organized.
 
 ---
 
