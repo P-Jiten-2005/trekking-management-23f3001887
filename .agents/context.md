@@ -48,7 +48,7 @@ D:\Jiten\Trek/
 │   ├── base.html
 │   ├── index.html          # Standalone Eco-Hikes landing page
 │   ├── auth/
-│   │   ├── login.html
+│   │   ├── login.html      # Frosted glass login page
 │   │   ├── register_user.html
 │   │   ├── register_staff.html
 │   │   └── pending_approval.html
@@ -117,7 +117,8 @@ D:\Jiten\Trek/
 - Promotion validation: Verified that promoting a staff member updates their database role to `'admin'` successfully.
 - Chronological marking: Verified that treks correctly class as Past, Active, or Future, and order by start date descending.
 - Landing page display: Standalone page with fixed transparent nav, centered Get Involved "Log In" button, and background image overlay works cleanly.
+- Login screen redesign: Frosted blur container overlay, centralized form card, custom focus state markers, and inverse hover actions are fully functional.
 
 ## 5. Next Steps / Actions
-- Stage new changes (index.html simplification, changelog/context) and push them to the remote GitHub repository.
+- Stage new changes (login.html redesign, changelog/context trackers) and push them to the remote GitHub repository.
 - Await any instructions or feature enhancements from the user.

@@ -2,39 +2,196 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In - HikerHub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Viewport Lock */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Background Base Layer */
+        .bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .bg-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Frost Layer (Ambient and Backdrop Blur) */
+        .frost-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(24px); /* heavy backdrop blur effect */
+            z-index: 2;
+        }
+
+        /* Viewport Centering Context */
+        .auth-wrapper {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Centralized Authentication Card */
+        .auth-card {
+            width: 100%;
+            max-width: 420px;
+            background-color: #ffffff;
+            border-radius: 4px; /* minimal rounding */
+            border-top: 4px solid #1E7A44; /* subtle top border line */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* elevated shadow profile */
+            padding: 40px 30px;
+        }
+
+        .auth-header {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1E7A44;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+        }
+
+        /* Form Labels & Inputs */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label-custom {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748B; /* slate grey finish */
+            margin-bottom: 6px;
+            display: block;
+        }
+        .form-input-custom {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 0.95rem;
+            color: #1E293B;
+            background-color: #ffffff;
+            border: 1px solid #CBD5E1;
+            border-radius: 4px;
+            transition: all 0.2s ease-in-out;
+        }
+        .form-input-custom:focus {
+            outline: none;
+            border-color: #2563EB; /* blue focus accent ring */
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Action Button */
+        .btn-submit-custom {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            background-color: #1E7A44; /* solid forest green */
+            border: none;
+            border-radius: 2px; /* square action component */
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+        .btn-submit-custom:hover {
+            background-color: #124d2b; /* smooth dark inverse hover state */
+        }
+        .btn-submit-custom:active {
+            transform: scale(0.99);
+        }
+
+        /* Footer links */
+        .auth-footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #64748B;
+        }
+        .auth-link-custom {
+            color: #2563EB; /* distinct bright blue hyperlinked elements */
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.15s ease;
+        }
+        .auth-link-custom:hover {
+            color: #1D4ED8;
+            text-decoration: underline;
+        }
+    </style>
 </head>
-<body class="bg-light">
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <div class="card shadow-sm p-4">
-                    <h2 class="text-center text-success mb-4">Log In</h2>
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                        {% if messages %}
-                            {% for category, message in messages %}
-                                <div class="alert alert-{{ category }}">{{ message }}</div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
-                    <form method="POST" action="/login">
-                        <div class="mb-3">
-                            <label class="form-label">Email Address</label>
-                            <input type="email" name="email" class="form-control" required>
+<body>
+
+    <!-- Base Layer Background -->
+    <div class="bg-container">
+        <img class="bg-image" src="{{ url_for('static', filename='images/himalayan_mountains.jpg') }}" alt="Himalayan Mountains">
+    </div>
+
+    <!-- Frost Layer Overlay -->
+    <div class="frost-overlay"></div>
+
+    <!-- Centered Card Wrapper -->
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <h2 class="auth-header">Log In</h2>
+
+            <!-- Flash Error Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category if category != 'danger' else 'danger' }} py-2 px-3 mb-4" style="font-size: 0.9rem; border-radius: 4px;">
+                            {{ message }}
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-success w-100">Log In</button>
-                    </form>
-                    <div class="mt-3 text-center">
-                        <small>Register as <a href="/register/trekker">Trekker</a> or <a href="/register/staff">Staff</a></small>
-                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Login Form -->
+            <form method="POST" action="{{ url_for('auth.login') }}">
+                <div class="form-group">
+                    <label class="form-label-custom">Email Address</label>
+                    <input type="email" name="email" class="form-input-custom" required placeholder="name@example.com">
                 </div>
+                <div class="form-group">
+                    <label class="form-label-custom">Password</label>
+                    <input type="password" name="password" class="form-input-custom" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-submit-custom">Log In</button>
+            </form>
+
+            <!-- Footer links -->
+            <div class="auth-footer">
+                <span>Register as </span>
+                <a class="auth-link-custom" href="{{ url_for('auth.register_trekker') }}">Trekker</a>
+                <span> or </span>
+                <a class="auth-link-custom" href="{{ url_for('auth.register_staff') }}">Staff</a>
             </div>
         </div>
     </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

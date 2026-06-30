@@ -100,3 +100,12 @@ This file documents the chronological conversation history and technical changes
   - Replaced the dual-column card layouts in the guest block of `templates/index.html` with a single centered card block housing a prominent "Log In" button.
 - **Verification**: Verified that all 8 unit tests passed successfully (`OK`).
 - **Git Actions**: Staged, committed, and pushed the template layout changes to the remote repository `main` branch.
+
+## Turn 14 (Frosted Glass Login Page Redesign)
+- **User Prompt**: Requested a custom frosted-glass login page interface using a local background image (`himalayan_mountains.jpg`), a heavy uniform blur overlay (backdrop-filter: blur(24px)), a centered elevated card with a green top border line, slate grey labels, custom focus outlines, a forest green action button (#1E7A44), and blue registration hyperlinks.
+- **Agent Action**:
+  - Redesigned `templates/auth/login.html` as a standalone lock-viewport layout preventing body scroll.
+  - Implemented the background image layers and uniform frost layer overlay.
+  - Formatted the form, labels, inputs (with outline shadows), actions button (with transitions), and distinct footer hyperlinks.
+- **Verification**: Verified that all 8 unit tests passed successfully (`OK`).
+- **Git Actions**: Staged, committed, and pushed changes to the remote repository `main` branch.

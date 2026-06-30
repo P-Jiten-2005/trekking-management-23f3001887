@@ -13,6 +13,7 @@ This file tracks all changes made by the AI agent during the project development
 - **Renamed application brand name to HikerHub** across all HTML templates and documentation layout.
 - **Updated application caption** in `index.html` to *"Your next adventure starts with the right community"*.
 - **Simplified guest access block** on the landing page to render a single, centered **Log In** button instead of dual columns for registering.
+- **Redesigned the Log In interface** at `templates/auth/login.html` into a premium frosted-glass design featuring full-screen lock-viewport styling, Himalayan mountain background base layers, a 24px backdrop blur overlay, an elevated centralized form card, custom inputs with focus ring states, and a forest-green submit button (#1E7A44) with dark transitions.
 
 ### Fixed
 - Fixed a template namespace collision where Flask resolved `dashboard.html` to the admin version for other roles by removing `template_folder` overrides from blueprints and prefixing all `render_template` calls with their subdirectory (e.g. `render_template('trekker/dashboard.html')`).
