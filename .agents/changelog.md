@@ -4,6 +4,10 @@ This file tracks all changes made by the AI agent during the project development
 
 ## [2026-06-30]
 
+### Added
+- **Created a custom Eco-Hikes landing page** at `templates/index.html` featuring a sticky transparent navbar, custom menu, full-screen Himalayan hero background image, and content cards for "What We Do", "Get Involved", and "About".
+- **Added landing page style tokens** to `static/css/custom.css` (smooth scroll, glassmorphic navbar transitions, full-screen hero overlays, responsive typography).
+
 ### Changed
 - Changed default seeded Admin email from `admin@trek.com` to `Jiten@trek.com` and password from `admin123` to `Jiten@123` across `app.py`, `init_db.py`, `test_app.py`, and `README.md`.
 - **Renamed application brand name to HikerHub** across all HTML templates and documentation layout.

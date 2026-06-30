@@ -1,6 +1,6 @@
 # Workspace Context State
 
-This file tracks the current system architecture, database schema, active branch, verification status, and next steps for the HikerHub Trekking Management Application.
+This file tracks the current system architecture, database schema, active branch, verification status, and next steps for the HikerHub / Eco-Hikes Trekking Management Application.
 
 ## 1. Environment Details
 - **Active Git Branch**: `main`
@@ -39,12 +39,14 @@ D:\Jiten\Trek/
 │   └── routes.py
 │
 ├── static/
-│   └── css/
-│       └── custom.css      # Premium custom CSS styles
+│   ├── css/
+│   │   └── custom.css      # Premium custom CSS styles
+│   └── images/
+│       └── himalayan_mountains.jpg # Full-screen background image
 │
 ├── templates/              # Jinja2 HTML templates
 │   ├── base.html
-│   ├── index.html
+│   ├── index.html          # Standalone Eco-Hikes landing page
 │   ├── auth/
 │   │   ├── login.html
 │   │   ├── register_user.html
@@ -68,10 +70,12 @@ D:\Jiten\Trek/
     ├── 2026-06-29-trekking-management-plan.md
     ├── 2026-06-29-trekking-management-walkthrough.md
     ├── 2026-06-29-admin-search-and-promote-plan.md
+    ├── 2026-06-30-eco-hikes-landing-plan.md
     └── superpowers/specs/
         ├── 2026-06-29-trekking-management-design.md
         ├── 2026-06-29-promote-staff-to-admin-design.md
-        └── 2026-06-29-admin-search-and-promote-design.md
+        ├── 2026-06-29-admin-search-and-promote-design.md
+        └── 2026-06-30-eco-hikes-landing-design.md
 ```
 
 ## 3. Database Schema (SQLite)
@@ -112,7 +116,8 @@ D:\Jiten\Trek/
 - Slot operations: Atomic decrements on booking are covered and fail when slots run out.
 - Promotion validation: Verified that promoting a staff member updates their database role to `'admin'` successfully.
 - Chronological marking: Verified that treks correctly class as Past, Active, or Future, and order by start date descending.
+- Landing page display: Standalone page with fixed transparent nav and background image overlay works cleanly.
 
 ## 5. Next Steps / Actions
-- Stage rebranding commits and push them to the GitHub remote repository.
+- Stage all landing page commits and push them to the GitHub remote repository.
 - Await any instructions or feature enhancements from the user.

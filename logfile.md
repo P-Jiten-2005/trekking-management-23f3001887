@@ -84,3 +84,12 @@ This file documents the chronological conversation history and technical changes
   - Updated title and introductory references in `README.md`.
 - **Verification**: Verified that all 8 unit tests passed successfully (`OK`).
 - **Git Actions**: Staged, committed, and pushed all changes to the remote repository `main` branch.
+
+## Turn 12 (Eco-Hikes Landing Page Integration)
+- **User Prompt**: Requested a modern, responsive website landing page with Logo text "Eco-Hikes", sticky transparent navigation menu ("What We Do", "Get Involved", "About"), and a full-screen Himalayan hero background image.
+- **Agent Action**:
+  - Generated a majestic high-resolution green Himalayan mountains view using the `generate_image` tool and copied it to `static/images/himalayan_mountains.jpg`.
+  - Appended transparent navigation bars, blur filters, scrolling animations, and full-screen overlay styles to `static/css/custom.css`.
+  - Replaced `templates/index.html` with a standalone responsive marketing layout featuring the logo, sticky top navbar, full-screen viewport hero, and sections for "What We Do", "Get Involved" (with login links), and "About".
+- **Verification**: Ran the automated unit tests and verified all **8/8 unit tests passed successfully**.
+- **Git Actions**: Staged all assets (including design specification and plan) and committed them.
