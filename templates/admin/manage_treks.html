@@ -42,7 +42,11 @@
                 {% for trek in treks %}
                 <tr>
                     <td><strong>#{{ trek.id }}</strong></td>
-                    <td>{{ trek.name }}</td>
+                    <td>
+                        <strong>{{ trek.name }}</strong><br>
+                        <small class="text-muted d-block" style="font-size: 0.8rem;">⛰️ Max: {{ trek.altitude or 'N/A' }} | 📏 Len: {{ trek.length or 'N/A' }}</small>
+                        <small class="text-muted d-block" style="font-size: 0.75rem;">🛡️ Safety: {{ trek.safety_equipment or 'N/A' }}</small>
+                    </td>
                     <td>{{ trek.location }}</td>
                     <td>
                         {% if trek.difficulty == 'Easy' %}
@@ -186,6 +190,18 @@
                     <div class="mb-3">
                         <label class="form-label">End Date</label>
                         <input type="date" name="end_date" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Max Altitude</label>
+                        <input type="text" name="altitude" class="form-control" placeholder="e.g. 18,200 ft" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Trek Route Length</label>
+                        <input type="text" name="length" class="form-control" placeholder="e.g. 130 km" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Required Safety Equipment</label>
+                        <textarea name="safety_equipment" class="form-control" rows="3" placeholder="e.g. Crampons, Microspikes, Trekking Pole, Headlamp, First-Aid Kit" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Assign Staff (Optional)</label>

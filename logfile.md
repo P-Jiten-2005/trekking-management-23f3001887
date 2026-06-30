@@ -137,7 +137,7 @@ This file documents the chronological conversation history and technical changes
   - Added a comprehensive "🗄️ Database Inspection Guide" to `README.md` listing the `instance/trekking.db` path and SQLite explorer tips.
   - Updated workspace context `.agents/context.md` and agent change histories.
 - **Verification**: Verified unit test suite execution success.
-- **Git Actions**: Staged all documentation commits and pushed to origin `main branch`.
+- **Git Actions**: Staged all documentation commits and pushed to origin `main` branch.
 
 ## Turn 18 (README Section Cleanup)
 - **User Prompt**: Requested removing the "Getting Started", "Database Inspection Guide", and "Running Unit Tests" sections from the README file.
@@ -153,4 +153,16 @@ This file documents the chronological conversation history and technical changes
   - Expanded the "What We Do" features grid in `templates/index.html` from a 3-card to a 6-card layout.
   - Integrated three new cards: **Medical Assistance** (🏥), **Emergency Support** (🚨), and **Pick & Drop Transit** (🚌).
 - **Verification**: Verified that all 9 unit tests passed successfully (`OK`).
+- **Git Actions**: Staged, committed, and pushed changes to remote repository `main` branch.
+
+## Turn 20 (Trek Safety Gear and Specifications)
+- **User Prompt**: Requested that when creating a trek, they can enter safety equipment to carry, altitude of the trek, and length of the trek.
+- **Agent Action**:
+  - Appended `safety_equipment`, `altitude`, and `length` to the `Trek` schema model in `models.py`.
+  - Processed and saved `safety_equipment`, `altitude`, and `length` fields inside `admin/routes.py`.
+  - Added input boxes and textarea selectors inside the Admin's "Create Trek" modal inside `templates/admin/manage_treks.html`.
+  - Rendered altitude, length, and safety subtexts inside Admin's trek directory list (`templates/admin/manage_treks.html`) and Staff assigned treks (`templates/staff/dashboard.html`).
+  - Displayed altitude, length, and required safety gear list on the Trekker's finder booking card in `templates/trekker/dashboard.html`.
+  - Executed temporary database schema alteration migrations using Python script.
+- **Verification**: Verified that all **9/9 unit tests passed successfully** (`OK`).
 - **Git Actions**: Staged, committed, and pushed changes to remote repository `main` branch.

@@ -8,7 +8,7 @@
 
 ### 👑 Admin Suite
 - **Global Overview Dashboard**: Quick-glance metrics for total treks, registered trekkers, active staff, and overall bookings.
-- **Trek Route Builder**: Add, review, approve, and delete trek events.
+- **Trek Route Builder**: Add, review, approve, and delete trek events, detailing route length, maximum altitude, and required safety equipment.
 - **Staff Assignment Matrix**: Assign approved guides/staff members to specific routes.
 - **Chronological Classifications & Sorting**: Treks are automatically categorized into **Past 🕰️**, **Active 🏃‍♂️**, or **Future 📅** schedules and sorted with the newest/future treks first.
 - **User Directory**: View, approve new guide registrations, and whitelist or blacklist/deactivate users & staff members.
@@ -21,7 +21,7 @@
 - **Capacity Management**: Adjust remaining available slots and toggle trek status (`Pending`, `Approved`, `Open`, `Closed`, `Completed`) with robust capacity validation guards.
 
 ### ⛺ Trekker (User) Experience
-- **Adventure Finder**: Search open treks by keywords or filter routes by difficulty (`Easy`, `Moderate`, `Hard`).
+- **Adventure Finder**: Search open treks by keywords or filter routes by difficulty (`Easy`, `Moderate`, `Hard`), viewing specific trek safety equipment requirements, altitudes, and lengths before booking.
 - **Atomic Checkout**: Direct booking with automatic slot decrementing, overbooking prevention, and double-booking protection.
 - **Expedition History**: Personal ledger tracking active bookings and completed historic treks.
 - **Profile Customizer**: Update personal details and contact numbers.

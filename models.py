@@ -36,6 +36,11 @@ class Trek(db.Model):
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
     assigned_staff_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
+    
+    # New expedition fields
+    safety_equipment = db.Column(db.String(500), nullable=True)
+    altitude = db.Column(db.String(100), nullable=True)
+    length = db.Column(db.String(100), nullable=True)
 
     bookings = db.relationship('Booking', backref='trek', lazy=True)
 

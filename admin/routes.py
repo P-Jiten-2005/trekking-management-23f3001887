@@ -30,11 +30,17 @@ def manage_treks():
             end_date = datetime.strptime(request.form.get('end_date'), '%Y-%m-%d').date()
             staff_id = request.form.get('assigned_staff_id')
             assigned_staff_id = int(staff_id) if staff_id else None
+            
+            # Retrieve new details
+            safety_equipment = request.form.get('safety_equipment')
+            altitude = request.form.get('altitude')
+            length = request.form.get('length')
 
             trek = Trek(
                 name=name, location=location, difficulty=difficulty,
                 duration=duration, max_slots=max_slots, available_slots=max_slots,
                 start_date=start_date, end_date=end_date, assigned_staff_id=assigned_staff_id,
+                safety_equipment=safety_equipment, altitude=altitude, length=length,
                 status='Pending'
             )
             db.session.add(trek)

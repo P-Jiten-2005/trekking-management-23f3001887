@@ -45,6 +45,9 @@
                     <span class="badge bg-info text-dark">⏱️ {{ trek.duration }} Days</span>
                 </div>
                 <p class="card-text">
+                    <strong>Altitude:</strong> {{ trek.altitude or 'N/A' }}<br>
+                    <strong>Length:</strong> {{ trek.length or 'N/A' }}<br>
+                    <strong>Safety Equipment:</strong> <span class="text-secondary small d-block">{{ trek.safety_equipment or 'N/A' }}</span>
                     <strong>Dates:</strong> {{ trek.start_date.strftime('%Y-%m-%d') }} to {{ trek.end_date.strftime('%Y-%m-%d') }}<br>
                     <strong>Available Slots:</strong> {{ trek.available_slots }} / {{ trek.max_slots }}
                 </p>

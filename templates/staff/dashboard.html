@@ -30,7 +30,10 @@
                         {% for data in treks_data %}
                         <tr>
                             <td><strong>#{{ data.trek.id }}</strong></td>
-                            <td>{{ data.trek.name }}</td>
+                             <td>
+                                 <strong>{{ data.trek.name }}</strong><br>
+                                 <small class="text-muted d-block" style="font-size: 0.8rem;">⛰️ Max: {{ data.trek.altitude or 'N/A' }} | 📏 Len: {{ data.trek.length or 'N/A' }}</small>
+                             </td>
                             <td>{{ data.trek.location }}</td>
                             <td>{{ data.trek.start_date.strftime('%Y-%m-%d') }} to {{ data.trek.end_date.strftime('%Y-%m-%d') }}</td>
                             <td>{{ data.trek.available_slots }} / {{ data.trek.max_slots }}</td>

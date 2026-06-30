@@ -12,6 +12,9 @@ This file tracks all changes made by the AI agent during the project development
 - **Added Indian contact format validation** (`+91` prefix followed by exactly 10 digits) using HTML5 `pattern` attributes and backend regex checks inside `auth/routes.py`.
 - **Added registration validation tests** (`test_register_validation`) inside `test_app.py`.
 - **Expanded landing page "What We Do" section** from 3 cards to 6 cards by adding dedicated feature blocks for **Medical Assistance**, **Emergency Support**, and **Pick & Drop Transit**.
+- **Added safety_equipment, altitude, and length columns** to the `Trek` schema model in `models.py`.
+- **Added max altitude, route length, and required safety gear** inputs to the Admin's "Create Trek" modal inside `templates/admin/manage_treks.html`.
+- **Displayed trek dimensions and safety lists** across Admin's manage table (`templates/admin/manage_treks.html`), Staff assigned view (`templates/staff/dashboard.html`), and Trekker find cards (`templates/trekker/dashboard.html`).
 
 ### Changed
 - Changed default seeded Admin email from `admin@trek.com` to `Jiten@trek.com` and password from `admin123` to `Jiten@123` across `app.py`, `init_db.py`, `test_app.py`, and `README.md`.

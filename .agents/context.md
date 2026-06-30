@@ -100,7 +100,10 @@ D:\Jiten\Trek/
 - `status` (VARCHAR(20), Default: Pending)
 - `start_date` (DATE, Not Null)
 - `end_date` (DATE, Not Null)
-- `assigned_staff_id` (INTEGER, FK to users.id, Nullable)
+- `assigned_staff_id` (INTEGER, db.ForeignKey('users.id'), Nullable)
+- `safety_equipment` (VARCHAR(500), Nullable)
+- `altitude` (VARCHAR(100), Nullable)
+- `length` (VARCHAR(100), Nullable)
 
 ### Bookings (`bookings`)
 - `id` (INTEGER, PK)
@@ -119,6 +122,7 @@ D:\Jiten\Trek/
 - Login screen redesign: Frosted blur container overlay, centralized form card, custom focus state markers, and inverse hover actions are fully functional.
 - Registration unification: Single registration `/register` route with pure-CSS slide toggle (Trekker vs Staff guide) and clean validation.
 - Validation checks: Confirm password validation and Indian phone number formatting (+91 and 10 digits) verified.
+- Trek Details: Added `safety_equipment`, `altitude`, and `length` fields. Supported in route creation forms and UI layout.
 
 ## 5. Next Steps / Actions
 - Stage new changes and push them to the remote GitHub repository.
