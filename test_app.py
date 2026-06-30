@@ -18,16 +18,16 @@ class TrekAppTestCase(unittest.TestCase):
         db.create_all()
         
         # Seed default Admin if not already present
-        self.admin = User.query.filter_by(email='admin@trek.com').first()
+        self.admin = User.query.filter_by(email='Jiten@trek.com').first()
         if not self.admin:
             self.admin = User(
-                email='admin@trek.com',
+                email='Jiten@trek.com',
                 role='admin',
                 name='System Administrator',
                 is_approved=True,
                 is_blacklisted=False
             )
-            self.admin.set_password('admin123')
+            self.admin.set_password('Jiten@123')
             db.session.add(self.admin)
             db.session.commit()
 
@@ -38,9 +38,9 @@ class TrekAppTestCase(unittest.TestCase):
 
     def test_admin_seeded(self):
         """Verify the default admin account exists and credentials check out."""
-        admin = User.query.filter_by(email='admin@trek.com').first()
+        admin = User.query.filter_by(email='Jiten@trek.com').first()
         self.assertIsNotNone(admin)
-        self.assertTrue(admin.check_password('admin123'))
+        self.assertTrue(admin.check_password('Jiten@123'))
         self.assertEqual(admin.role, 'admin')
         self.assertTrue(admin.is_approved)
         self.assertFalse(admin.is_blacklisted)

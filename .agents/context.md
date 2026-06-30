@@ -78,8 +78,8 @@ D:\Jiten\Trek/
 
 ### Users (`users`)
 - `id` (INTEGER, PK)
-- `email` (VARCHAR(150), Unique, Not Null)
-- `password_hash` (VARCHAR(256), Not Null)
+- `email` (VARCHAR(150), Unique, Not Null) - Default Admin: `Jiten@trek.com`
+- `password_hash` (VARCHAR(256), Not Null) - Default Admin password: `Jiten@123`
 - `role` (VARCHAR(20), Not Null) - Admin, Trek Staff, or Trekker.
 - `name` (VARCHAR(100), Not Null)
 - `contact_details` (VARCHAR(200), Nullable)
@@ -107,12 +107,12 @@ D:\Jiten\Trek/
 - `status` (VARCHAR(20), Default: Booked)
 
 ## 4. Verification Checkpoint
-- Seeding: Verified that `init_db.py` populates `admin@trek.com` (password: `admin123`).
+- Seeding: Verified that `init_db.py` populates `Jiten@trek.com` (password: `Jiten@123`).
 - Security guards: Checked that blacklisted or unapproved accounts are restricted correctly.
 - Slot operations: Atomic decrements on booking are covered and fail when slots run out.
 - Promotion validation: Verified that promoting a staff member updates their database role to `'admin'` successfully.
 - Chronological marking: Verified that treks correctly class as Past, Active, or Future, and order by start date descending.
 
 ## 5. Next Steps / Actions
-- Stage new changes (README, logfile, context) and push them to the GitHub remote repository.
+- Stage new changes (app.py, init_db.py, test_app.py, README.md, logfile.md, context trackers) and push them to the GitHub remote repository.
 - Await any instructions or feature enhancements from the user.

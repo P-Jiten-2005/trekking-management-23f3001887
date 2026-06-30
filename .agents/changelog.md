@@ -2,6 +2,13 @@
 
 This file tracks all changes made by the AI agent during the project development lifecycle.
 
+## [2026-06-30]
+
+### Changed
+- Changed default seeded Admin email from `admin@trek.com` to `Jiten@trek.com` and password from `admin123` to `Jiten@123` across `app.py`, `init_db.py`, `test_app.py`, and `README.md`.
+
+---
+
 ## [2026-06-29]
 
 ### Added

@@ -107,8 +107,8 @@ Generate the database file and populate the default administrator credentials:
 ```bash
 python init_db.py
 ```
-* **Default Admin Login**: `admin@trek.com`
-* **Default Admin Password**: `admin123`
+* **Default Admin Login**: `Jiten@trek.com`
+* **Default Admin Password**: `Jiten@123`
 
 ### 5. Launch the Server
 ```bash

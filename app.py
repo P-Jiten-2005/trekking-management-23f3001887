@@ -40,16 +40,16 @@ if __name__ == '__main__':
         db.create_all()
         from models import User
         # Seed Admin
-        admin = User.query.filter_by(email='admin@trek.com').first()
+        admin = User.query.filter_by(email='Jiten@trek.com').first()
         if not admin:
             admin = User(
-                email='admin@trek.com',
+                email='Jiten@trek.com',
                 role='admin',
                 name='System Administrator',
                 is_approved=True,
                 is_blacklisted=False
             )
-            admin.set_password('admin123')
+            admin.set_password('Jiten@123')
             db.session.add(admin)
             db.session.commit()
             print("Admin user seeded.")
