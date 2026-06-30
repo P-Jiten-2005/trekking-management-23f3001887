@@ -129,3 +129,12 @@ This file documents the chronological conversation history and technical changes
   - Added automated test cases inside `test_app.py` covering mismatched passwords and invalid phone number formats.
 - **Verification**: Verified that all **9/9 unit tests passed successfully** (`OK`).
 - **Git Actions**: Staged, committed, and pushed all changes to the remote repository `main` branch.
+
+## Turn 17 (Documentation Enhancements)
+- **User Prompt**: Requested updating the readme file, log files, and .agents track files.
+- **Agent Action**:
+  - Wrote a new "🔐 Authentication & Validation Highlights" section in `README.md` documenting the frosted layout, CSS slider toggle, password matching logic, and Indian phone format checks.
+  - Added a comprehensive "🗄️ Database Inspection Guide" to `README.md` listing the `instance/trekking.db` path and SQLite explorer tips.
+  - Updated workspace context `.agents/context.md` and agent change histories.
+- **Verification**: Verified unit test suite execution success.
+- **Git Actions**: Staged all documentation commits and pushed to origin `main` branch.
