@@ -21,7 +21,7 @@ This file tracks all changes made by the AI agent during the project development
 - **Unified registration flows** under a single `/register` route in `auth/routes.py` (redirecting `/register/trekker` and `/register/staff` to this endpoint).
 - **Updated Login footer** to link directly to the new unified registration page.
 - **Updated README.md** to include a "🔐 Authentication & Validation Highlights" section detailing custom layouts, CSS role switch toggles, password verification checks, and Indian mobile format constraints.
-- **Added a Database Inspection Guide** to `README.md` containing local DB locations and inspection tools references.
+- **Cleaned up README.md** by removing "Getting Started", "Database Inspection Guide", and "Running Unit Tests" sections.
 
 ### Deleted
 - **Removed obsolete templates** `templates/auth/register_user.html` and `templates/auth/register_staff.html`.

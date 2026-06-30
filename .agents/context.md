@@ -121,5 +121,5 @@ D:\Jiten\Trek/
 - Validation checks: Confirm password validation and Indian phone number formatting (+91 and 10 digits) verified.
 
 ## 5. Next Steps / Actions
-- Stage new changes (README.md, logfile.md, changelog/context trackers) and push them to the remote GitHub repository.
+- Stage new changes and push them to the remote GitHub repository.
 - Await any instructions or feature enhancements from the user.

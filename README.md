@@ -72,50 +72,6 @@ Trek/
 ├── logfile.md              # Turn-by-turn chat and changes logger
 └── requirements.txt        # Package dependencies
 ```
-
----
-
-## 🚀 Getting Started
-
-Follow these steps to run the project locally on your machine:
-
-### 1. Clone & Navigate
-```bash
-git clone https://github.com/P-Jiten-2005/trekking-management-23f3001887.git
-cd trekking-management-23f3001887
-```
-
-### 2. Set Up Virtual Environment
-```bash
-# Create environment
-python -m venv venv
-
-# Activate on Windows
-venv\Scripts\activate
-
-# Activate on macOS/Linux
-source venv/bin/activate
-```
-
-### 3. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Initialize and Seed Database
-Generate the database file and populate the default administrator credentials:
-```bash
-python init_db.py
-```
-* **Default Admin Login**: `Jiten@trek.com`
-* **Default Admin Password**: `Jiten@123`
-
-### 5. Launch the Server
-```bash
-python app.py
-```
-Open your browser and navigate to **`http://127.0.0.1:5000`** to access the system.
-
 ---
 
 ## 🔐 Authentication & Validation Highlights
@@ -124,30 +80,3 @@ Open your browser and navigate to **`http://127.0.0.1:5000`** to access the syst
 * **Segmented CSS Role Slider**: The registration page features a pure-CSS sliding switch using radio buttons to select between **Trekker 🏕️** and **Trek Staff 🏔️** with zero JavaScript dependencies.
 * **Password Match Checks**: Requires entering matching values in both `Password` and `Confirm Password` fields.
 * **Indian Phone Validation**: Limits contact details to Indian numbers starting with country code `+91` followed by exactly 10 digits (validated via HTML5 pattern matching and regex backend checks).
-
----
-
-## 🗄️ Database Inspection Guide
-
-All application state is saved locally in:
-📁 **Database File**: `instance/trekking.db`
-
-### Inspecting Database Content
-- **VS Code**: Install the extension **SQLite Viewer** (by *qwtel*), and click directly on the `instance/trekking.db` file.
-- **GUI Desktop**: Install **DB Browser for SQLite** (from [sqlitebrowser.org](https://sqlitebrowser.org/)), open the app, and browse the database file.
-- **Command Line**: Run `flask shell` to query records using SQLAlchemy:
-  ```python
-  from extensions import db
-  from models import User
-  for u in User.query.all():
-      print(u.name, u.email, u.role)
-  ```
-
----
-
-## 🧪 Running Unit Tests
-
-An automated test suite is provided to verify role registrations, assignment logic, overbooking protections, date sorting rules, and form validation triggers:
-```bash
-python -m unittest test_app.py
-```
