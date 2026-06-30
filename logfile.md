@@ -24,7 +24,7 @@ This file documents the chronological conversation history and technical changes
   - Built the `auth`, `admin`, `staff`, and `trekker` Blueprints with their respective route files and HTML views under `templates/`.
   - Configured premium `custom.css` theme and layout in `base.html` / `index.html`.
   - Programmed database seed runner `init_db.py` to seed `admin@trek.com`.
-  - Created initial test suite `test_app.py` covering model relations and booking slot decrementing logic.
+  - Created initial test suite `test_app.py` covering model relationships and booking slot decrementing logic.
 - **Technical Fixes**: Resolved a `RuntimeError` regarding SQLAlchemy app context registration by shifting `db` to `extensions.py` to prevent circular imports. Fixed unit test user password constraints.
 - **Verification**: Verified that all 6 tests in `test_app.py` passed successfully.
 - **Git Actions**: Initialized local git repository on the `main` branch, committed all code assets, and pushed them to the remote GitHub repository: `https://github.com/P-Jiten-2005/trekking-management-23f3001887`.
@@ -109,3 +109,13 @@ This file documents the chronological conversation history and technical changes
   - Formatted the form, labels, inputs (with outline shadows), actions button (with transitions), and distinct footer hyperlinks.
 - **Verification**: Verified that all 8 unit tests passed successfully (`OK`).
 - **Git Actions**: Staged, committed, and pushed changes to the remote repository `main` branch.
+
+## Turn 15 (Unified Registration Page & Role Slider)
+- **User Prompt**: Requested replacing the separate trekker and staff register links on the login screen with a single Register link, and replacing the separate register pages with a unified registration screen containing a role toggle slider between Trekker and Staff.
+- **Agent Action**:
+  - Added a unified `/register` route in `auth/routes.py` and redirected the old `/register/trekker` and `/register/staff` requests to this new route.
+  - Updated `templates/auth/login.html` footer to display a single unified registration link.
+  - Created `templates/auth/register.html` with a matching frosted glass style layout and implemented a pure-CSS sliding switch/segmented control to toggle between Trekker and Staff guide roles.
+  - Deleted the now obsolete template files `templates/auth/register_user.html` and `templates/auth/register_staff.html`.
+- **Verification**: Verified that all 8 unit tests passed successfully (`OK`).
+- **Git Actions**: Staged, committed, and pushed all changes to the remote repository `main` branch.

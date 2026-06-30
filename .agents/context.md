@@ -49,8 +49,7 @@ D:\Jiten\Trek/
 │   ├── index.html          # Standalone Eco-Hikes landing page
 │   ├── auth/
 │   │   ├── login.html      # Frosted glass login page
-│   │   ├── register_user.html
-│   │   ├── register_staff.html
+│   │   ├── register.html   # Frosted glass unified registration page
 │   │   └── pending_approval.html
 │   ├── admin/
 │   │   ├── dashboard.html
@@ -118,7 +117,8 @@ D:\Jiten\Trek/
 - Chronological marking: Verified that treks correctly class as Past, Active, or Future, and order by start date descending.
 - Landing page display: Standalone page with fixed transparent nav, centered Get Involved "Log In" button, and background image overlay works cleanly.
 - Login screen redesign: Frosted blur container overlay, centralized form card, custom focus state markers, and inverse hover actions are fully functional.
+- Registration unification: Single registration `/register` route with pure-CSS slide toggle (Trekker vs Staff guide) and clean validation.
 
 ## 5. Next Steps / Actions
-- Stage new changes (login.html redesign, changelog/context trackers) and push them to the remote GitHub repository.
+- Stage new changes (register.html addition, register_user/staff template deletions, auth route modifications, changelog/context trackers) and push them to the remote GitHub repository.
 - Await any instructions or feature enhancements from the user.

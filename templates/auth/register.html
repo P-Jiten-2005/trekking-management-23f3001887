@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In - HikerHub</title>
+    <title>Register - HikerHub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -40,7 +40,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(24px); /* heavy backdrop blur effect */
+            backdrop-filter: blur(24px);
             z-index: 2;
         }
 
@@ -59,37 +59,84 @@
         /* Centralized Authentication Card */
         .auth-card {
             width: 100%;
-            max-width: 420px;
+            max-width: 440px;
             background-color: #ffffff;
-            border-radius: 4px; /* minimal rounding */
-            border-top: 4px solid #1E7A44; /* subtle top border line */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* elevated shadow profile */
-            padding: 40px 30px;
+            border-radius: 4px;
+            border-top: 4px solid #1E7A44;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            padding: 35px 30px;
         }
 
         .auth-header {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: #1E7A44;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             letter-spacing: -0.5px;
+        }
+
+        /* Pure CSS Sliding Toggle Switch (Slider) */
+        .slider-container {
+            position: relative;
+            display: flex;
+            background-color: #F1F5F9;
+            border-radius: 30px;
+            padding: 4px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            border: 1px solid #E2E8F0;
+        }
+        .slider-container input[type="radio"] {
+            display: none;
+        }
+        .slider-label {
+            flex: 1;
+            text-align: center;
+            padding: 10px 0;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #64748B;
+            cursor: pointer;
+            z-index: 2;
+            transition: color 0.25s ease;
+            user-select: none;
+        }
+        .slider-highlight {
+            position: absolute;
+            top: 4px;
+            bottom: 4px;
+            left: 4px;
+            width: calc(50% - 4px);
+            background-color: #1E7A44;
+            border-radius: 26px;
+            z-index: 1;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #role-staff:checked ~ .slider-highlight {
+            transform: translateX(100%);
+        }
+        #role-trekker:checked ~ label[for="role-trekker"] {
+            color: #ffffff;
+        }
+        #role-staff:checked ~ label[for="role-staff"] {
+            color: #ffffff;
         }
 
         /* Form Labels & Inputs */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .form-label-custom {
             font-size: 0.85rem;
             font-weight: 600;
-            color: #64748B; /* slate grey finish */
+            color: #64748B;
             margin-bottom: 6px;
             display: block;
         }
         .form-input-custom {
             width: 100%;
-            padding: 12px 14px;
+            padding: 10px 12px;
             font-size: 0.95rem;
             color: #1E293B;
             background-color: #ffffff;
@@ -99,25 +146,26 @@
         }
         .form-input-custom:focus {
             outline: none;
-            border-color: #2563EB; /* blue focus accent ring */
+            border-color: #2563EB;
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
         }
 
         /* Action Button */
         .btn-submit-custom {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             font-size: 1rem;
             font-weight: 700;
             color: #ffffff;
-            background-color: #1E7A44; /* solid forest green */
+            background-color: #1E7A44;
             border: none;
-            border-radius: 2px; /* square action component */
+            border-radius: 2px;
             cursor: pointer;
             transition: background-color 0.2s ease, transform 0.1s ease;
+            margin-top: 10px;
         }
         .btn-submit-custom:hover {
-            background-color: #124d2b; /* smooth dark inverse hover state */
+            background-color: #124d2b;
         }
         .btn-submit-custom:active {
             transform: scale(0.99);
@@ -125,13 +173,13 @@
 
         /* Footer links */
         .auth-footer {
-            margin-top: 25px;
+            margin-top: 20px;
             text-align: center;
             font-size: 0.9rem;
             color: #64748B;
         }
         .auth-link-custom {
-            color: #2563EB; /* distinct bright blue hyperlinked elements */
+            color: #2563EB;
             text-decoration: none;
             font-weight: 600;
             transition: color 0.15s ease;
@@ -155,21 +203,37 @@
     <!-- Centered Card Wrapper -->
     <div class="auth-wrapper">
         <div class="auth-card">
-            <h2 class="auth-header">Log In</h2>
+            <h2 class="auth-header">Create Account</h2>
 
             <!-- Flash Error Messages -->
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
-                        <div class="alert alert-{{ category if category != 'danger' else 'danger' }} py-2 px-3 mb-4" style="font-size: 0.9rem; border-radius: 4px;">
+                        <div class="alert alert-{{ category }} py-2 px-3 mb-4" style="font-size: 0.9rem; border-radius: 4px;">
                             {{ message }}
                         </div>
                     {% endfor %}
                 {% endif %}
             {% endwith %}
 
-            <!-- Login Form -->
-            <form method="POST" action="{{ url_for('auth.login') }}">
+            <!-- Registration Form -->
+            <form method="POST" action="{{ url_for('auth.register') }}">
+                
+                <!-- Role Slider Switch Component -->
+                <div class="slider-container">
+                    <input type="radio" name="role" value="trekker" id="role-trekker" checked>
+                    <input type="radio" name="role" value="staff" id="role-staff">
+                    
+                    <label for="role-trekker" class="slider-label">Trekker 🏕️</label>
+                    <label for="role-staff" class="slider-label">Trek Staff 🏔️</label>
+                    
+                    <div class="slider-highlight"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label-custom">Full Name</label>
+                    <input type="text" name="name" class="form-input-custom" required placeholder="John Doe">
+                </div>
                 <div class="form-group">
                     <label class="form-label-custom">Email Address</label>
                     <input type="email" name="email" class="form-input-custom" required placeholder="name@example.com">
@@ -178,13 +242,17 @@
                     <label class="form-label-custom">Password</label>
                     <input type="password" name="password" class="form-input-custom" required placeholder="••••••••">
                 </div>
-                <button type="submit" class="btn-submit-custom">Log In</button>
+                <div class="form-group">
+                    <label class="form-label-custom">Contact Details</label>
+                    <input type="text" name="contact" class="form-input-custom" required placeholder="+1 (555) 000-0000">
+                </div>
+                <button type="submit" class="btn-submit-custom">Register</button>
             </form>
 
             <!-- Footer links -->
             <div class="auth-footer">
-                <span>New to Eco-Hikes? </span>
-                <a class="auth-link-custom" href="{{ url_for('auth.register') }}">Register Here</a>
+                <span>Already have an account? </span>
+                <a class="auth-link-custom" href="{{ url_for('auth.login') }}">Log In</a>
             </div>
         </div>
     </div>

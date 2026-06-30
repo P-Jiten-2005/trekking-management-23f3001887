@@ -7,6 +7,7 @@ This file tracks all changes made by the AI agent during the project development
 ### Added
 - **Created a custom Eco-Hikes landing page** at `templates/index.html` featuring a sticky transparent navbar, custom menu, full-screen Himalayan hero background image, and content cards for "What We Do", "Get Involved", and "About".
 - **Added landing page style tokens** to `static/css/custom.css` (smooth scroll, glassmorphic navbar transitions, full-screen hero overlays, responsive typography).
+- **Created a unified registration interface** at `templates/auth/register.html` with a matching frosted-glass style layout, and integrated a pure-CSS sliding switch/segmented control to toggle between Trekker and Staff guide roles.
 
 ### Changed
 - Changed default seeded Admin email from `admin@trek.com` to `Jiten@trek.com` and password from `admin123` to `Jiten@123` across `app.py`, `init_db.py`, `test_app.py`, and `README.md`.
@@ -14,6 +15,11 @@ This file tracks all changes made by the AI agent during the project development
 - **Updated application caption** in `index.html` to *"Your next adventure starts with the right community"*.
 - **Simplified guest access block** on the landing page to render a single, centered **Log In** button instead of dual columns for registering.
 - **Redesigned the Log In interface** at `templates/auth/login.html` into a premium frosted-glass design featuring full-screen lock-viewport styling, Himalayan mountain background base layers, a 24px backdrop blur overlay, an elevated centralized form card, custom inputs with focus ring states, and a forest-green submit button (#1E7A44) with dark transitions.
+- **Unified registration flows** under a single `/register` route in `auth/routes.py` (redirecting `/register/trekker` and `/register/staff` to this endpoint).
+- **Updated Login footer** to link directly to the new unified registration page.
+
+### Deleted
+- **Removed obsolete templates** `templates/auth/register_user.html` and `templates/auth/register_staff.html`.
 
 ### Fixed
 - Fixed a template namespace collision where Flask resolved `dashboard.html` to the admin version for other roles by removing `template_folder` overrides from blueprints and prefixing all `render_template` calls with their subdirectory (e.g. `render_template('trekker/dashboard.html')`).
