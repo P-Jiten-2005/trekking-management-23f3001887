@@ -9,7 +9,7 @@ This file tracks the current system architecture, database schema, active branch
 - **Database Engine**: SQLite
 - **Database File Location**: `instance/trekking.db` (locally created, ignored by Git)
 - **Unit Test File**: `test_app.py`
-- **Verification Status**: ✅ 8/8 tests passing (OK)
+- **Verification Status**: ✅ 9/9 tests passing (OK)
 
 ## 2. Directory Structure
 ```text
@@ -118,7 +118,8 @@ D:\Jiten\Trek/
 - Landing page display: Standalone page with fixed transparent nav, centered Get Involved "Log In" button, and background image overlay works cleanly.
 - Login screen redesign: Frosted blur container overlay, centralized form card, custom focus state markers, and inverse hover actions are fully functional.
 - Registration unification: Single registration `/register` route with pure-CSS slide toggle (Trekker vs Staff guide) and clean validation.
+- Validation checks: Confirm password validation and Indian phone number formatting (+91 and 10 digits) verified.
 
 ## 5. Next Steps / Actions
-- Stage new changes (register.html addition, register_user/staff template deletions, auth route modifications, changelog/context trackers) and push them to the remote GitHub repository.
+- Stage new changes and push them to the remote GitHub repository.
 - Await any instructions or feature enhancements from the user.

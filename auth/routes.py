@@ -55,8 +55,20 @@ def register():
         email = request.form.get('email')
         name = request.form.get('name')
         password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
         contact = request.form.get('contact')
         role = request.form.get('role', 'trekker')
+
+        # Password matching validation
+        if password != confirm_password:
+            flash('Passwords do not match.', 'danger')
+            return redirect(url_for('auth.register'))
+
+        # Indian phone number format validation
+        import re
+        if not contact or not re.match(r'^\+91\d{10}$', contact):
+            flash('Contact number must start with +91 followed by exactly 10 digits.', 'danger')
+            return redirect(url_for('auth.register'))
 
         if User.query.filter_by(email=email).first():
             flash('Email already exists.', 'danger')

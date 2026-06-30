@@ -12,6 +12,7 @@ class TrekAppTestCase(unittest.TestCase):
         self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
         self.app.config['WTF_CSRF_ENABLED'] = False
         
+        self.client = self.app.test_client()
         self.ctx = self.app.app_context()
         self.ctx.push()
         
@@ -199,6 +200,53 @@ class TrekAppTestCase(unittest.TestCase):
         # Trek A (Oct 2026) must come before Trek B (Jan 2026)
         self.assertEqual(sorted_treks[0].name, 'Trek A (Future)')
         self.assertEqual(sorted_treks[1].name, 'Trek B (Past)')
+
+    def test_register_validation(self):
+        """Verify registration validations for password matching and Indian phone format."""
+        with self.client:
+            # 1. Test mismatched passwords
+            response = self.client.post('/register', data={
+                'name': 'Test User',
+                'email': 'validation_test@trek.com',
+                'password': 'password123',
+                'confirm_password': 'mismatch_password',
+                'contact': '+919876543210',
+                'role': 'trekker'
+            }, follow_redirects=True)
+            self.assertIn(b'Passwords do not match.', response.data)
+
+            # 2. Test invalid phone number format (wrong prefix)
+            response = self.client.post('/register', data={
+                'name': 'Test User',
+                'email': 'validation_test@trek.com',
+                'password': 'password123',
+                'confirm_password': 'password123',
+                'contact': '+15550000000',
+                'role': 'trekker'
+            }, follow_redirects=True)
+            self.assertIn(b'Contact number must start with +91 followed by exactly 10 digits.', response.data)
+
+            # 3. Test invalid phone number format (too short)
+            response = self.client.post('/register', data={
+                'name': 'Test User',
+                'email': 'validation_test@trek.com',
+                'password': 'password123',
+                'confirm_password': 'password123',
+                'contact': '+9112345',
+                'role': 'trekker'
+            }, follow_redirects=True)
+            self.assertIn(b'Contact number must start with +91 followed by exactly 10 digits.', response.data)
+
+            # 4. Test valid registration
+            response = self.client.post('/register', data={
+                'name': 'Valid User',
+                'email': 'valid_test@trek.com',
+                'password': 'password123',
+                'confirm_password': 'password123',
+                'contact': '+919988776655',
+                'role': 'trekker'
+            }, follow_redirects=True)
+            self.assertIn(b'Registration successful. Please log in.', response.data)
 
 if __name__ == '__main__':
     unittest.main()

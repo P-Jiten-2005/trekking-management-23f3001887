@@ -119,3 +119,13 @@ This file documents the chronological conversation history and technical changes
   - Deleted the now obsolete template files `templates/auth/register_user.html` and `templates/auth/register_staff.html`.
 - **Verification**: Verified that all 8 unit tests passed successfully (`OK`).
 - **Git Actions**: Staged, committed, and pushed all changes to the remote repository `main` branch.
+
+## Turn 16 (Registration Password Confirmation & Indian Phone Format Verification)
+- **User Prompt**: Requested adding password confirmation and Indian contact number validation (starting with +91 followed by exactly 10 digits).
+- **Agent Action**:
+  - Added a "Confirm Password" input block in `templates/auth/register.html`.
+  - Added strict HTML5 phone pattern checking attributes (`pattern="^\+91\d{10}$"`) and description helper texts to the "Contact Details" input in `templates/auth/register.html`.
+  - Configured matching server-side validation checks in the `/register` handler inside `auth/routes.py` to compare passwords and match phone formats against regular expression patterns (`r'^\+91\d{10}$'`).
+  - Added automated test cases inside `test_app.py` covering mismatched passwords and invalid phone number formats.
+- **Verification**: Verified that all **9/9 unit tests passed successfully** (`OK`).
+- **Git Actions**: Staged, committed, and pushed all changes to the remote repository `main` branch.

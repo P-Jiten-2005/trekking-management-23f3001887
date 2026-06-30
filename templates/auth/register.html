@@ -243,8 +243,13 @@
                     <input type="password" name="password" class="form-input-custom" required placeholder="••••••••">
                 </div>
                 <div class="form-group">
+                    <label class="form-label-custom">Confirm Password</label>
+                    <input type="password" name="confirm_password" class="form-input-custom" required placeholder="••••••••">
+                </div>
+                <div class="form-group">
                     <label class="form-label-custom">Contact Details</label>
-                    <input type="text" name="contact" class="form-input-custom" required placeholder="+1 (555) 000-0000">
+                    <input type="text" name="contact" class="form-input-custom" required placeholder="+919876543210" pattern="^\+91\d{10}$" title="Contact number must start with +91 followed by exactly 10 digits.">
+                    <small style="color: #64748B; font-size: 0.75rem; display: block; margin-top: 4px;">Format: +91 followed by 10-digit mobile number</small>
                 </div>
                 <button type="submit" class="btn-submit-custom">Register</button>
             </form>
