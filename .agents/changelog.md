@@ -11,6 +11,7 @@ This file tracks all changes made by the AI agent during the project development
 - **Added Confirm Password** field and validations to `templates/auth/register.html` and `auth/routes.py`.
 - **Added Indian contact format validation** (`+91` prefix followed by exactly 10 digits) using HTML5 `pattern` attributes and backend regex checks inside `auth/routes.py`.
 - **Added registration validation tests** (`test_register_validation`) inside `test_app.py`.
+- **Expanded landing page "What We Do" section** from 3 cards to 6 cards by adding dedicated feature blocks for **Medical Assistance**, **Emergency Support**, and **Pick & Drop Transit**.
 
 ### Changed
 - Changed default seeded Admin email from `admin@trek.com` to `Jiten@trek.com` and password from `admin123` to `Jiten@123` across `app.py`, `init_db.py`, `test_app.py`, and `README.md`.

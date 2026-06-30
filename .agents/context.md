@@ -115,7 +115,7 @@ D:\Jiten\Trek/
 - Slot operations: Atomic decrements on booking are covered and fail when slots run out.
 - Promotion validation: Verified that promoting a staff member updates their database role to `'admin'` successfully.
 - Chronological marking: Verified that treks correctly class as Past, Active, or Future, and order by start date descending.
-- Landing page display: Standalone page with fixed transparent nav, centered Get Involved "Log In" button, and background image overlay works cleanly.
+- Landing page display: Standalone page with fixed transparent nav, centered Get Involved "Log In" button, and expanded 6-card feature grid works cleanly.
 - Login screen redesign: Frosted blur container overlay, centralized form card, custom focus state markers, and inverse hover actions are fully functional.
 - Registration unification: Single registration `/register` route with pure-CSS slide toggle (Trekker vs Staff guide) and clean validation.
 - Validation checks: Confirm password validation and Indian phone number formatting (+91 and 10 digits) verified.
