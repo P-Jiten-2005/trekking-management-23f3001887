@@ -166,3 +166,14 @@ This file documents the chronological conversation history and technical changes
   - Executed temporary database schema alteration migrations using Python script.
 - **Verification**: Verified that all **9/9 unit tests passed successfully** (`OK`).
 - **Git Actions**: Staged, committed, and pushed changes to remote repository `main` branch.
+
+## Turn 21 (Admin & Staff Dashboard Redesign)
+- **User Prompt**: Requested redesigning the Admin and Staff dashboards with premium user interface and experiences.
+- **Agent Action**:
+  - Modified route controllers inside `admin/routes.py` and `staff/routes.py` to query rich metrics context (recent bookings, pending registrations, active hikers count, next departure launch dates).
+  - Appended premium HikerHub CSS tokens (`.glass-navbar`, `.metric-card`, `.action-card`, gradients) to `static/css/custom.css`.
+  - Redesigned the main wrapper header navbar in `templates/base.html` as a sticky glassmorphic layout.
+  - Replaced `templates/admin/dashboard.html` with a grid layout containing colorful metric gradients, a recent activity ledger, upcoming departs schedule, and an active guide registration review panel.
+  - Replaced `templates/staff/dashboard.html` with a personalized dashboard housing guided trip counts, hikers counts, next launch parameters, and clean status-badged tables.
+- **Verification**: Verified that all **9/9 unit tests passed successfully** (`OK`).
+- **Git Actions**: Staged, committed, and pushed all modifications to the remote repository `main` branch.

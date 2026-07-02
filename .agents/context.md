@@ -70,11 +70,13 @@ D:\Jiten\Trek/
     ├── 2026-06-29-trekking-management-walkthrough.md
     ├── 2026-06-29-admin-search-and-promote-plan.md
     ├── 2026-06-30-eco-hikes-landing-plan.md
+    ├── 2026-07-02-dashboard-redesign-plan.md
     └── superpowers/specs/
         ├── 2026-06-29-trekking-management-design.md
         ├── 2026-06-29-promote-staff-to-admin-design.md
         ├── 2026-06-29-admin-search-and-promote-design.md
-        └── 2026-06-30-eco-hikes-landing-design.md
+        ├── 2026-06-30-eco-hikes-landing-design.md
+        └── 2026-07-02-dashboard-redesign-spec.md
 ```
 
 ## 3. Database Schema (SQLite)
@@ -123,6 +125,7 @@ D:\Jiten\Trek/
 - Registration unification: Single registration `/register` route with pure-CSS slide toggle (Trekker vs Staff guide) and clean validation.
 - Validation checks: Confirm password validation and Indian phone number formatting (+91 and 10 digits) verified.
 - Trek Details: Added `safety_equipment`, `altitude`, and `length` fields. Supported in route creation forms and UI layout.
+- Dashboard Redesign: Fully overhauled the Admin dashboard with colorful metric gradients, recent booking ledgers, upcoming departures charts, and active guide registrations panels. Fully overhauled the Staff dashboard with personalized guide greeting headers, assigned treks counts, hikers counts, next departure specifications, and clean timelines. Added a sticky glassmorphic wrapper navbar.
 
 ## 5. Next Steps / Actions
 - Stage new changes and push them to the remote GitHub repository.

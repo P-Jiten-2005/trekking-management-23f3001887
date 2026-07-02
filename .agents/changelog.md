@@ -2,6 +2,27 @@
 
 This file tracks all changes made by the AI agent during the project development lifecycle.
 
+## [2026-07-02]
+
+### Added
+- **Created a design specification and implementation plan** for the dashboard redesign at `docs/superpowers/specs/2026-07-02-dashboard-redesign-spec.md` and `docs/2026-07-02-dashboard-redesign-plan.md`.
+- **Added CSS styling classes** for the premium glassmorphic navbar and gradient metric cards (`.glass-navbar`, `.metric-card`, `.action-card`, `bg-grad-*`) to `static/css/custom.css`.
+- **Integrated a sticky glassmorphic navigation bar** in `templates/base.html` for clean layout spacing.
+- **Redesigned the Admin Dashboard** at `templates/admin/dashboard.html` to feature:
+  - Four premium HikerHub gradient cards (Treks, Trekkers, Staff, Bookings).
+  - A **Recent Bookings** ledger table.
+  - An **Upcoming Departures** schedule table.
+  - A **Pending Staff Registrations** alert sidebar to approve new guides directly.
+- **Redesigned the Staff Dashboard** at `templates/staff/dashboard.html` to feature:
+  - A personalized guide greeting header.
+  - Three premium metrics cards: Assigned Treks, Hikers Led, and Next Departure launch details.
+  - A clean, status-badged table of assigned expeditions with quick-action links.
+
+### Changed
+- **Updated route handlers** in `admin/routes.py` and `staff/routes.py` to retrieve the additional context variables (recent bookings, upcoming treks, pending staff, total hikers, next departures) needed for the redesigned dashboard widgets.
+
+---
+
 ## [2026-06-30]
 
 ### Added
