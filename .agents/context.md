@@ -9,7 +9,7 @@ This file tracks the current system architecture, database schema, active branch
 - **Database Engine**: SQLite
 - **Database File Location**: `instance/trekking.db` (locally created, ignored by Git)
 - **Unit Test File**: `test_app.py`
-- **Verification Status**: ✅ 9/9 tests passing (OK)
+- **Verification Status**: ✅ 10/10 tests passing (OK)
 
 ## 2. Directory Structure
 ```text
@@ -71,12 +71,14 @@ D:\Jiten\Trek/
     ├── 2026-06-29-admin-search-and-promote-plan.md
     ├── 2026-06-30-eco-hikes-landing-plan.md
     ├── 2026-07-02-dashboard-redesign-plan.md
+    ├── 2026-07-02-staff-create-trek-plan.md
     └── superpowers/specs/
         ├── 2026-06-29-trekking-management-design.md
         ├── 2026-06-29-promote-staff-to-admin-design.md
         ├── 2026-06-29-admin-search-and-promote-design.md
         ├── 2026-06-30-eco-hikes-landing-design.md
-        └── 2026-07-02-dashboard-redesign-spec.md
+        ├── 2026-07-02-dashboard-redesign-spec.md
+        └── 2026-07-02-staff-create-trek-spec.md
 ```
 
 ## 3. Database Schema (SQLite)
@@ -126,6 +128,7 @@ D:\Jiten\Trek/
 - Validation checks: Confirm password validation and Indian phone number formatting (+91 and 10 digits) verified.
 - Trek Details: Added `safety_equipment`, `altitude`, and `length` fields. Supported in route creation forms and UI layout.
 - Dashboard Redesign: Fully overhauled the Admin dashboard with colorful metric gradients, recent booking ledgers, upcoming departures charts, and active guide registrations panels. Fully overhauled the Staff dashboard with personalized guide greeting headers, assigned treks counts, hikers counts, next departure specifications, and clean timelines. Added a sticky glassmorphic wrapper navbar.
+- Staff Proposals: Configured route endpoint `/staff/create_trek` and dashboard submit modal allowing guides to submit trek proposals that default to `Pending` status and require Admin approval before being posted.
 
 ## 5. Next Steps / Actions
 - Stage new changes and push them to the remote GitHub repository.
