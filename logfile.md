@@ -197,3 +197,14 @@ This file documents the chronological conversation history and technical changes
   - Programmatically executed sqlite migration adding `price` column.
 - **Verification**: Updated unit tests inside `test_app.py` to cover pricing fields, verifying that all **10/10 tests passed successfully** (`OK`).
 - **Git Actions**: Staged, committed, and pushed all updates to the remote repository `main` branch.
+
+## Turn 24 (Trek Cover Image & Thumbnails)
+- **User Prompt**: Requested adding cover pictures to each trek instead of plain text.
+- **Agent Action**:
+  - Added `image_url = db.Column(db.String(500), nullable=True)` to the `Trek` schema model in `models.py`.
+  - Handled parsing and saving of `image_url` fields in `admin/routes.py` and `staff/routes.py`.
+  - Added optional Trek Cover Image URL inputs to Admin and Staff modals.
+  - Overhauled `templates/trekker/dashboard.html` to display the trek cover image card header at the top of each booking card.
+  - Added rounded thumbnails displaying custom or fallback images next to Trek names inside Admin manager lists, Staff tables, Trekker booking logs, and Admin bookings logs.
+- **Verification**: Updated tests inside `test_app.py` to assert image url persistence, ensuring all **10/10 unit tests pass successfully**.
+- **Git Actions**: Staged, committed, and pushed all updates to the remote repository `main` branch.
