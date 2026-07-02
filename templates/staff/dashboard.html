@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 {% block title %}Staff Dashboard - HikerHub{% endblock %}
 {% block content %}
-<div class="row mb-4">
-    <div class="col-12">
+<div class="row align-items-center mb-4">
+    <div class="col-md-8">
         <h2 class="fw-bold">Welcome back, {{ current_user.name }}! 🥾</h2>
-        <p class="text-muted">Manage your assigned trekking expeditions and participant lists.</p>
+        <p class="text-muted mb-0">Manage your assigned trekking expeditions and participant lists.</p>
+    </div>
+    <div class="col-md-4 text-end">
+        <button type="button" class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#proposeTrekModal">➕ Propose New Trek</button>
     </div>
 </div>
 
@@ -98,4 +101,68 @@
         </div>
     </div>
 </div>
+<!-- Propose Trek Modal -->
+<div class="modal fade" id="proposeTrekModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ url_for('staff.create_trek') }}">
+                <div class="modal-header">
+                    <h5 class="modal-title">Propose New Trek Expedition</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label text-dark">Trek Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="e.g. Kedarkantha Trek" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-dark">Location</label>
+                        <input type="text" name="location" class="form-control" placeholder="e.g. Uttarakhand, India" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-dark">Difficulty</label>
+                        <select name="difficulty" class="form-select">
+                            <option value="Easy">Easy 🟢</option>
+                            <option value="Moderate">Moderate 🟡</option>
+                            <option value="Hard">Hard 🔴</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-dark">Duration (in Days)</label>
+                        <input type="number" name="duration" class="form-control" min="1" placeholder="e.g. 6" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-dark">Maximum Slots</label>
+                        <input type="number" name="max_slots" class="form-control" min="1" placeholder="e.g. 20" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-dark">Start Date</label>
+                        <input type="date" name="start_date" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-dark">End Date</label>
+                        <input type="date" name="end_date" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-dark">Max Altitude</label>
+                        <input type="text" name="altitude" class="form-control" placeholder="e.g. 12,500 ft" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-dark">Trek Route Length</label>
+                        <input type="text" name="length" class="form-control" placeholder="e.g. 20 km" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-dark">Required Safety Equipment</label>
+                        <textarea name="safety_equipment" class="form-control" rows="3" placeholder="e.g. Warm clothing, trekking shoes, headlights, microspikes" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Submit Proposal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
