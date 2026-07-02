@@ -248,5 +248,41 @@ class TrekAppTestCase(unittest.TestCase):
             }, follow_redirects=True)
             self.assertIn(b'Registration successful. Please log in.', response.data)
 
+    def test_staff_propose_trek(self):
+        """Verify that a staff user can propose a trek, which is created with Pending status."""
+        # Create an approved staff member
+        staff = User(email='guide@trek.com', role='staff', name='John Guide', is_approved=True)
+        staff.set_password('password')
+        db.session.add(staff)
+        db.session.commit()
+
+        # Log in as staff and post a trek creation request
+        with self.client:
+            self.client.post('/login', data={'email': 'guide@trek.com', 'password': 'password'}, follow_redirects=True)
+            
+            response = self.client.post('/staff/create_trek', data={
+                'name': 'Proposed Peaks',
+                'location': 'Western Ghats',
+                'difficulty': 'Moderate',
+                'duration': 2,
+                'max_slots': 12,
+                'start_date': '2026-08-01',
+                'end_date': '2026-08-03',
+                'altitude': '4,500 ft',
+                'length': '20 km',
+                'safety_equipment': 'First-aid kit, trekking poles'
+            }, follow_redirects=True)
+            
+            self.assertIn(b'Trek proposal submitted successfully', response.data)
+            
+            # Verify database entry
+            proposed_trek = Trek.query.filter_by(name='Proposed Peaks').first()
+            self.assertIsNotNone(proposed_trek)
+            self.assertEqual(proposed_trek.status, 'Pending')
+            self.assertEqual(proposed_trek.assigned_staff_id, staff.id)
+            self.assertEqual(proposed_trek.altitude, '4,500 ft')
+            self.assertEqual(proposed_trek.length, '20 km')
+            self.assertEqual(proposed_trek.safety_equipment, 'First-aid kit, trekking poles')
+
 if __name__ == '__main__':
     unittest.main()
