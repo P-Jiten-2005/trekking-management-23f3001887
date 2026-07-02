@@ -181,8 +181,19 @@ This file documents the chronological conversation history and technical changes
 ## Turn 22 (Staff Trek Proposals with Pending Approval)
 - **User Prompt**: Requested a feature where staff guides can propose treks, which must be approved by the Admin before being posted.
 - **Agent Action**:
-  - Configured `@staff_bp.route('/staff/create_trek', methods=['POST'])` in `staff/routes.py` to handle staff trek proposals. Proproposed treks are automatically marked with `Pending` status and assigned to the proposing staff member.
+  - Configured `@staff_bp.route('/staff/create_trek', methods=['POST'])` in `staff/routes.py` to handle staff trek proposals. Proposed treks are automatically marked with `Pending` status and assigned to the proposing staff member.
   - Integrated a **"Propose New Trek"** button on the Staff Dashboard and created a `#proposeTrekModal` modal form capturing all dimensions (name, location, difficulty, duration, slots, dates, altitude, length, and safety equipment).
   - Since the Admin already has an "Approve" button that sets the status of Pending treks to "Approved", the proposed treks integrate seamlessly into the existing workflow.
 - **Verification**: Added `test_staff_propose_trek` to `test_app.py` and verified all **10/10 unit tests passed successfully** (`OK`).
+- **Git Actions**: Staged, committed, and pushed all updates to the remote repository `main` branch.
+
+## Turn 23 (Trek Price Integration)
+- **User Prompt**: Requested adding the price amount for each trek.
+- **Agent Action**:
+  - Appended `price = db.Column(db.Float, nullable=True)` to the `Trek` schema model in `models.py`.
+  - Handled `price` form data processing in `admin/routes.py` and `staff/routes.py`.
+  - Added a Price input field to the Admin creation and Staff proposal modals.
+  - Displayed the trek price across the Admin treks list, Staff dashboard, Trekker find cards (formatted as `₹X.XX`), Trekker booking ledger, and Admin booking log.
+  - Programmatically executed sqlite migration adding `price` column.
+- **Verification**: Updated unit tests inside `test_app.py` to cover pricing fields, verifying that all **10/10 tests passed successfully** (`OK`).
 - **Git Actions**: Staged, committed, and pushed all updates to the remote repository `main` branch.

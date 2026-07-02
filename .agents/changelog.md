@@ -7,6 +7,7 @@ This file tracks all changes made by the AI agent during the project development
 ### Added
 - **Created a design specification and implementation plan** for the dashboard redesign at `docs/superpowers/specs/2026-07-02-dashboard-redesign-spec.md` and `docs/2026-07-02-dashboard-redesign-plan.md`.
 - **Created a design specification and implementation plan** for the staff trek proposal feature at `docs/superpowers/specs/2026-07-02-staff-create-trek-spec.md` and `docs/2026-07-02-staff-create-trek-plan.md`.
+- **Created a design specification and implementation plan** for the trek price integration feature at `docs/superpowers/specs/2026-07-02-trek-price-spec.md` and `docs/2026-07-02-trek-price-plan.md`.
 - **Added CSS styling classes** for the premium glassmorphic navbar and gradient metric cards (`.glass-navbar`, `.metric-card`, `.action-card`, `bg-grad-*`) to `static/css/custom.css`.
 - **Integrated a sticky glassmorphic navigation bar** in `templates/base.html` for clean layout spacing.
 - **Redesigned the Admin Dashboard** at `templates/admin/dashboard.html` to feature:
@@ -20,10 +21,14 @@ This file tracks all changes made by the AI agent during the project development
   - A clean, status-badged table of assigned expeditions with quick-action links.
   - A **"Propose New Trek"** modal form allowing guides to submit trek proposals directly.
 - **Added staff trek proposal capabilities**: Route endpoint `/staff/create_trek` handles trek submissions, saving them with `Pending` status and assigning them to the proposing guide automatically.
+- **Added pricing support to treks**: Added `price` column (float, nullable) to the `Trek` schema model in `models.py`.
+- **Added price fields and displays**: Integrated price inputs to Admin creation and Staff proposal modals, and displayed prices across all dashboards and booking ledgers (Trekker dashboard, Trekker my bookings, Admin view bookings).
 - **Added unit test `test_staff_propose_trek`** inside [test_app.py](file:///D:/Jiten/Trek/test_app.py) validating the staff creation route and database state constraints.
+- **Added price parameter checks to tests** inside [test_app.py](file:///D:/Jiten/Trek/test_app.py) to cover model creation assertions.
 
 ### Changed
 - **Updated route handlers** in `admin/routes.py` and `staff/routes.py` to retrieve the additional context variables (recent bookings, upcoming treks, pending staff, total hikers, next departures) needed for the redesigned dashboard widgets.
+- **Modified routes** in `admin/routes.py` and `staff/routes.py` to parse and save `price` form data.
 
 ---
 
