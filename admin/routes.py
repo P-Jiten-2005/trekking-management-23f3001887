@@ -13,7 +13,22 @@ def dashboard():
     total_users = User.query.filter_by(role='trekker').count()
     total_staff = User.query.filter_by(role='staff').count()
     total_bookings = Booking.query.count()
-    return render_template('admin/dashboard.html', total_treks=total_treks, total_users=total_users, total_staff=total_staff, total_bookings=total_bookings)
+
+    # Rich metrics context
+    recent_bookings = Booking.query.order_by(Booking.booking_date.desc()).limit(5).all()
+    pending_staff = User.query.filter_by(role='staff', is_approved=False).all()
+    upcoming_treks = Trek.query.filter(Trek.status.in_(['Approved', 'Open']), Trek.start_date >= date.today()).order_by(Trek.start_date.asc()).limit(5).all()
+
+    return render_template(
+        'admin/dashboard.html',
+        total_treks=total_treks,
+        total_users=total_users,
+        total_staff=total_staff,
+        total_bookings=total_bookings,
+        recent_bookings=recent_bookings,
+        pending_staff=pending_staff,
+        upcoming_treks=upcoming_treks
+    )
 
 @admin_bp.route('/admin/treks', methods=['GET', 'POST'])
 @role_required('admin')

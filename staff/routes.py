@@ -9,15 +9,31 @@ staff_bp = Blueprint('staff', __name__)
 @staff_bp.route('/staff/dashboard')
 @role_required('staff')
 def dashboard():
+    from datetime import date
     assigned_treks = Trek.query.filter_by(assigned_staff_id=current_user.id).all()
     treks_data = []
+    total_hikers = 0
     for trek in assigned_treks:
         booking_count = Booking.query.filter_by(trek_id=trek.id, status='Booked').count()
+        total_hikers += booking_count
         treks_data.append({
             'trek': trek,
             'booking_count': booking_count
         })
-    return render_template('staff/dashboard.html', treks_data=treks_data)
+
+    # Next departure
+    future_assigned = [t for t in assigned_treks if t.start_date >= date.today() and t.status in ['Approved', 'Open']]
+    next_departure = None
+    if future_assigned:
+        next_departure = min(future_assigned, key=lambda t: t.start_date)
+
+    return render_template(
+        'staff/dashboard.html',
+        treks_data=treks_data,
+        total_assigned=len(assigned_treks),
+        total_hikers=total_hikers,
+        next_departure=next_departure
+    )
 
 @staff_bp.route('/staff/trek/<int:trek_id>/edit', methods=['GET', 'POST'])
 @role_required('staff')
