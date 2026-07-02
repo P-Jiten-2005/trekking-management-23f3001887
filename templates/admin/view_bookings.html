@@ -26,7 +26,12 @@
                 {% for booking in bookings %}
                 <tr>
                     <td><strong>#{{ booking.id }}</strong></td>
-                    <td>{{ booking.trek.name }}</td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="{{ booking.trek.image_url if booking.trek.image_url else url_for('static', filename='images/himalayan_mountains.jpg') }}" alt="{{ booking.trek.name }}" class="rounded me-2" style="width: 32px; height: 32px; object-fit: cover;">
+                            <span>{{ booking.trek.name }}</span>
+                        </div>
+                    </td>
                     <td>₹{{ "%.2f"|format(booking.trek.price) if booking.trek.price else '0.00' }}</td>
                     <td>{{ booking.trekker.name }}</td>
                     <td>{{ booking.trekker.email }}</td>

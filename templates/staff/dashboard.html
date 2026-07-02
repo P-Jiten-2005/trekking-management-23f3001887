@@ -63,8 +63,13 @@
                         <tr>
                             <td><strong>#{{ data.trek.id }}</strong></td>
                             <td>
-                                <strong>{{ data.trek.name }}</strong><br>
-                                <small class="text-muted d-block" style="font-size: 0.8rem;">⛰️ Max: {{ data.trek.altitude or 'N/A' }} | 📏 Len: {{ data.trek.length or 'N/A' }} | 💰 Price: ₹{{ "%.2f"|format(data.trek.price) if data.trek.price else '0.00' }}</small>
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ data.trek.image_url if data.trek.image_url else url_for('static', filename='images/himalayan_mountains.jpg') }}" alt="{{ data.trek.name }}" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                    <div>
+                                        <strong>{{ data.trek.name }}</strong><br>
+                                        <small class="text-muted d-block" style="font-size: 0.8rem;">⛰️ Max: {{ data.trek.altitude or 'N/A' }} | 📏 Len: {{ data.trek.length or 'N/A' }} | 💰 Price: ₹{{ "%.2f"|format(data.trek.price) if data.trek.price else '0.00' }}</small>
+                                    </div>
+                                </div>
                             </td>
                             <td>{{ data.trek.location }}</td>
                             <td>{{ data.trek.start_date.strftime('%Y-%m-%d') }} to {{ data.trek.end_date.strftime('%Y-%m-%d') }}</td>
@@ -158,6 +163,11 @@
                     <div class="mb-3">
                         <label class="form-label text-dark">Price (INR)</label>
                         <input type="number" name="price" step="0.01" class="form-control" placeholder="e.g. 5000" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-dark">Trek Cover Image URL (Optional)</label>
+                        <input type="url" name="image_url" class="form-control" placeholder="e.g. https://images.unsplash.com/photo-...">
+                        <small class="text-muted">Leave blank to use the default mountain background visual.</small>
                     </div>
                 </div>
                 <div class="modal-footer">

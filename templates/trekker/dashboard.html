@@ -31,6 +31,7 @@
     {% for trek in treks %}
     <div class="col-md-4">
         <div class="card h-100 shadow-sm">
+            <img src="{{ trek.image_url if trek.image_url else url_for('static', filename='images/himalayan_mountains.jpg') }}" class="card-img-top" alt="{{ trek.name }}" style="height: 200px; object-fit: cover; border-top-left-radius: 16px; border-top-right-radius: 16px;">
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title fw-bold text-success">{{ trek.name }}</h5>
                 <h6 class="card-subtitle mb-3 text-muted">📍 {{ trek.location }}</h6>
