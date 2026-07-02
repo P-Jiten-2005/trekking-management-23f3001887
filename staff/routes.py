@@ -86,13 +86,14 @@ def create_trek():
     safety_equipment = request.form.get('safety_equipment')
     price_val = request.form.get('price')
     price = float(price_val) if price_val else 0.0
+    image_url = request.form.get('image_url')
 
     trek = Trek(
         name=name, location=location, difficulty=difficulty,
         duration=duration, max_slots=max_slots, available_slots=max_slots,
         start_date=start_date, end_date=end_date, assigned_staff_id=current_user.id,
         altitude=altitude, length=length, safety_equipment=safety_equipment,
-        price=price, status='Pending'
+        price=price, image_url=image_url, status='Pending'
     )
     db.session.add(trek)
     db.session.commit()

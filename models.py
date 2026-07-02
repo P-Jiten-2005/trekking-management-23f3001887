@@ -42,6 +42,7 @@ class Trek(db.Model):
     altitude = db.Column(db.String(100), nullable=True)
     length = db.Column(db.String(100), nullable=True)
     price = db.Column(db.Float, nullable=True)
+    image_url = db.Column(db.String(500), nullable=True)
 
     bookings = db.relationship('Booking', backref='trek', lazy=True)
 
