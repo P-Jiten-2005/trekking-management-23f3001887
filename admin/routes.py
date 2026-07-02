@@ -50,13 +50,15 @@ def manage_treks():
             safety_equipment = request.form.get('safety_equipment')
             altitude = request.form.get('altitude')
             length = request.form.get('length')
+            price_val = request.form.get('price')
+            price = float(price_val) if price_val else 0.0
 
             trek = Trek(
                 name=name, location=location, difficulty=difficulty,
                 duration=duration, max_slots=max_slots, available_slots=max_slots,
                 start_date=start_date, end_date=end_date, assigned_staff_id=assigned_staff_id,
                 safety_equipment=safety_equipment, altitude=altitude, length=length,
-                status='Pending'
+                price=price, status='Pending'
             )
             db.session.add(trek)
             db.session.commit()
