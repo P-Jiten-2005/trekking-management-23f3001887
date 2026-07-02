@@ -15,6 +15,7 @@
                 <tr>
                     <th>Booking ID</th>
                     <th>Trek Name</th>
+                    <th>Price</th>
                     <th>Trekker Name</th>
                     <th>Trekker Email</th>
                     <th>Booking Date</th>
@@ -26,6 +27,7 @@
                 <tr>
                     <td><strong>#{{ booking.id }}</strong></td>
                     <td>{{ booking.trek.name }}</td>
+                    <td>₹{{ "%.2f"|format(booking.trek.price) if booking.trek.price else '0.00' }}</td>
                     <td>{{ booking.trekker.name }}</td>
                     <td>{{ booking.trekker.email }}</td>
                     <td>{{ booking.booking_date.strftime('%Y-%m-%d %H:%M') }}</td>
@@ -41,7 +43,7 @@
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="6" class="text-center py-4 text-muted">No bookings logged in the system yet.</td>
+                    <td colspan="7" class="text-center py-4 text-muted">No bookings logged in the system yet.</td>
                 </tr>
                 {% endfor %}
             </tbody>

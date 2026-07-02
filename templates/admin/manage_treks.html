@@ -44,7 +44,7 @@
                     <td><strong>#{{ trek.id }}</strong></td>
                     <td>
                         <strong>{{ trek.name }}</strong><br>
-                        <small class="text-muted d-block" style="font-size: 0.8rem;">⛰️ Max: {{ trek.altitude or 'N/A' }} | 📏 Len: {{ trek.length or 'N/A' }}</small>
+                        <small class="text-muted d-block" style="font-size: 0.8rem;">⛰️ Max: {{ trek.altitude or 'N/A' }} | 📏 Len: {{ trek.length or 'N/A' }} | 💰 Price: ₹{{ "%.2f"|format(trek.price) if trek.price else '0.00' }}</small>
                         <small class="text-muted d-block" style="font-size: 0.75rem;">🛡️ Safety: {{ trek.safety_equipment or 'N/A' }}</small>
                     </td>
                     <td>{{ trek.location }}</td>
@@ -202,6 +202,10 @@
                     <div class="mb-3">
                         <label class="form-label">Required Safety Equipment</label>
                         <textarea name="safety_equipment" class="form-control" rows="3" placeholder="e.g. Crampons, Microspikes, Trekking Pole, Headlamp, First-Aid Kit" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Price (INR)</label>
+                        <input type="number" name="price" step="0.01" class="form-control" placeholder="e.g. 5000" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Assign Staff (Optional)</label>

@@ -48,6 +48,7 @@
                     <strong>Altitude:</strong> {{ trek.altitude or 'N/A' }}<br>
                     <strong>Length:</strong> {{ trek.length or 'N/A' }}<br>
                     <strong>Safety Equipment:</strong> <span class="text-secondary small d-block">{{ trek.safety_equipment or 'N/A' }}</span>
+                    <strong>Price:</strong> <span class="text-success fw-bold">₹{{ "%.2f"|format(trek.price) if trek.price else '0.00' }}</span><br>
                     <strong>Dates:</strong> {{ trek.start_date.strftime('%Y-%m-%d') }} to {{ trek.end_date.strftime('%Y-%m-%d') }}<br>
                     <strong>Available Slots:</strong> {{ trek.available_slots }} / {{ trek.max_slots }}
                 </p>

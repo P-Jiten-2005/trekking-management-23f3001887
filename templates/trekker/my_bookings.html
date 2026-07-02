@@ -18,6 +18,7 @@
                     <th>Location</th>
                     <th>Difficulty</th>
                     <th>Duration</th>
+                    <th>Price</th>
                     <th>Booking Date</th>
                     <th>Status</th>
                 </tr>
@@ -38,6 +39,7 @@
                         {% endif %}
                     </td>
                     <td>{{ booking.trek.duration }} Days</td>
+                    <td>₹{{ "%.2f"|format(booking.trek.price) if booking.trek.price else '0.00' }}</td>
                     <td>{{ booking.booking_date.strftime('%Y-%m-%d %H:%M') }}</td>
                     <td>
                         {% if booking.status == 'Booked' %}
@@ -51,7 +53,7 @@
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="7" class="text-center py-4 text-muted">You have no booking history. <a href="{{ url_for('trekker.dashboard') }}">Browse treks</a> to find an adventure!</td>
+                    <td colspan="8" class="text-center py-4 text-muted">You have no booking history. <a href="{{ url_for('trekker.dashboard') }}">Browse treks</a> to find an adventure!</td>
                 </tr>
                 {% endfor %}
             </tbody>
