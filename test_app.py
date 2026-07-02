@@ -100,7 +100,8 @@ class TrekAppTestCase(unittest.TestCase):
             start_date=date(2026, 7, 10),
             end_date=date(2026, 7, 16),
             assigned_staff_id=staff.id,
-            status='Pending'
+            status='Pending',
+            price=5000.0
         )
         db.session.add(trek)
         db.session.commit()
@@ -110,6 +111,7 @@ class TrekAppTestCase(unittest.TestCase):
         self.assertEqual(db_trek.assigned_staff_id, staff.id)
         self.assertEqual(db_trek.staff.name, 'Guide John')
         self.assertEqual(db_trek.status, 'Pending')
+        self.assertEqual(db_trek.price, 5000.0)
 
     def test_booking_rules_and_slots(self):
         """Verify booking requirements: must be Open and have available slots."""
@@ -121,7 +123,7 @@ class TrekAppTestCase(unittest.TestCase):
         trek = Trek(
             name='Kedar Kantha', location='Himalayas', difficulty='Easy', duration=4,
             max_slots=5, available_slots=5, start_date=date(2026, 8, 1), end_date=date(2026, 8, 5),
-            status='Approved'
+            status='Approved', price=5000.0
         )
         db.session.add(trek)
         db.session.commit()
@@ -151,7 +153,7 @@ class TrekAppTestCase(unittest.TestCase):
         trek = Trek(
             name='Chadar Trek', location='Ladakh', difficulty='Hard', duration=9,
             max_slots=2, available_slots=0, start_date=date(2026, 12, 1), end_date=date(2026, 12, 10),
-            status='Open'
+            status='Open', price=5000.0
         )
         db.session.add(trek)
         db.session.commit()
@@ -185,11 +187,13 @@ class TrekAppTestCase(unittest.TestCase):
         """Verify that treks are queried in descending order of start_date."""
         t1 = Trek(
             name='Trek A (Future)', location='Loc A', difficulty='Easy', duration=3,
-            max_slots=10, available_slots=10, start_date=date(2026, 10, 1), end_date=date(2026, 10, 4)
+            max_slots=10, available_slots=10, start_date=date(2026, 10, 1), end_date=date(2026, 10, 4),
+            price=5000.0
         )
         t2 = Trek(
             name='Trek B (Past)', location='Loc B', difficulty='Moderate', duration=3,
-            max_slots=10, available_slots=10, start_date=date(2026, 1, 1), end_date=date(2026, 1, 4)
+            max_slots=10, available_slots=10, start_date=date(2026, 1, 1), end_date=date(2026, 1, 4),
+            price=5000.0
         )
         db.session.add_all([t1, t2])
         db.session.commit()
@@ -270,7 +274,8 @@ class TrekAppTestCase(unittest.TestCase):
                 'end_date': '2026-08-03',
                 'altitude': '4,500 ft',
                 'length': '20 km',
-                'safety_equipment': 'First-aid kit, trekking poles'
+                'safety_equipment': 'First-aid kit, trekking poles',
+                'price': '3500.0'
             }, follow_redirects=True)
             
             self.assertIn(b'Trek proposal submitted successfully', response.data)
@@ -283,6 +288,7 @@ class TrekAppTestCase(unittest.TestCase):
             self.assertEqual(proposed_trek.altitude, '4,500 ft')
             self.assertEqual(proposed_trek.length, '20 km')
             self.assertEqual(proposed_trek.safety_equipment, 'First-aid kit, trekking poles')
+            self.assertEqual(proposed_trek.price, 3500.0)
 
 if __name__ == '__main__':
     unittest.main()
