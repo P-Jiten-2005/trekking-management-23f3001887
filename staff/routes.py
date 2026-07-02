@@ -69,3 +69,31 @@ def view_participants(trek_id):
     trek = Trek.query.filter_by(id=trek_id, assigned_staff_id=current_user.id).first_or_404()
     bookings = Booking.query.filter_by(trek_id=trek.id).all()
     return render_template('staff/view_participants.html', trek=trek, bookings=bookings)
+
+@staff_bp.route('/staff/create_trek', methods=['POST'])
+@role_required('staff')
+def create_trek():
+    from datetime import datetime
+    name = request.form.get('name')
+    location = request.form.get('location')
+    difficulty = request.form.get('difficulty')
+    duration = int(request.form.get('duration'))
+    max_slots = int(request.form.get('max_slots'))
+    start_date = datetime.strptime(request.form.get('start_date'), '%Y-%m-%d').date()
+    end_date = datetime.strptime(request.form.get('end_date'), '%Y-%m-%d').date()
+    altitude = request.form.get('altitude')
+    length = request.form.get('length')
+    safety_equipment = request.form.get('safety_equipment')
+
+    trek = Trek(
+        name=name, location=location, difficulty=difficulty,
+        duration=duration, max_slots=max_slots, available_slots=max_slots,
+        start_date=start_date, end_date=end_date, assigned_staff_id=current_user.id,
+        altitude=altitude, length=length, safety_equipment=safety_equipment,
+        status='Pending'
+    )
+    db.session.add(trek)
+    db.session.commit()
+    flash('Trek proposal submitted successfully. Awaiting Admin approval.', 'success')
+    return redirect(url_for('staff.dashboard'))
+
