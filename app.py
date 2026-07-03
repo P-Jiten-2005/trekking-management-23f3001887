@@ -30,7 +30,9 @@ def create_app():
 
     @app.route('/')
     def index():
-        return render_template('index.html')
+        from models import Trek
+        featured_treks = Trek.query.filter(Trek.status.in_(['Approved', 'Open'])).limit(3).all()
+        return render_template('index.html', featured_treks=featured_treks)
 
     return app
 

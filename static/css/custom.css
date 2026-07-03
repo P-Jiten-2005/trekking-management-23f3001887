@@ -221,3 +221,108 @@ html {
     border-radius: 12px;
     font-weight: 500;
 }
+
+/* Visual Trek Card Styles (from reference image) */
+.trek-card-visual {
+    border-radius: 16px !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.trek-card-visual:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.trek-card-img-container {
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.trek-card-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.trek-card-visual:hover .trek-card-img-container img {
+    transform: scale(1.05);
+}
+
+/* Red Ribbon Badge top-left */
+.trek-card-badge-overlay {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    background-color: #d9383a !important; /* Crimson red */
+    color: #ffffff !important;
+    padding: 5px 14px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    z-index: 10;
+    letter-spacing: 0.5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Bottom text overlays inside the image */
+.trek-card-meta-row {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 16px 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 0.95rem;
+    z-index: 10;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.trek-card-img-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Wine Red / Maroon centered title */
+.trek-card-title-maroon {
+    color: #8B1E3F !important; /* Wine red / maroon */
+    font-weight: 700;
+    text-align: center;
+    margin: 15px 0;
+    font-size: 1.25rem;
+    transition: color 0.2s ease;
+}
+
+.trek-card-title-maroon:hover {
+    color: #64112a !important;
+}
+
+/* Footer Row Links */
+.trek-card-link-red {
+    color: #8B1E3F !important;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: underline !important;
+    transition: color 0.2s ease;
+}
+
+.trek-card-link-red:hover {
+    color: #64112a !important;
+}
