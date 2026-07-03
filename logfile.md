@@ -208,3 +208,13 @@ This file documents the chronological conversation history and technical changes
   - Added rounded thumbnails displaying custom or fallback images next to Trek names inside Admin manager lists, Staff tables, Trekker booking logs, and Admin bookings logs.
 - **Verification**: Updated tests inside `test_app.py` to assert image url persistence, ensuring all **10/10 unit tests pass successfully**.
 - **Git Actions**: Staged, committed, and pushed all updates to the remote repository `main` branch.
+
+## Turn 25 (Featured Treks Showcase & Visual Card Redesign)
+- **User Prompt**: Requested showing trek visual cards exactly as designed in the `reference image .png` layout. Also requested displaying featured treks directly inside the landing page instead of showing treks only in the trekker's view.
+- **Agent Action**:
+  - Modified `index()` route in `app.py` to fetch up to 3 active treks and pass them to the template context.
+  - Appended visual card hover lift, image scaling, linear overlays, top-left crimson ribbons, bottom meta overlays, and maroon title classes to `static/css/custom.css`.
+  - Rebuilt the layout cards inside `templates/trekker/dashboard.html` and `templates/index.html` to match the exact card visual elements, triggering a detailed Bootstrap modal popup overlay that houses location, difficulty, dates, available slots, altitudes, length, safety gear, and booking actions.
+  - Integrated a new **Featured Treks Showcase** section on the landing page directly after "What We Do" and added a navigation anchor in the navbar.
+- **Verification**: Verified all **10/10 unit tests pass successfully**.
+- **Git Actions**: Staged, committed, and pushed all changes to the remote repository `main` branch.

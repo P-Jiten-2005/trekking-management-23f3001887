@@ -2,6 +2,16 @@
 
 This file tracks all changes made by the AI agent during the project development lifecycle.
 
+## [2026-07-03]
+
+### Added
+- **Featured Treks Showcase Section**: Integrated a showcase section inside the landing page `templates/index.html` querying up to 3 approved treks from [app.py](file:///D:/Jiten/Trek/app.py). Added navbar anchor links.
+- **Trek Visual Card Redesign**: Overhauled trek booking cards inside `templates/trekker/dashboard.html` and the landing page to feature visual image overlays, top-left crimson ribbons ("Best Seller" / "Trending"), bottom meta overlaps (duration and difficulty), centered wine-red titles, star ratings, and an underlined "View Details" trigger launching a Bootstrap modal specs popup with full details and booking/login calls.
+- **Visual Card Stylesheets**: Appended card hover transforms, image zoom triggers, gradient underlays, red ribbons, and customized links inside `static/css/custom.css`.
+- **Created a design specification and implementation plan** for the landing page featured showcase and visual card overlays at `docs/superpowers/specs/2026-07-03-trek-landing-spec.md` and `docs/2026-07-03-trek-landing-plan.md`.
+
+---
+
 ## [2026-07-02]
 
 ### Added
