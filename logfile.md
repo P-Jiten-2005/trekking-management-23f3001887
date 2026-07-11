@@ -218,3 +218,13 @@ This file documents the chronological conversation history and technical changes
   - Integrated a new **Featured Treks Showcase** section on the landing page directly after "What We Do" and added a navigation anchor in the navbar.
 - **Verification**: Verified all **10/10 unit tests pass successfully**.
 - **Git Actions**: Staged, committed, and pushed all changes to the remote repository `main` branch.
+
+## Turn 26 (Robust Input Validation & Defensive Coding)
+- **User Prompt**: Explicitly requested that neither the website nor the code should look like it was "vibecoded" (meaning, ensuring robust input validations, casting defenses, checking chronological parameters, and enforcing mobile formatting).
+- **Agent Action**:
+  - Wrapped integer/float casts for trek durations, max slots, and prices inside try-except `ValueError` blocks in `admin/routes.py` and `staff/routes.py`.
+  - Enforced chronological validations check in admin/staff creators verifying trek `start_date <= end_date`.
+  - Added regex checking logic to profile updates in `trekker/routes.py` validating that edited contact numbers strictly adhere to the Indian format (`^\+91\d{10}$`).
+  - Added pattern, title, tel, and required validation parameters to the profile form in `templates/trekker/edit_profile.html`.
+- **Verification**: Added `test_admin_create_trek_validation` and `test_trekker_profile_contact_validation` unit tests to `test_app.py`, verifying that all **12/12 unit tests pass successfully** (`OK`).
+- **Git Actions**: Staged, committed, and pushed all changes to the remote repository `main` branch.

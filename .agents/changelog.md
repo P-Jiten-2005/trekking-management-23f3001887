@@ -2,6 +2,17 @@
 
 This file tracks all changes made by the AI agent during the project development lifecycle.
 
+## [2026-07-11]
+
+### Added
+- **Robust Input Validation & Casting Defenses**: Implemented defensive try-except validation blocks for numeric casting and date chronological bounds on trek creation (Admin) and proposals (Staff) in `admin/routes.py` and `staff/routes.py`.
+- **Indian Phone Regex checks on Profiles**: Integrated backend regex format matching (`^\+91\d{10}$`) for user contact details updates inside `trekker/routes.py`.
+- **HTML5 Input Form Enforcement**: Added `tel`, `pattern`, `title`, and `required` parameters to the contact details input in `templates/trekker/edit_profile.html`.
+- **Automated Validation Test Cases**: Added `test_admin_create_trek_validation` and `test_trekker_profile_contact_validation` tests to [test_app.py](file:///D:/Jiten/Trek/test_app.py).
+- **Created a design specification and implementation plan** for input validation and defensive coding at `docs/superpowers/specs/2026-07-11-robust-input-validation-spec.md` and `docs/2026-07-11-robust-input-validation-plan.md`.
+
+---
+
 ## [2026-07-03]
 
 ### Added
