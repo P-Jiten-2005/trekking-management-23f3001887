@@ -118,7 +118,7 @@ Trek/
 1. **Start the Flask Application**:
    Running the application will automatically create all SQLite database tables and seed the system administrator credentials:
    ```bash
-   python app.py
+   python run.py
    ```
 
 2. **Access the Application**:
