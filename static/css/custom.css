@@ -8,7 +8,7 @@
     
     /* Neutral Color Palette */
     --neutral-dark: #1e293b;
-    --neutral-light: #f8fafc;
+    --neutral-light: #f4f6f4;
     --neutral-border: #e2e8f0;
     --bg-gradient: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%); /* Legacy support */
 
@@ -62,10 +62,10 @@
 }
 
 body {
-    background: var(--bg-gradient);
+    background: var(--neutral-light) !important;
     min-height: 100vh;
-    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
-    color: #2c3e50;
+    font-family: var(--font-family-base);
+    color: var(--neutral-dark);
 }
 
 .navbar {
@@ -419,5 +419,164 @@ html {
 .btn-footer:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(30, 122, 68, 0.4) !important;
+}
+
+/* Standardized Dashboard Metric Cards */
+.metric-card-modern {
+    background-color: #ffffff !important;
+    border: 1px solid var(--neutral-border) !important;
+    border-top: 4px solid var(--brand-primary) !important;
+    border-radius: var(--radius-card) !important;
+    box-shadow: var(--shadow-base) !important;
+    color: var(--neutral-dark) !important;
+    transition: transform var(--transition-normal) ease, box-shadow var(--transition-normal) ease;
+    padding: var(--spacing-lg) !important;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.metric-card-modern:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover) !important;
+}
+
+.metric-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.metric-card-title {
+    font-size: var(--font-size-label);
+    font-weight: var(--font-weight-semibold);
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.metric-card-icon {
+    font-size: 1.25rem;
+    color: var(--brand-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.metric-card-value {
+    font-size: 2.25rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--neutral-dark);
+    margin: var(--spacing-xs) 0;
+    line-height: 1.2;
+}
+
+.metric-card-desc {
+    font-size: var(--font-size-caption);
+    color: #64748b;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Standardized Table Styling */
+.table-modern {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    width: 100% !important;
+    border: 1px solid var(--neutral-border) !important;
+    border-radius: var(--radius-table) !important;
+    overflow: hidden !important;
+    background-color: #ffffff !important;
+}
+
+.table-modern thead th {
+    background-color: #f8fafc !important;
+    color: #475569 !important;
+    font-family: var(--font-family-base) !important;
+    font-size: var(--font-size-table-head) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    padding: 16px 20px !important;
+    border-bottom: 2px solid var(--neutral-border) !important;
+}
+
+.table-modern tbody td {
+    padding: 16px 20px !important;
+    font-size: var(--font-size-body) !important;
+    color: var(--neutral-dark) !important;
+    border-bottom: 1px solid var(--neutral-border) !important;
+    vertical-align: middle !important;
+    background-color: #ffffff !important;
+    transition: background-color var(--transition-fast) ease !important;
+}
+
+.table-modern tbody tr:last-child td {
+    border-bottom: none !important;
+}
+
+.table-modern tbody tr:hover td {
+    background-color: #f1f5f9 !important;
+}
+
+/* Standardized Buttons */
+.btn {
+    border-radius: var(--radius-button) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    transition: all var(--transition-normal) ease !important;
+}
+
+.btn-primary {
+    background-color: var(--brand-primary) !important;
+    border-color: var(--brand-primary) !important;
+    color: #ffffff !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--brand-secondary) !important;
+    border-color: var(--brand-secondary) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(15, 81, 50, 0.2);
+}
+
+.btn-outline-primary {
+    color: var(--brand-primary) !important;
+    border-color: var(--brand-primary) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--brand-primary) !important;
+    color: #ffffff !important;
+}
+
+.btn-success {
+    background-color: var(--brand-primary) !important;
+    border-color: var(--brand-primary) !important;
+}
+
+.btn-success:hover {
+    background-color: var(--brand-secondary) !important;
+    border-color: var(--brand-secondary) !important;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: #475569 !important;
+    border-color: #475569 !important;
+    color: #ffffff !important;
+}
+
+.btn-secondary:hover {
+    background-color: #334155 !important;
+    border-color: #334155 !important;
+}
+
+.btn-dark {
+    background-color: var(--neutral-dark) !important;
+    border-color: var(--neutral-dark) !important;
+    color: #ffffff !important;
 }
 
