@@ -16,14 +16,14 @@
         </div>
         <div class="col-md-3">
             <select name="difficulty" class="form-select">
-                <option value="">Any Difficulty</option>
+                <option value="">All Difficulties</option>
                 <option value="Easy" {% if difficulty == 'Easy' %}selected{% endif %}>Easy</option>
                 <option value="Moderate" {% if difficulty == 'Moderate' %}selected{% endif %}>Moderate</option>
                 <option value="Hard" {% if difficulty == 'Hard' %}selected{% endif %}>Hard</option>
             </select>
         </div>
         <div class="col-md-3">
-            <button type="submit" class="btn btn-primary w-100 py-2">Filter Treks</button>
+            <button type="submit" class="btn btn-primary w-100">Filter Treks</button>
         </div>
     </form>
 </div>
@@ -57,7 +57,7 @@
     <!-- Trek Details Modal -->
     <div class="modal fade text-dark" id="trekModal{{ trek.id }}" tabindex="-1" aria-labelledby="trekModalLabel{{ trek.id }}" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content border-0 shadow-lg" style="border-radius: 20px !important;">
+            <div class="modal-content">
                 <div class="modal-header border-0 pb-0">
                     <h3 class="fw-bold text-dark mb-0" id="trekModalLabel{{ trek.id }}">{{ trek.name }}</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -114,9 +114,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer border-0 pt-0">
+                <div class="modal-footer">
                     <form method="POST" action="{{ url_for('trekker.book_trek', trek_id=trek.id) }}" class="w-100">
-                        <button type="submit" class="btn btn-success w-100 py-3 rounded-3 fw-bold" {% if trek.available_slots <= 0 %}disabled{% endif %}>
+                        <button type="submit" class="btn btn-primary w-100" {% if trek.available_slots <= 0 %}disabled{% endif %}>
                             {% if trek.available_slots <= 0 %}Sold Out{% else %}Confirm Booking (₹{{ "%.2f"|format(trek.price) if trek.price else '0.00' }}){% endif %}
                         </button>
                     </form>
