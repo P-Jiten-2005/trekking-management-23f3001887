@@ -6,6 +6,7 @@
     <title>Log In - HikerHub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
     <style>
         /* Viewport Lock */
         html, body {
@@ -61,16 +62,16 @@
             width: 100%;
             max-width: 420px;
             background-color: #ffffff;
-            border-radius: 4px; /* minimal rounding */
-            border-top: 4px solid #1E7A44; /* subtle top border line */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* elevated shadow profile */
+            border-radius: var(--radius-card); /* standardized radius */
+            border-top: 4px solid var(--brand-primary); /* standardized brand primary top border */
+            box-shadow: var(--shadow-card); /* standardized shadow profile */
             padding: 40px 30px;
         }
 
         .auth-header {
             font-size: 2rem;
             font-weight: 700;
-            color: #1E7A44;
+            color: var(--brand-primary);
             text-align: center;
             margin-bottom: 30px;
             letter-spacing: -0.5px;
@@ -93,14 +94,14 @@
             font-size: 0.95rem;
             color: #1E293B;
             background-color: #ffffff;
-            border: 1px solid #CBD5E1;
-            border-radius: 4px;
-            transition: all 0.2s ease-in-out;
+            border: 1px solid var(--neutral-border);
+            border-radius: var(--radius-input);
+            transition: all var(--transition-fast) ease-in-out;
         }
         .form-input-custom:focus {
             outline: none;
-            border-color: #2563EB; /* blue focus accent ring */
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 0 3px rgba(15, 81, 50, 0.15);
         }
 
         /* Action Button */
@@ -110,14 +111,14 @@
             font-size: 1rem;
             font-weight: 700;
             color: #ffffff;
-            background-color: #1E7A44; /* solid forest green */
+            background-color: var(--brand-primary); /* solid brand forest green */
             border: none;
-            border-radius: 2px; /* square action component */
+            border-radius: var(--radius-button); /* standardized button radius */
             cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            transition: background-color var(--transition-normal) ease, transform 0.1s ease;
         }
         .btn-submit-custom:hover {
-            background-color: #124d2b; /* smooth dark inverse hover state */
+            background-color: var(--brand-secondary); /* standardized hover background */
         }
         .btn-submit-custom:active {
             transform: scale(0.99);
@@ -131,13 +132,13 @@
             color: #64748B;
         }
         .auth-link-custom {
-            color: #2563EB; /* distinct bright blue hyperlinked elements */
+            color: var(--brand-primary); /* standardized brand link color */
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.15s ease;
+            transition: color var(--transition-fast) ease;
         }
         .auth-link-custom:hover {
-            color: #1D4ED8;
+            color: var(--brand-secondary);
             text-decoration: underline;
         }
     </style>
