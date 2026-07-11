@@ -42,7 +42,11 @@ def edit_trek(trek_id):
     bookings_count = Booking.query.filter_by(trek_id=trek.id, status='Booked').count()
 
     if request.method == 'POST':
-        slots = int(request.form.get('available_slots'))
+        try:
+            slots = int(request.form.get('available_slots'))
+        except (ValueError, TypeError):
+            flash('Available slots must be a valid integer.', 'danger')
+            return redirect(url_for('staff.edit_trek', trek_id=trek.id))
         status = request.form.get('status')
         
         # Validation: Available slots cannot be negative
@@ -74,19 +78,30 @@ def view_participants(trek_id):
 @role_required('staff')
 def create_trek():
     from datetime import datetime
-    name = request.form.get('name')
-    location = request.form.get('location')
-    difficulty = request.form.get('difficulty')
-    duration = int(request.form.get('duration'))
-    max_slots = int(request.form.get('max_slots'))
-    start_date = datetime.strptime(request.form.get('start_date'), '%Y-%m-%d').date()
-    end_date = datetime.strptime(request.form.get('end_date'), '%Y-%m-%d').date()
-    altitude = request.form.get('altitude')
-    length = request.form.get('length')
-    safety_equipment = request.form.get('safety_equipment')
-    price_val = request.form.get('price')
-    price = float(price_val) if price_val else 0.0
-    image_url = request.form.get('image_url')
+    try:
+        name = request.form.get('name')
+        location = request.form.get('location')
+        difficulty = request.form.get('difficulty')
+        duration = int(request.form.get('duration'))
+        max_slots = int(request.form.get('max_slots'))
+        start_date = datetime.strptime(request.form.get('start_date'), '%Y-%m-%d').date()
+        end_date = datetime.strptime(request.form.get('end_date'), '%Y-%m-%d').date()
+        altitude = request.form.get('altitude')
+        length = request.form.get('length')
+        safety_equipment = request.form.get('safety_equipment')
+        price_val = request.form.get('price')
+        price = float(price_val) if price_val else 0.0
+        image_url = request.form.get('image_url')
+    except (ValueError, TypeError):
+        flash('Invalid numeric or date values provided. Please verify your inputs.', 'danger')
+        return redirect(url_for('staff.dashboard'))
+
+    if start_date > end_date:
+        flash('Start date cannot be after end date.', 'danger')
+        return redirect(url_for('staff.dashboard'))
+    if duration <= 0 or max_slots <= 0 or price < 0:
+        flash('Duration, slots, and price must be positive values.', 'danger')
+        return redirect(url_for('staff.dashboard'))
 
     trek = Trek(
         name=name, location=location, difficulty=difficulty,

@@ -66,6 +66,11 @@ def edit_profile():
         name = request.form.get('name')
         contact = request.form.get('contact')
 
+        import re
+        if contact and not re.match(r'^\+91\d{10}$', contact):
+            flash('Contact number must start with +91 followed by exactly 10 digits.', 'danger')
+            return redirect(url_for('trekker.edit_profile'))
+
         current_user.name = name
         current_user.contact_details = contact
         db.session.commit()
