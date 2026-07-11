@@ -294,5 +294,85 @@ class TrekAppTestCase(unittest.TestCase):
             self.assertEqual(proposed_trek.price, 3500.0)
             self.assertEqual(proposed_trek.image_url, 'https://images.unsplash.com/photo-1234567')
 
+    def test_admin_create_trek_validation(self):
+        """Verify admin trek creation input validation and bounds checking."""
+        # Log in as admin
+        with self.app.test_client() as client:
+            client.post('/login', data={'email': 'Jiten@trek.com', 'password': 'Jiten@123'})
+            
+            # Case 1: Invalid numeric formats (TypeError/ValueError)
+            response = client.post('/admin/treks', data={
+                'action': 'create',
+                'name': 'Valid Name',
+                'location': 'Himalayas',
+                'difficulty': 'Moderate',
+                'duration': 'abc',  # invalid
+                'max_slots': '10',
+                'start_date': '2026-07-10',
+                'end_date': '2026-07-16',
+                'price': '3000.0'
+            }, follow_redirects=True)
+            self.assertIn(b'Invalid numeric or date values provided', response.data)
+
+            # Case 2: Date chronological violation (start_date > end_date)
+            response = client.post('/admin/treks', data={
+                'action': 'create',
+                'name': 'Valid Name',
+                'location': 'Himalayas',
+                'difficulty': 'Moderate',
+                'duration': '5',
+                'max_slots': '10',
+                'start_date': '2026-07-20',
+                'end_date': '2026-07-16',  # earlier
+                'price': '3000.0'
+            }, follow_redirects=True)
+            self.assertIn(b'Start date cannot be after end date', response.data)
+
+            # Case 3: Boundary violations (negative values)
+            response = client.post('/admin/treks', data={
+                'action': 'create',
+                'name': 'Valid Name',
+                'location': 'Himalayas',
+                'difficulty': 'Moderate',
+                'duration': '-5',  # negative
+                'max_slots': '10',
+                'start_date': '2026-07-10',
+                'end_date': '2026-07-16',
+                'price': '3000.0'
+            }, follow_redirects=True)
+            self.assertIn(b'must be positive values', response.data)
+
+    def test_trekker_profile_contact_validation(self):
+        """Verify profile editing enforces Indian contact number format."""
+        # Create trekker user
+        trekker = User(
+            email='trekker@trek.com',
+            role='trekker',
+            name='Trekker User',
+            is_approved=True,
+            is_blacklisted=False
+        )
+        trekker.set_password('password')
+        db.session.add(trekker)
+        db.session.commit()
+
+        # Log in as trekker
+        with self.app.test_client() as client:
+            client.post('/login', data={'email': 'trekker@trek.com', 'password': 'password'})
+            
+            # Update with invalid phone format (no +91 prefix)
+            response = client.post('/trekker/profile', data={
+                'name': 'Trekker Updated',
+                'contact': '9876543210'  # invalid format
+            }, follow_redirects=True)
+            self.assertIn(b'Contact number must start with +91', response.data)
+            
+            # Update with valid phone format
+            response = client.post('/trekker/profile', data={
+                'name': 'Trekker Updated',
+                'contact': '+919876543210'  # valid
+            }, follow_redirects=True)
+            self.assertIn(b'Profile updated successfully', response.data)
+
 if __name__ == '__main__':
     unittest.main()
