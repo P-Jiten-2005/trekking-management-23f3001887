@@ -10,31 +10,47 @@
 
 <div class="row g-4 mb-5">
     <div class="col-md-3">
-        <div class="card metric-card bg-grad-forest p-4 text-center h-100">
-            <h5 class="opacity-75">Total Treks</h5>
-            <h2 class="display-4 fw-bold my-2">{{ total_treks }}</h2>
-            <a href="{{ url_for('admin.manage_treks') }}" class="btn btn-sm btn-light mt-3">Manage Treks</a>
+        <div class="card metric-card-modern">
+            <div class="metric-card-header">
+                <h6 class="metric-card-title">Total Treks</h6>
+                <span class="metric-card-icon"><i class="bi bi-mountain"></i></span>
+            </div>
+            <h2 class="metric-card-value">{{ total_treks }}</h2>
+            <p class="metric-card-desc">Active paths registered in system</p>
+            <a href="{{ url_for('admin.manage_treks') }}" class="btn btn-outline-success btn-sm w-100 mt-auto">Manage Treks</a>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card metric-card bg-grad-ocean p-4 text-center h-100">
-            <h5 class="opacity-75">Total Trekkers</h5>
-            <h2 class="display-4 fw-bold my-2">{{ total_users }}</h2>
-            <a href="{{ url_for('admin.user_management') }}" class="btn btn-sm btn-light mt-3">View Users</a>
+        <div class="card metric-card-modern">
+            <div class="metric-card-header">
+                <h6 class="metric-card-title">Total Trekkers</h6>
+                <span class="metric-card-icon"><i class="bi bi-people"></i></span>
+            </div>
+            <h2 class="metric-card-value">{{ total_users }}</h2>
+            <p class="metric-card-desc">Registered trekking participants</p>
+            <a href="{{ url_for('admin.user_management') }}" class="btn btn-outline-success btn-sm w-100 mt-auto">View Users</a>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card metric-card bg-grad-teal p-4 text-center h-100">
-            <h5 class="opacity-75">Active Staff</h5>
-            <h2 class="display-4 fw-bold my-2">{{ total_staff }}</h2>
-            <a href="{{ url_for('admin.user_management') }}" class="btn btn-sm btn-light mt-3">Manage Staff</a>
+        <div class="card metric-card-modern">
+            <div class="metric-card-header">
+                <h6 class="metric-card-title">Active Staff</h6>
+                <span class="metric-card-icon"><i class="bi bi-person-badge"></i></span>
+            </div>
+            <h2 class="metric-card-value">{{ total_staff }}</h2>
+            <p class="metric-card-desc">Approved guides & team members</p>
+            <a href="{{ url_for('admin.user_management') }}" class="btn btn-outline-success btn-sm w-100 mt-auto">Manage Staff</a>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card metric-card bg-grad-amber p-4 text-center h-100">
-            <h5 class="opacity-75">Total Bookings</h5>
-            <h2 class="display-4 fw-bold my-2">{{ total_bookings }}</h2>
-            <a href="{{ url_for('admin.view_bookings') }}" class="btn btn-sm btn-dark mt-3">View Bookings</a>
+        <div class="card metric-card-modern">
+            <div class="metric-card-header">
+                <h6 class="metric-card-title">Total Bookings</h6>
+                <span class="metric-card-icon"><i class="bi bi-calendar-check"></i></span>
+            </div>
+            <h2 class="metric-card-value">{{ total_bookings }}</h2>
+            <p class="metric-card-desc">Reserved expeditions logged</p>
+            <a href="{{ url_for('admin.view_bookings') }}" class="btn btn-outline-success btn-sm w-100 mt-auto">View Bookings</a>
         </div>
     </div>
 </div>
@@ -45,7 +61,7 @@
         <div class="card action-card p-4 mb-4">
             <h4 class="fw-bold mb-3">Recent Bookings</h4>
             <div class="table-responsive">
-                <table class="table align-middle mb-0">
+                <table class="table table-modern align-middle mb-0">
                     <thead class="table-light">
                         <tr>
                             <th>Booking ID</th>
@@ -64,7 +80,11 @@
                         </tr>
                         {% else %}
                         <tr>
-                            <td colspan="4" class="text-center py-4 text-muted">No recent bookings recorded.</td>
+                            <td colspan="4" class="text-center py-5 text-muted">
+                                <i class="bi bi-calendar-x d-block fs-3 mb-2 text-secondary"></i>
+                                <strong>No bookings yet.</strong>
+                                <p class="small mb-0 mt-1">Bookings will appear here once trekkers begin registering.</p>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -75,7 +95,7 @@
         <div class="card action-card p-4">
             <h4 class="fw-bold mb-3">Upcoming Departures</h4>
             <div class="table-responsive">
-                <table class="table align-middle mb-0">
+                <table class="table table-modern align-middle mb-0">
                     <thead class="table-light">
                         <tr>
                             <th>Trek ID</th>
@@ -96,7 +116,11 @@
                         </tr>
                         {% else %}
                         <tr>
-                            <td colspan="5" class="text-center py-4 text-muted">No upcoming departures found.</td>
+                            <td colspan="5" class="text-center py-5 text-muted">
+                                <i class="bi bi-calendar-x d-block fs-3 mb-2 text-secondary"></i>
+                                <strong>No upcoming departures.</strong>
+                                <p class="small mb-0 mt-1">New scheduled departures will appear here once created.</p>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>

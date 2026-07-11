@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<div class="card p-3 mb-4 shadow-sm">
+<div class="card p-4 mb-4 border-0 shadow-sm">
     <form method="GET" action="{{ url_for('trekker.dashboard') }}" class="row g-3">
         <div class="col-md-6">
             <input type="text" name="search" class="form-control" placeholder="Search by name or location" value="{{ search }}">
@@ -22,7 +22,7 @@
             </select>
         </div>
         <div class="col-md-3">
-            <button type="submit" class="btn btn-success w-100">Filter Treks</button>
+            <button type="submit" class="btn btn-primary w-100 py-2">Filter Treks</button>
         </div>
     </form>
 </div>
@@ -125,7 +125,11 @@
     </div>
     {% else %}
     <div class="col-12">
-        <div class="alert alert-warning text-center">No open treks found matching the filters.</div>
+        <div class="card p-5 text-center text-muted border-0 shadow-sm">
+            <i class="bi bi-search d-block display-6 mb-3 text-secondary"></i>
+            <h5 class="fw-bold text-dark">No open treks found matching the filters.</h5>
+            <p class="small mb-0 mt-1">Try adjusting your search query or selecting another difficulty category.</p>
+        </div>
     </div>
     {% endfor %}
 </div>
