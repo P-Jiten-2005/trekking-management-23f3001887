@@ -11,19 +11,21 @@
 - **Trek Route Builder**: Add, review, approve, and delete trek events, detailing route length, maximum altitude, and required safety equipment.
 - **Staff Assignment Matrix**: Assign approved guides/staff members to specific routes.
 - **Chronological Classifications & Sorting**: Treks are automatically categorized into **Past**, **Active**, or **Future** schedules and sorted with the newest/future treks first.
-- **User Directory**: View, approve new guide registrations, and whitelist or blacklist/deactivate users & staff members.
-- **Staff Promotion**: Promote active guides to Administrator status directly with confirmation verification checks.
+- **User Directory**: View, approve new guide registrations, and whitelist or blacklist/deactivate users & staff members with verification checks.
+- **Staff Promotion**: Promote active guides to Administrator status directly.
 - **Search Engine**: Search treks and users by names, email addresses, or IDs.
+- **Booking Filtering**: Filter bookings by status, trek, or date.
 
 ### Trek Staff Portal
 - **My Expeditions**: Dashboard listing assigned treks, departure dates, capacity status, and participant headcounts.
 - **Trekkers Log**: View contact cards and registration details of participants booked on assigned treks.
-- **Capacity Management**: Adjust remaining available slots and toggle trek status (`Pending`, `Approved`, `Open`, `Closed`, `Completed`) with robust capacity validation guards.
+- **Capacity Management**: Adjust remaining available slots and toggle trek status (`Pending`, `Approved`, `Open`, `Closed`, `Completed`) with robust capacity validation guards. Staff cannot transition treks back to admin-controlled pending/approved states.
 
 ### Trekker (User) Experience
 - **Adventure Finder**: Search open treks by keywords or filter routes by difficulty (`Easy`, `Moderate`, `Hard`), viewing specific trek safety equipment requirements, altitudes, and lengths before booking.
 - **Atomic Checkout**: Direct booking with automatic slot decrementing, overbooking prevention, and double-booking protection.
 - **Expedition History**: Personal ledger tracking active bookings and completed historic treks.
+- **Booking Cancellation**: Self-cancel bookings before the trek start date.
 - **Profile Customizer**: Update personal details and contact numbers.
 
 ---
@@ -41,42 +43,110 @@
 
 ```text
 Trek/
-├── .agents/                # AI Agent tracks (Changelog and Workspace Context)
-│   ├── changelog.md
-│   └── context.md
-├── auth/                   # Authentication Blueprints (Login, Registration, Logout)
-│   └── routes.py
-├── admin/                  # Admin Dashboard, user management, and trek controls
-│   └── routes.py
-├── staff/                  # Staff dashboard and trek updates
-│   └── routes.py
-├── trekker/                # Trekker searching and checkout controls
-│   └── routes.py
-├── static/
-│   └── css/
-│       └── custom.css      # Premium custom outdoors stylesheet
-├── templates/              # Jinja2 HTML layout templates
-│   ├── base.html           # Unified navigation, flashes, and styling links
+├── app/                    # Core Application Package
+│   ├── __init__.py         # Application Factory (create_app)
+│   ├── config.py           # Configuration values
+│   ├── decorators.py       # Custom decorator logic (@role_required)
+│   ├── extensions.py       # Database & login manager definitions
+│   └── models.py           # Database schemas (User, Trek, Booking)
+├── routes/                 # Blueprint Route Package
+│   ├── __init__.py
+│   ├── admin.py            # Admin controllers
+│   ├── auth.py             # Auth controllers
+│   ├── staff.py            # Staff controllers
+│   └── trekker.py          # Trekker search & booking controllers
+├── static/                 # Stylesheets, fallback images, and assets
+│   ├── css/
+│   │   └── custom.css
+│   └── images/
+│       ├── logo.png
+│       └── himalayan_mountains.jpg
+├── templates/              # HTML frontend view templates
+│   ├── base.html           # Core layout structure
 │   ├── index.html          # Public landing portal
-│   ├── auth/               # Login & Register views
-│   ├── admin/              # Admin pages
-│   ├── staff/              # Staff pages
-│   └── trekker/            # Trekker pages
-├── docs/                   # Specifications, implementation plans, and walkthroughs
-├── app.py                  # Core Application Factory & WSGI entry point
-├── config.py               # Key and database configurations
-├── extensions.py           # Unified SQLAlchemy & LoginManager instances
-├── decorators.py           # Custom @role_required access controller
-├── init_db.py              # Script to build tables and seed admin credentials
-├── test_app.py             # Automated unit test suite
-├── logfile.md              # Turn-by-turn chat and changes logger
-└── requirements.txt        # Package dependencies
+│   ├── auth/
+│   ├── admin/
+│   ├── staff/
+│   └── trekker/
+├── docs/                   # Development logs, plans, and architectures
+│   ├── development/        # Detailed design system and modernization logs
+│   └── images/             # Design references and mockups
+├── tests/                  # Automated integration tests
+│   └── test_app.py
+├── app.py                  # Root package runner file
+├── requirements.txt        # Dependencies list
+├── .gitignore
+├── .env.example
+├── LICENSE                 # Project License (MIT)
+└── README.md
 ```
+
 ---
 
-## 🔐 Authentication & Validation Highlights
+## Installation & Setup
 
-* **Frosted-Glass Redesign**: The login (`/login`) and unified registration (`/register`) pages utilize a full-screen, responsive lock-viewport structure with a backdrop blur overlay on a majestic Himalayan mountain base layer.
-* **Segmented CSS Role Slider**: The registration page features a pure-CSS sliding switch using radio buttons to select between **Trekker** and **Trek Staff** with zero JavaScript dependencies.
-* **Password Match Checks**: Requires entering matching values in both `Password` and `Confirm Password` fields.
-* **Indian Phone Validation**: Limits contact details to Indian numbers starting with country code `+91` followed by exactly 10 digits (validated via HTML5 pattern matching and regex backend checks).
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/P-Jiten-2005/trekking-management-23f3001887.git
+   cd trekking-management-23f3001887
+   ```
+
+2. **Create a Virtual Environment**:
+   ```bash
+   python -m venv venv
+   # On Windows:
+   venv\Scripts\activate
+   # On macOS/Linux:
+   source venv/bin/activate
+   ```
+
+3. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Initialize Environment Variables**:
+   Copy `.env.example` to `.env` and adjust the variables where necessary:
+   ```bash
+   cp .env.example .env
+   ```
+
+---
+
+## Running the Project
+
+1. **Start the Flask Application**:
+   Running the application will automatically create all SQLite database tables and seed the system administrator credentials:
+   ```bash
+   python app.py
+   ```
+
+2. **Access the Application**:
+   Open your browser and navigate to `http://127.0.0.1:5000`.
+
+3. **Administrator Credentials**:
+   - **Email**: `Jiten@trek.com`
+   - **Password**: `Jiten@123`
+
+---
+
+## Running Tests
+
+To run the automated integration test suite:
+```bash
+python -m unittest discover -s tests
+```
+
+---
+
+## Future Improvements
+
+- **Schedule Overlap Warnings**: Warn administrators during guide assignments if a guide has conflicting schedules on overlapping dates.
+- **Payment Gateway Integration**: Replace reservation mocks with a payment checkout flow.
+- **Dynamic Altitudes Map**: Embed geospatial maps displaying trek altitude tracks.
+
+---
+
+## Author & License
+
+Developed by **Jiten** and Team. Released under the [MIT License](LICENSE).
