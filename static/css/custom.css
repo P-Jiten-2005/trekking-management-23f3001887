@@ -326,3 +326,43 @@ html {
 .trek-card-link-red:hover {
     color: #64112a !important;
 }
+
+/* Footer Redesign */
+.footer-custom {
+    background-color: #12260c !important;
+    border-top: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-link {
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.footer-link:hover {
+    color: #a3e635 !important;
+    text-decoration: underline !important;
+}
+
+.btn-footer {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 8px !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease-in-out !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.btn-footer:hover {
+    background-color: #1E7A44 !important;
+    color: #ffffff !important;
+    border-color: #1E7A44 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(30, 122, 68, 0.3);
+}
+
+.btn-footer:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(30, 122, 68, 0.4) !important;
+}
+

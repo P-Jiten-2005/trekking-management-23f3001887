@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 
@@ -175,10 +176,47 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-4 bg-dark text-white-50 text-center">
+    <footer class="footer-custom py-5 text-white-50">
         <div class="container">
-            <p class="mb-1">&copy; 2026 Eco-Hikes. All rights reserved.</p>
-            <small>Powered by HikerHub System</small>
+            <div class="row align-items-center g-4">
+                <!-- Left Side: Contact Us -->
+                <div class="col-md-7 text-start">
+                    <h5 class="text-white fw-bold mb-4">Contact Us</h5>
+                    <div class="mb-3 d-flex align-items-start">
+                        <i class="bi bi-envelope-fill me-2 fs-5 text-success"></i>
+                        <div>
+                            <span class="d-block text-white fw-semibold small">Email</span>
+                            <a href="mailto:pjiten2275@gmail.com" class="footer-link text-white-50 text-decoration-none">pjiten2275@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="mb-3 d-flex align-items-start">
+                        <i class="bi bi-telephone-fill me-2 fs-5 text-success"></i>
+                        <div>
+                            <span class="d-block text-white fw-semibold small">Mobile</span>
+                            <a href="tel:+918919973413" class="footer-link text-white-50 text-decoration-none">8919973413</a>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start">
+                        <i class="bi bi-instagram me-2 fs-5 text-success"></i>
+                        <div>
+                            <span class="d-block text-white fw-semibold small">Instagram</span>
+                            <a href="https://instagram.com/jiten.ashrith" target="_blank" rel="noopener noreferrer" class="footer-link text-white-50 text-decoration-none">@jiten.ashrith</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Action Buttons -->
+                <div class="col-md-5 d-flex flex-wrap justify-content-start justify-content-md-end align-items-center gap-3 mt-4 mt-md-0">
+                    <a href="https://github.com/P-Jiten-2005" target="_blank" rel="noopener noreferrer" class="btn btn-footer d-inline-flex align-items-center justify-content-center px-4 py-2 text-decoration-none">
+                        <i class="bi bi-github me-2 fs-5"></i>
+                        GitHub
+                    </a>
+                    <a href="https://docs.google.com/document/u/2/d/e/2PACX-1vQvgzwz2tFt96B8VApnHqWqlP3LtPDbnxYwAPyr8VOffLCm_Zh2JuTa51z7d1CNJbrZKC0oWPredYcV/pub" target="_blank" rel="noopener noreferrer" class="btn btn-footer d-inline-flex align-items-center justify-content-center px-4 py-2 text-decoration-none">
+                        <i class="bi bi-file-earmark-text-fill me-2 fs-5"></i>
+                        Project Document
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
 
