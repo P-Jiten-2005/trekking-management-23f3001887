@@ -236,3 +236,12 @@ This file documents the chronological conversation history and technical changes
   - Cleaned up `README.md` removing emojis from headings, key features, technology stack, directory mappings, and slider slider texts.
 - **Verification**: Verified that all **12/12 unit tests pass successfully**.
 - **Git Actions**: Staged, committed, and pushed all changes to the remote repository `main` branch.
+
+## Turn 28 (Brand Logo Integration)
+- **User Prompt**: Requested integrating `Logo.png` as the website logo.
+- **Agent Action**:
+  - Copied `Logo.png` from the root workspace directory to the static directory `static/images/Logo.png`.
+  - Integrated `Logo.png` next to the brand name inside the primary layout navbar in `templates/base.html` and the landing page transparent navbar in `templates/index.html`.
+  - Centered and prepended the `Logo.png` image above the login card title (`templates/auth/login.html`) and registration card title (`templates/auth/register.html`).
+- **Verification**: Verified that all **12/12 unit tests pass successfully** (`OK`).
+- **Git Actions**: Staged, committed, and pushed all changes to the remote repository `main` branch.
