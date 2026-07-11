@@ -1,9 +1,64 @@
 /* Premium Outdoors theme styling extending Bootstrap */
 :root {
-    --primary-color: #0d6efd;
-    --accent-color: #0f5132;
-    --bg-gradient: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%);
-    --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    /* Brand Color Palette */
+    --primary-color: #0d6efd; /* Legacy support */
+    --accent-color: #0f5132;  /* Legacy support */
+    --brand-primary: #0f5132;
+    --brand-secondary: #2b4c1e;
+    
+    /* Neutral Color Palette */
+    --neutral-dark: #1e293b;
+    --neutral-light: #f8fafc;
+    --neutral-border: #e2e8f0;
+    --bg-gradient: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%); /* Legacy support */
+
+    /* Semantic Colors */
+    --color-success: #1e7a44;
+    --color-warning: #d97706;
+    --color-danger: #d9383a;
+
+    /* Typography Scale */
+    --font-family-base: 'Outfit', system-ui, -apple-system, sans-serif;
+    --font-size-title: 2rem;
+    --font-size-section: 1.5rem;
+    --font-size-card: 1.15rem;
+    --font-size-table-head: 0.85rem;
+    --font-size-body: 0.95rem;
+    --font-size-label: 0.85rem;
+    --font-size-caption: 0.8rem;
+    --font-weight-regular: 400;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Border Radius Tokens */
+    --radius-card: 12px;
+    --radius-button: 6px;
+    --radius-input: 6px;
+    --radius-table: 12px;
+    --radius-dialog: 16px;
+    --radius-badge: 100px;
+
+    /* Shadow Tokens */
+    --shadow-base: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.08); /* Legacy support */
+    --shadow-card: 0 8px 16px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.08);
+    --shadow-overlay: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+    /* Spacing Tokens */
+    --spacing-xxs: 4px;
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+
+    /* Transition Duration Tokens */
+    --transition-fast: 0.15s;
+    --transition-normal: 0.2s;
+    --transition-slow: 0.3s;
+    --transition-bounce: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
