@@ -1,8 +1,8 @@
 import unittest
 from datetime import datetime, date, timedelta
 from app import create_app
-from extensions import db
-from models import User, Trek, Booking
+from app.extensions import db
+from app.models import User, Trek, Booking
 
 class TrekAppTestCase(unittest.TestCase):
     def setUp(self):

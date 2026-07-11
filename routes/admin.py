@@ -1,8 +1,8 @@
 from datetime import date, datetime
 from flask import Blueprint, render_template, redirect, url_for, flash, request
-from extensions import db
-from models import User, Trek, Booking
-from decorators import role_required
+from app.extensions import db
+from app.models import User, Trek, Booking
+from app.decorators import role_required
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -154,7 +154,7 @@ def user_management():
 @admin_bp.route('/admin/bookings')
 @role_required('admin')
 def view_bookings():
-    from models import Trek
+    from app.models import Trek
     from datetime import datetime
     
     status_filter = request.args.get('status', '')

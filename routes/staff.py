@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import current_user
-from extensions import db
-from models import Trek, Booking
-from decorators import role_required
+from app.extensions import db
+from app.models import Trek, Booking
+from app.decorators import role_required
 
 staff_bp = Blueprint('staff', __name__)
 
