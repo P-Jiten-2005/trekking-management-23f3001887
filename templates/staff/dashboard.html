@@ -87,15 +87,15 @@
                             <td>{{ data.booking_count }}</td>
                             <td>
                                 {% if data.trek.status == 'Pending' %}
-                                <span class="badge bg-warning text-dark">Pending</span>
+                                <span class="badge badge-status-warning">Pending</span>
                                 {% elif data.trek.status == 'Approved' %}
-                                <span class="badge bg-primary">Approved</span>
+                                <span class="badge badge-status-info">Approved</span>
                                 {% elif data.trek.status == 'Open' %}
-                                <span class="badge bg-success">Open</span>
+                                <span class="badge badge-status-success">Open</span>
                                 {% elif data.trek.status == 'Closed' %}
-                                <span class="badge bg-secondary">Closed</span>
+                                <span class="badge badge-status-secondary">Closed</span>
                                 {% else %}
-                                <span class="badge bg-info">Completed</span>
+                                <span class="badge badge-status-info">Completed</span>
                                 {% endif %}
                             </td>
                             <td>
