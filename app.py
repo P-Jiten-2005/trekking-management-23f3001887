@@ -16,16 +16,16 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
 
-    from auth.routes import auth_bp
+    from routes.auth import auth_bp
     app.register_blueprint(auth_bp)
 
-    from admin.routes import admin_bp
+    from routes.admin import admin_bp
     app.register_blueprint(admin_bp)
 
-    from staff.routes import staff_bp
+    from routes.staff import staff_bp
     app.register_blueprint(staff_bp)
 
-    from trekker.routes import trekker_bp
+    from routes.trekker import trekker_bp
     app.register_blueprint(trekker_bp)
 
     @app.route('/')
