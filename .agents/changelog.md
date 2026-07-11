@@ -14,6 +14,8 @@ This file tracks all changes made by the AI agent during the project development
 - **Created a design specification and implementation plan** for emoji removal at `docs/superpowers/specs/2026-07-11-remove-all-emojis-spec.md` and `docs/2026-07-11-remove-all-emojis-plan.md`.
 - **Brand Logo Integration**: Copied `Logo.png` to `static/images/Logo.png` and integrated it across headers, base layouts, login form headers, and registration headers.
 - **Created a design specification and implementation plan** for logo integration at `docs/superpowers/specs/2026-07-11-integrate-logo-spec.md` and `docs/2026-07-11-integrate-logo-plan.md`.
+- **Footer Redesign**: Replaced the simple copyright block in `templates/index.html` with a responsive two-column grid enclosing a Contact Us block (with Bootstrap icons and tel/mailto/Instagram links) and horizontally aligned, elevated action buttons linking to GitHub and the Google Project Document on the right.
+- **Created a design specification and implementation plan** for footer redesign at `docs/superpowers/specs/2026-07-11-footer-redesign-spec.md` and `docs/2026-07-11-footer-redesign-plan.md`.
 
 ---
 

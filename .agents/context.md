@@ -80,6 +80,7 @@ D:\Jiten\Trek/
     ├── 2026-07-11-robust-input-validation-plan.md
     ├── 2026-07-11-remove-all-emojis-plan.md
     ├── 2026-07-11-integrate-logo-plan.md
+    ├── 2026-07-11-footer-redesign-plan.md
     └── superpowers/specs/
         ├── 2026-06-29-trekking-management-design.md
         ├── 2026-06-29-promote-staff-to-admin-design.md
@@ -92,7 +93,8 @@ D:\Jiten\Trek/
         ├── 2026-07-03-trek-landing-spec.md
         ├── 2026-07-11-robust-input-validation-spec.md
         ├── 2026-07-11-remove-all-emojis-spec.md
-        └── 2026-07-11-integrate-logo-spec.md
+        ├── 2026-07-11-integrate-logo-spec.md
+        └── 2026-07-11-footer-redesign-spec.md
 ```
 
 ## 3. Database Schema (SQLite)
@@ -151,6 +153,7 @@ D:\Jiten\Trek/
 - Input Validation & Defensive Coding: Integrated try-except boundary validation blocks for all route castings. Enforced chronological dates constraint (`start_date <= end_date`). Appended backend and frontend regex validations to ensure edited user contact profiles adhere strictly to the Indian `+91` format.
 - Emoji Removal: Removed all graphical icons and emojis from template views and `README.md` file.
 - Brand Logo Integration: Copied `Logo.png` from the root workspace directory to the static directory `static/images/Logo.png` and embedded it across the base navigation layout (`templates/base.html`), the landing page sticky navigation layout (`templates/index.html`), the login interface form container card (`templates/auth/login.html`), and the registration interface form container card (`templates/auth/register.html`).
+- Footer Redesign: Replaced the simple copyright block in `templates/index.html` with a responsive two-column grid. Left side features a Contact Us section (Email, Mobile, and Instagram with Bootstrap Icons). Right side features elevated action buttons linking to GitHub and the Google Project Document, with CSS shadow and translateY transitions on hover.
 
 ## 5. Next Steps / Actions
 - Stage new changes and push them to the remote GitHub repository.
