@@ -41,7 +41,7 @@ D:\Jiten\Trek/
 │
 ├── static/
 │   ├── css/
-│   │   └── custom.css      # Premium custom CSS styles
+│   │   └── custom.css      # Premium custom CSS styles (holds CSS variables)
 │   └── images/
 │       ├── himalayan_mountains.jpg # Full-screen background image
 │       └── Logo.png        # Target brand logo static asset
@@ -81,6 +81,7 @@ D:\Jiten\Trek/
     ├── 2026-07-11-remove-all-emojis-plan.md
     ├── 2026-07-11-integrate-logo-plan.md
     ├── 2026-07-11-footer-redesign-plan.md
+    ├── 2026-07-11-global-design-system-plan.md
     └── superpowers/specs/
         ├── 2026-06-29-trekking-management-design.md
         ├── 2026-06-29-promote-staff-to-admin-design.md
@@ -94,7 +95,8 @@ D:\Jiten\Trek/
         ├── 2026-07-11-robust-input-validation-spec.md
         ├── 2026-07-11-remove-all-emojis-spec.md
         ├── 2026-07-11-integrate-logo-spec.md
-        └── 2026-07-11-footer-redesign-spec.md
+        ├── 2026-07-11-footer-redesign-spec.md
+        └── 2026-07-11-global-design-system-spec.md
 ```
 
 ## 3. Database Schema (SQLite)
@@ -154,6 +156,7 @@ D:\Jiten\Trek/
 - Emoji Removal: Removed all graphical icons and emojis from template views and `README.md` file.
 - Brand Logo Integration: Copied `Logo.png` from the root workspace directory to the static directory `static/images/Logo.png` and embedded it across the base navigation layout (`templates/base.html`), the landing page sticky navigation layout (`templates/index.html`), the login interface form container card (`templates/auth/login.html`), and the registration interface form container card (`templates/auth/register.html`).
 - Footer Redesign: Replaced the simple copyright block in `templates/index.html` with a responsive two-column grid. Left side features a Contact Us section (Email, Mobile, and Instagram with Bootstrap Icons). Right side features elevated action buttons linking to GitHub and the Google Project Document, with CSS shadow and translateY transitions on hover.
+- Global Design System (Phase 1 - Step 1): Integrated design tokens inside `:root` of `static/css/custom.css`. Declared brand colors, neutral colors, semantic indicators, font scale dimensions, spacing bounds, border radii, shadows, and duration speeds. Maintained legacy support mappings to prevent style breakages.
 
 ## 5. Next Steps / Actions
 - Stage new changes and push them to the remote GitHub repository.

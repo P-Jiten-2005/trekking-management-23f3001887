@@ -16,6 +16,8 @@ This file tracks all changes made by the AI agent during the project development
 - **Created a design specification and implementation plan** for logo integration at `docs/superpowers/specs/2026-07-11-integrate-logo-spec.md` and `docs/2026-07-11-integrate-logo-plan.md`.
 - **Footer Redesign**: Replaced the simple copyright block in `templates/index.html` with a responsive two-column grid enclosing a Contact Us block (with Bootstrap icons and tel/mailto/Instagram links) and horizontally aligned, elevated action buttons linking to GitHub and the Google Project Document on the right.
 - **Created a design specification and implementation plan** for footer redesign at `docs/superpowers/specs/2026-07-11-footer-redesign-spec.md` and `docs/2026-07-11-footer-redesign-plan.md`.
+- **Global Design System (Phase 1 - Step 1)**: Centralized design system variables in the `:root` block of `static/css/custom.css`. Declared tokens for brand color palettes, neutral palettes, semantic colors, typography scale, border radii, shadow scale, spacing parameters, and transitions.
+- **Created a design specification and implementation plan** for the global design system at `docs/superpowers/specs/2026-07-11-global-design-system-spec.md` and `docs/2026-07-11-global-design-system-plan.md`.
 
 ---
 

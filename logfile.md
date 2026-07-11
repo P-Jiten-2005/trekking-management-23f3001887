@@ -254,3 +254,10 @@ This file documents the chronological conversation history and technical changes
   - Replaced the simple copyright block in `templates/index.html` with a responsive two-column grid.
 - **Verification**: Verified that all **12/12 unit tests pass successfully** (`OK`).
 - **Git Actions**: Staged, committed, and pushed all updates to the remote repository `main` branch.
+
+## Turn 30 (Design System Tokens)
+- **User Prompt**: Proceed with Phase 1 - Step 1 only. Establish the global design system (brand colors, neutral colors, semantic colors, typography scale, border radius, shadows, spacing, and transitions).
+- **Agent Action**:
+  - Centralized design tokens inside `static/css/custom.css` `:root`, retaining backward compatibility supporting attributes.
+- **Verification**: Verified that all **12/12 unit tests pass successfully** (`OK`).
+- **Git Actions**: Staged, committed, and pushed all updates to the remote repository `main` branch.
