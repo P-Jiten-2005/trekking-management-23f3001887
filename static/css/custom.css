@@ -880,6 +880,7 @@ textarea.form-control {
     color: #0369a1 !important;
 }
 
+
 .invalid-feedback {
     color: var(--color-danger) !important;
     font-size: var(--font-size-caption) !important;
@@ -887,4 +888,61 @@ textarea.form-control {
     margin-top: var(--spacing-xxs) !important;
     display: block !important;
 }
+
+/* Reusable Premium Status Badges */
+.badge-status-success {
+    background-color: #dcfce7 !important;
+    color: var(--color-success) !important;
+    border: 1px solid rgba(15, 81, 50, 0.2) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    font-size: var(--font-size-caption) !important;
+    padding: 4px 10px !important;
+    border-radius: 12px !important;
+    display: inline-block !important;
+}
+
+.badge-status-warning {
+    background-color: #fef3c7 !important;
+    color: var(--color-warning) !important;
+    border: 1px solid rgba(102, 77, 3, 0.2) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    font-size: var(--font-size-caption) !important;
+    padding: 4px 10px !important;
+    border-radius: 12px !important;
+    display: inline-block !important;
+}
+
+.badge-status-danger {
+    background-color: #fee2e2 !important;
+    color: var(--color-danger) !important;
+    border: 1px solid rgba(217, 56, 58, 0.2) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    font-size: var(--font-size-caption) !important;
+    padding: 4px 10px !important;
+    border-radius: 12px !important;
+    display: inline-block !important;
+}
+
+.badge-status-info {
+    background-color: #e0f2fe !important;
+    color: #0369a1 !important;
+    border: 1px solid rgba(3, 105, 161, 0.2) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    font-size: var(--font-size-caption) !important;
+    padding: 4px 10px !important;
+    border-radius: 12px !important;
+    display: inline-block !important;
+}
+
+.badge-status-secondary {
+    background-color: #f1f5f9 !important;
+    color: #475569 !important;
+    border: 1px solid #e2e8f0 !important;
+    font-weight: var(--font-weight-semibold) !important;
+    font-size: var(--font-size-caption) !important;
+    padding: 4px 10px !important;
+    border-radius: 12px !important;
+    display: inline-block !important;
+}
+
 

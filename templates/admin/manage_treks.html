@@ -24,7 +24,7 @@
 
 <div class="card p-4">
     <div class="table-responsive">
-        <table class="table table-striped table-hover align-middle mb-0">
+        <table class="table table-modern align-middle mb-0">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -56,35 +56,35 @@
                     <td>{{ trek.location }}</td>
                     <td>
                         {% if trek.difficulty == 'Easy' %}
-                        <span class="badge bg-success text-white">{{ trek.difficulty }}</span>
+                        <span class="badge badge-status-success">{{ trek.difficulty }}</span>
                         {% elif trek.difficulty == 'Moderate' %}
-                        <span class="badge bg-warning text-dark">{{ trek.difficulty }}</span>
+                        <span class="badge badge-status-warning">{{ trek.difficulty }}</span>
                         {% else %}
-                        <span class="badge bg-danger text-white">{{ trek.difficulty }}</span>
+                        <span class="badge badge-status-danger">{{ trek.difficulty }}</span>
                         {% endif %}
                     </td>
                     <td>{{ trek.duration }} Days</td>
                     <td>{{ trek.available_slots }} / {{ trek.max_slots }}</td>
                     <td>
                         {% if trek.status == 'Pending' %}
-                        <span class="badge bg-warning text-dark">Pending</span>
+                        <span class="badge badge-status-warning">Pending</span>
                         {% elif trek.status == 'Approved' %}
-                        <span class="badge bg-primary">Approved</span>
+                        <span class="badge badge-status-info">Approved</span>
                         {% elif trek.status == 'Open' %}
-                        <span class="badge bg-success">Open</span>
+                        <span class="badge badge-status-success">Open</span>
                         {% elif trek.status == 'Closed' %}
-                        <span class="badge bg-secondary">Closed</span>
+                        <span class="badge badge-status-secondary">Closed</span>
                         {% else %}
-                        <span class="badge bg-info">Completed</span>
+                        <span class="badge badge-status-info">Completed</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if trek.end_date < today %}
-                        <span class="badge bg-secondary text-white">Past</span>
+                        <span class="badge badge-status-secondary">Past</span>
                         {% elif trek.start_date <= today and today <= trek.end_date %}
-                        <span class="badge bg-success text-white">Active</span>
+                        <span class="badge badge-status-success">Active</span>
                         {% else %}
-                        <span class="badge bg-info text-dark">Future</span>
+                        <span class="badge badge-status-info">Future</span>
                         {% endif %}
                     </td>
                     <td>
@@ -146,7 +146,11 @@
                 </div>
                 {% else %}
                 <tr>
-                    <td colspan="10" class="text-center py-4 text-muted">No treks found. Create one to get started!</td>
+                    <td colspan="10" class="text-center py-5 text-muted">
+                        <i class="bi bi-mountain d-block fs-3 mb-2 text-secondary"></i>
+                        <strong>No treks found.</strong>
+                        <p class="small mb-0 mt-1">Create one to get started!</p>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -11,7 +11,7 @@
 
 <div class="card p-4">
     <div class="table-responsive">
-        <table class="table table-striped table-hover align-middle mb-0">
+        <table class="table table-modern align-middle mb-0">
             <thead>
                 <tr>
                     <th>Booking ID</th>
@@ -37,11 +37,11 @@
                     <td>{{ booking.trek.location }}</td>
                     <td>
                         {% if booking.trek.difficulty == 'Easy' %}
-                        <span class="badge bg-success text-white">{{ booking.trek.difficulty }}</span>
+                        <span class="badge badge-status-success">{{ booking.trek.difficulty }}</span>
                         {% elif booking.trek.difficulty == 'Moderate' %}
-                        <span class="badge bg-warning text-dark">{{ booking.trek.difficulty }}</span>
+                        <span class="badge badge-status-warning">{{ booking.trek.difficulty }}</span>
                         {% else %}
-                        <span class="badge bg-danger text-white">{{ booking.trek.difficulty }}</span>
+                        <span class="badge badge-status-danger">{{ booking.trek.difficulty }}</span>
                         {% endif %}
                     </td>
                     <td>{{ booking.trek.duration }} Days</td>
@@ -49,17 +49,22 @@
                     <td>{{ booking.booking_date.strftime('%Y-%m-%d %H:%M') }}</td>
                     <td>
                         {% if booking.status == 'Booked' %}
-                        <span class="badge bg-success">Booked</span>
+                        <span class="badge badge-status-success">Booked</span>
                         {% elif booking.status == 'Cancelled' %}
-                        <span class="badge bg-danger">Cancelled</span>
+                        <span class="badge badge-status-danger">Cancelled</span>
                         {% else %}
-                        <span class="badge bg-info">Completed</span>
+                        <span class="badge badge-status-info">Completed</span>
                         {% endif %}
                     </td>
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="8" class="text-center py-4 text-muted">You have no booking history. <a href="{{ url_for('trekker.dashboard') }}">Browse treks</a> to find an adventure!</td>
+                    <td colspan="8" class="text-center py-5 text-muted">
+                        <i class="bi bi-calendar-x d-block fs-3 mb-2 text-secondary"></i>
+                        <strong>You have no booking history yet.</strong>
+                        <p class="small mb-2 mt-1">Browse treks to find and book your next adventure!</p>
+                        <a href="{{ url_for('trekker.dashboard') }}" class="btn btn-primary btn-sm px-4">Browse Treks</a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

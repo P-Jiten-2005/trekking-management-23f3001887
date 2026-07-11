@@ -22,7 +22,7 @@
 
 <div class="card p-4">
     <div class="table-responsive">
-        <table class="table table-striped table-hover align-middle mb-0">
+        <table class="table table-modern align-middle mb-0">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -42,17 +42,17 @@
                     <td>{{ user.email }}</td>
                     <td>
                         {% if user.role == 'staff' %}
-                        <span class="badge bg-primary">Trek Staff</span>
+                        <span class="badge badge-status-info">Trek Staff</span>
                         {% else %}
-                        <span class="badge bg-success">Trekker</span>
+                        <span class="badge badge-status-success">Trekker</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if user.role == 'staff' %}
                             {% if user.is_approved %}
-                            <span class="badge bg-success">Approved</span>
+                            <span class="badge badge-status-success">Approved</span>
                             {% else %}
-                            <span class="badge bg-warning text-dark">Pending Approval</span>
+                            <span class="badge badge-status-warning">Pending Approval</span>
                             {% endif %}
                         {% else %}
                             <span class="text-muted">N/A (Auto-approved)</span>
@@ -60,9 +60,9 @@
                     </td>
                     <td>
                         {% if user.is_blacklisted %}
-                        <span class="badge bg-danger">Yes</span>
+                        <span class="badge badge-status-danger">Yes</span>
                         {% else %}
-                        <span class="badge bg-light text-dark">No</span>
+                        <span class="badge badge-status-secondary">No</span>
                         {% endif %}
                     </td>
                     <td>
@@ -93,7 +93,11 @@
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="7" class="text-center py-4 text-muted">No users found.</td>
+                    <td colspan="7" class="text-center py-5 text-muted">
+                        <i class="bi bi-people d-block fs-3 mb-2 text-secondary"></i>
+                        <strong>No users found.</strong>
+                        <p class="small mb-0 mt-1">Try adjusting your search criteria or register a new user.</p>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
