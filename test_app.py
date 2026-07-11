@@ -1,5 +1,5 @@
 import unittest
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from app import create_app
 from extensions import db
 from models import User, Trek, Booking
@@ -373,6 +373,160 @@ class TrekAppTestCase(unittest.TestCase):
                 'contact': '+919876543210'  # valid
             }, follow_redirects=True)
             self.assertIn(b'Profile updated successfully', response.data)
+
+    def test_cancel_booking(self):
+        """Verify trekker can cancel booking before the trek starts."""
+        # Create trekker user
+        trekker = User(email='trekker_cancel@trek.com', role='trekker', name='Cancel User', is_approved=True)
+        trekker.set_password('password')
+        db.session.add(trekker)
+        
+        # Create a trek that starts tomorrow
+        tomorrow = date.today() + timedelta(days=1)
+        trek = Trek(
+            name='Cancel Trek', location='Himalayas', difficulty='Easy', duration=4,
+            max_slots=5, available_slots=4, start_date=tomorrow, end_date=tomorrow + timedelta(days=3),
+            status='Open', price=5000.0, image_url='https://images.unsplash.com/photo-default'
+        )
+        db.session.add(trek)
+        db.session.commit()
+        
+        # Create a booking
+        booking = Booking(user_id=trekker.id, trek_id=trek.id, status='Booked')
+        db.session.add(booking)
+        db.session.commit()
+        
+        with self.client:
+            self.client.post('/login', data={'email': 'trekker_cancel@trek.com', 'password': 'password'})
+            # Cancel the booking
+            response = self.client.post(f'/trekker/cancel-booking/{booking.id}', follow_redirects=True)
+            self.assertIn(b'has been cancelled', response.data)
+            
+            # Check db updates
+            db_booking = Booking.query.get(booking.id)
+            self.assertEqual(db_booking.status, 'Cancelled')
+            db_trek = Trek.query.get(trek.id)
+            self.assertEqual(db_trek.available_slots, 5)
+
+    def test_cancel_booking_fails_after_start(self):
+        """Verify trekker cannot cancel booking on or after trek start date."""
+        trekker = User(email='trekker_cancel2@trek.com', role='trekker', name='Cancel User 2', is_approved=True)
+        trekker.set_password('password')
+        db.session.add(trekker)
+        
+        # Create a trek that starts today
+        today = date.today()
+        trek = Trek(
+            name='Past Trek', location='Himalayas', difficulty='Easy', duration=4,
+            max_slots=5, available_slots=4, start_date=today, end_date=today + timedelta(days=3),
+            status='Open', price=5000.0, image_url='https://images.unsplash.com/photo-default'
+        )
+        db.session.add(trek)
+        db.session.commit()
+        
+        # Create a booking
+        booking = Booking(user_id=trekker.id, trek_id=trek.id, status='Booked')
+        db.session.add(booking)
+        db.session.commit()
+        
+        with self.client:
+            self.client.post('/login', data={'email': 'trekker_cancel2@trek.com', 'password': 'password'})
+            # Cancel the booking (should fail)
+            response = self.client.post(f'/trekker/cancel-booking/{booking.id}', follow_redirects=True)
+            self.assertIn(b'cannot cancel a booking on or after', response.data)
+            
+            # Check db updates (should not change)
+            db_booking = Booking.query.get(booking.id)
+            self.assertEqual(db_booking.status, 'Booked')
+            db_trek = Trek.query.get(trek.id)
+            self.assertEqual(db_trek.available_slots, 4)
+
+    def test_staff_edit_trek_validation(self):
+        """Verify staff cannot edit Pending trek, or change status to Pending/Approved."""
+        # Create staff user
+        staff = User(email='staff_val@trek.com', role='staff', name='Staff Val', is_approved=True)
+        staff.set_password('password')
+        db.session.add(staff)
+        db.session.commit()
+        
+        # Create a Pending trek
+        trek_pending = Trek(
+            name='Pending Trek', location='Himalayas', difficulty='Easy', duration=4,
+            max_slots=5, available_slots=5, start_date=date.today() + timedelta(days=5),
+            end_date=date.today() + timedelta(days=9), status='Pending', assigned_staff_id=staff.id,
+            price=5000.0, image_url='https://images.unsplash.com/photo-default'
+        )
+        # Create an Open trek
+        trek_open = Trek(
+            name='Open Trek', location='Himalayas', difficulty='Easy', duration=4,
+            max_slots=5, available_slots=5, start_date=date.today() + timedelta(days=5),
+            end_date=date.today() + timedelta(days=9), status='Open', assigned_staff_id=staff.id,
+            price=5000.0, image_url='https://images.unsplash.com/photo-default'
+        )
+        db.session.add_all([trek_pending, trek_open])
+        db.session.commit()
+        
+        with self.client:
+            self.client.post('/login', data={'email': 'staff_val@trek.com', 'password': 'password'})
+            
+            # Try to edit Pending trek
+            response = self.client.post(f'/staff/trek/{trek_pending.id}/edit', data={
+                'available_slots': 3,
+                'status': 'Open'
+            }, follow_redirects=True)
+            self.assertIn(b'awaiting Administrator approval and cannot be modified', response.data)
+            
+            # Try to transition Open trek to Pending/Approved
+            response2 = self.client.post(f'/staff/trek/{trek_open.id}/edit', data={
+                'available_slots': 3,
+                'status': 'Approved'
+            }, follow_redirects=True)
+            self.assertIn(b'You do not have permission to transition this trek to an Administrator-controlled status', response2.data)
+
+    def test_admin_view_bookings_filtering(self):
+        """Verify admin can filter bookings by status, trek_id, and date."""
+        # Create trekker, treks, bookings
+        trekker = User(email='trekker_filter@trek.com', role='trekker', name='Filter User', is_approved=True)
+        trekker.set_password('password')
+        db.session.add(trekker)
+        
+        t1 = Trek(
+            name='Trek A', location='Himalayas', difficulty='Easy', duration=4,
+            max_slots=5, available_slots=5, start_date=date(2026, 8, 1), end_date=date(2026, 8, 5),
+            status='Open', price=5000.0, image_url='https://images.unsplash.com/photo-default'
+        )
+        t2 = Trek(
+            name='Trek B', location='Western Ghats', difficulty='Easy', duration=4,
+            max_slots=5, available_slots=5, start_date=date(2026, 9, 1), end_date=date(2026, 9, 5),
+            status='Open', price=5000.0, image_url='https://images.unsplash.com/photo-default'
+        )
+        db.session.add_all([t1, t2])
+        db.session.commit()
+        
+        # Booking for t1 (Booked)
+        b1 = Booking(user_id=trekker.id, trek_id=t1.id, status='Booked')
+        # Booking for t2 (Cancelled)
+        b2 = Booking(user_id=trekker.id, trek_id=t2.id, status='Cancelled')
+        db.session.add_all([b1, b2])
+        db.session.commit()
+        
+        with self.client:
+            self.client.post('/login', data={'email': 'Jiten@trek.com', 'password': 'Jiten@123'})
+            
+            # Filter by status 'Booked'
+            response = self.client.get('/admin/bookings?status=Booked')
+            self.assertIn(b'Trek A', response.data)
+            self.assertNotIn(b'<span>Trek B</span>', response.data)
+            
+            # Filter by status 'Cancelled'
+            response = self.client.get('/admin/bookings?status=Cancelled')
+            self.assertIn(b'Trek B', response.data)
+            self.assertNotIn(b'<span>Trek A</span>', response.data)
+            
+            # Filter by trek_id of t1
+            response = self.client.get(f'/admin/bookings?trek_id={t1.id}')
+            self.assertIn(b'Trek A', response.data)
+            self.assertNotIn(b'<span>Trek B</span>', response.data)
 
 if __name__ == '__main__':
     unittest.main()

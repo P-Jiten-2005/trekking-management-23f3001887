@@ -115,7 +115,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <form method="POST" action="{{ url_for('trekker.book_trek', trek_id=trek.id) }}" class="w-100">
+                    <form method="POST" action="{{ url_for('trekker.book_trek', trek_id=trek.id) }}" class="w-100" onsubmit="return confirm('Are you sure you want to book this trek?');">
                         <button type="submit" class="btn btn-primary w-100" {% if trek.available_slots <= 0 %}disabled{% endif %}>
                             {% if trek.available_slots <= 0 %}Sold Out{% else %}Confirm Booking (₹{{ "%.2f"|format(trek.price) if trek.price else '0.00' }}){% endif %}
                         </button>

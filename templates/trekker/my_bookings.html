@@ -22,6 +22,7 @@
                     <th>Price</th>
                     <th>Booking Date</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,10 +57,19 @@
                         <span class="badge badge-status-info">Completed</span>
                         {% endif %}
                     </td>
+                    <td>
+                        {% if booking.status == 'Booked' and booking.trek.start_date > today %}
+                        <form method="POST" action="{{ url_for('trekker.cancel_booking', booking_id=booking.id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to cancel your booking for {{ booking.trek.name }}?');">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Cancel Booking</button>
+                        </form>
+                        {% else %}
+                        <span class="text-muted small">-</span>
+                        {% endif %}
+                    </td>
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="8" class="text-center py-5 text-muted">
+                    <td colspan="9" class="text-center py-5 text-muted">
                         <i class="bi bi-calendar-x d-block fs-3 mb-2 text-secondary"></i>
                         <strong>You have no booking history yet.</strong>
                         <p class="small mb-2 mt-1">Browse treks to find and book your next adventure!</p>

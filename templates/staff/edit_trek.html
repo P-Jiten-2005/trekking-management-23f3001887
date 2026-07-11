@@ -20,9 +20,13 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold">Trek Status</label>
-                    <select name="status" class="form-select">
-                        <option value="Pending" {% if trek.status == 'Pending' %}selected{% endif %}>Pending</option>
-                        <option value="Approved" {% if trek.status == 'Approved' %}selected{% endif %}>Approved (Ready to open)</option>
+                    <select name="status" class="form-select" {% if trek.status == 'Pending' %}disabled{% endif %}>
+                        {% if trek.status == 'Pending' %}
+                        <option value="Pending" selected>Pending (Awaiting Administrator Approval)</option>
+                        {% endif %}
+                        {% if trek.status == 'Approved' %}
+                        <option value="Approved" selected>Approved (Ready to open)</option>
+                        {% endif %}
                         <option value="Open" {% if trek.status == 'Open' %}selected{% endif %}>Open (Accepting bookings)</option>
                         <option value="Closed" {% if trek.status == 'Closed' %}selected{% endif %}>Closed (No new bookings)</option>
                         <option value="Completed" {% if trek.status == 'Completed' %}selected{% endif %}>Completed</option>

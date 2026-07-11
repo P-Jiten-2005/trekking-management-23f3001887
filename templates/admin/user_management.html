@@ -81,7 +81,7 @@
                                 <button type="submit" class="btn btn-sm btn-outline-warning">Promote to Admin</button>
                             </form>
                             {% endif %}
-                            <form method="POST" action="{{ url_for('admin.user_management') }}">
+                            <form method="POST" action="{{ url_for('admin.user_management') }}" onsubmit="return confirm('Are you sure you want to {% if user.is_blacklisted %}activate / whitelist{% else %}deactivate / blacklist{% endif %} {{ user.name }}?');">
                                 <input type="hidden" name="user_id" value="{{ user.id }}">
                                 <input type="hidden" name="action" value="toggle_blacklist">
                                 <button type="submit" class="btn btn-sm {% if user.is_blacklisted %}btn-outline-success{% else %}btn-outline-danger{% endif %}">

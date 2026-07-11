@@ -9,6 +9,36 @@
     </div>
 </div>
 
+<div class="card p-4 mb-4 border-0 shadow-sm">
+    <form method="GET" action="{{ url_for('admin.view_bookings') }}" class="row g-3">
+        <div class="col-md-3">
+            <label for="status" class="form-label small fw-bold text-muted">Status</label>
+            <select name="status" id="status" class="form-select">
+                <option value="">All Statuses</option>
+                <option value="Booked" {% if status_filter == 'Booked' %}selected{% endif %}>Booked</option>
+                <option value="Cancelled" {% if status_filter == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                <option value="Completed" {% if status_filter == 'Completed' %}selected{% endif %}>Completed</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="trek_id" class="form-label small fw-bold text-muted">Trek</label>
+            <select name="trek_id" id="trek_id" class="form-select">
+                <option value="">All Treks</option>
+                {% for trek in all_treks %}
+                <option value="{{ trek.id }}" {% if trek_filter == trek.id|string %}selected{% endif %}>{{ trek.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="date" class="form-label small fw-bold text-muted">Date</label>
+            <input type="date" name="date" id="date" class="form-control" value="{{ date_filter }}">
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">Filter</button>
+        </div>
+    </form>
+</div>
+
 <div class="card p-4">
     <div class="table-responsive">
         <table class="table table-modern align-middle mb-0">

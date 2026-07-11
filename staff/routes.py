@@ -42,12 +42,21 @@ def edit_trek(trek_id):
     bookings_count = Booking.query.filter_by(trek_id=trek.id, status='Booked').count()
 
     if request.method == 'POST':
+        # Verify administrator-controlled states
+        if trek.status == 'Pending':
+            flash('This trek is awaiting Administrator approval and cannot be modified.', 'danger')
+            return redirect(url_for('staff.edit_trek', trek_id=trek.id))
+            
+        status = request.form.get('status')
+        if status in ['Pending', 'Approved']:
+            flash('You do not have permission to transition this trek to an Administrator-controlled status.', 'danger')
+            return redirect(url_for('staff.edit_trek', trek_id=trek.id))
+
         try:
             slots = int(request.form.get('available_slots'))
         except (ValueError, TypeError):
             flash('Available slots must be a valid integer.', 'danger')
             return redirect(url_for('staff.edit_trek', trek_id=trek.id))
-        status = request.form.get('status')
         
         # Validation: Available slots cannot be negative
         if slots < 0:

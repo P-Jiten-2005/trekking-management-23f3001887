@@ -56,8 +56,30 @@ def book_trek(trek_id):
 @trekker_bp.route('/trekker/my-bookings')
 @role_required('trekker')
 def my_bookings():
+    from datetime import date
     bookings = Booking.query.filter_by(user_id=current_user.id).all()
-    return render_template('trekker/my_bookings.html', bookings=bookings)
+    return render_template('trekker/my_bookings.html', bookings=bookings, today=date.today())
+
+@trekker_bp.route('/trekker/cancel-booking/<int:booking_id>', methods=['POST'])
+@role_required('trekker')
+def cancel_booking(booking_id):
+    from datetime import date
+    booking = Booking.query.filter_by(id=booking_id, user_id=current_user.id).first_or_404()
+    
+    if booking.status != 'Booked':
+        flash('Only active bookings can be cancelled.', 'danger')
+        return redirect(url_for('trekker.my_bookings'))
+        
+    if booking.trek.start_date <= date.today():
+        flash('You cannot cancel a booking on or after the trek start date.', 'danger')
+        return redirect(url_for('trekker.my_bookings'))
+        
+    booking.status = 'Cancelled'
+    booking.trek.available_slots += 1
+    db.session.commit()
+    
+    flash(f'Booking for trek {booking.trek.name} has been cancelled.', 'success')
+    return redirect(url_for('trekker.my_bookings'))
 
 @trekker_bp.route('/trekker/profile', methods=['GET', 'POST'])
 @role_required('trekker')

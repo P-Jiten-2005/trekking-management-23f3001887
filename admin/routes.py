@@ -154,5 +154,39 @@ def user_management():
 @admin_bp.route('/admin/bookings')
 @role_required('admin')
 def view_bookings():
-    bookings = Booking.query.all()
-    return render_template('admin/view_bookings.html', bookings=bookings)
+    from models import Trek
+    from datetime import datetime
+    
+    status_filter = request.args.get('status', '')
+    trek_filter = request.args.get('trek_id', '')
+    date_filter = request.args.get('date', '')
+    
+    query = Booking.query
+    
+    if status_filter:
+        query = query.filter(Booking.status == status_filter)
+    if trek_filter:
+        try:
+            trek_id_val = int(trek_filter)
+            query = query.filter(Booking.trek_id == trek_id_val)
+        except ValueError:
+            pass
+    if date_filter:
+        try:
+            target_date = datetime.strptime(date_filter, '%Y-%m-%d').date()
+            from sqlalchemy import func
+            query = query.filter(func.date(Booking.booking_date) == target_date)
+        except ValueError:
+            pass
+            
+    bookings = query.all()
+    all_treks = Trek.query.order_by(Trek.name.asc()).all()
+    
+    return render_template(
+        'admin/view_bookings.html',
+        bookings=bookings,
+        all_treks=all_treks,
+        status_filter=status_filter,
+        trek_filter=trek_filter,
+        date_filter=date_filter
+    )
