@@ -203,7 +203,10 @@
     <!-- Centered Card Wrapper -->
     <div class="auth-wrapper">
         <div class="auth-card">
-            <h2 class="auth-header">Create Account</h2>
+            <div class="text-center mb-4">
+                <img src="{{ url_for('static', filename='images/Logo.png') }}" alt="Logo" height="60" class="mb-2">
+                <h2 class="auth-header" style="margin-bottom: 0;">Create Account</h2>
+            </div>
 
             <!-- Flash Error Messages -->
             {% with messages = get_flashed_messages(with_categories=true) %}
