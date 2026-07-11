@@ -16,9 +16,9 @@
         <div class="col-md-3">
             <select name="difficulty" class="form-select">
                 <option value="">Any Difficulty</option>
-                <option value="Easy" {% if difficulty == 'Easy' %}selected{% endif %}>Easy 🟢</option>
-                <option value="Moderate" {% if difficulty == 'Moderate' %}selected{% endif %}>Moderate 🟡</option>
-                <option value="Hard" {% if difficulty == 'Hard' %}selected{% endif %}>Hard 🔴</option>
+                <option value="Easy" {% if difficulty == 'Easy' %}selected{% endif %}>Easy</option>
+                <option value="Moderate" {% if difficulty == 'Moderate' %}selected{% endif %}>Moderate</option>
+                <option value="Hard" {% if difficulty == 'Hard' %}selected{% endif %}>Hard</option>
             </select>
         </div>
         <div class="col-md-3">
@@ -44,9 +44,9 @@
             </div>
             <div class="card-body d-flex flex-column">
                 <h5 class="trek-card-title-maroon mb-3">{{ trek.name }}</h5>
-                <p class="text-muted small text-center mb-4">📍 {{ trek.location }}</p>
+                <p class="text-muted small text-center mb-4">Location: {{ trek.location }}</p>
                 <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3">
-                    <span class="small text-muted">⭐ 5.0 | {{ (trek.id * 13) % 40 + 6 }} reviews</span>
+                    <span class="small text-muted">Rating: 5.0 | {{ (trek.id * 13) % 40 + 6 }} reviews</span>
                     <a href="#" class="trek-card-link-red" data-bs-toggle="modal" data-bs-target="#trekModal{{ trek.id }}">View Details</a>
                 </div>
             </div>
@@ -67,49 +67,49 @@
                             <img src="{{ trek.image_url if trek.image_url else url_for('static', filename='images/himalayan_mountains.jpg') }}" class="img-fluid rounded-4 w-100" style="height: 250px; object-fit: cover; border-radius: 16px;" alt="{{ trek.name }}">
                         </div>
                         <div class="col-md-7 text-start">
-                            <h5 class="fw-bold mb-3 text-dark">📍 Location: <span class="text-secondary fw-normal">{{ trek.location }}</span></h5>
-                            <div class="row g-3 mb-4 text-dark">
-                                <div class="col-6">
-                                    <strong>Difficulty:</strong>
-                                    <div>
-                                        {% if trek.difficulty == 'Easy' %}
-                                        <span class="badge bg-success text-white">Easy 🟢</span>
-                                        {% elif trek.difficulty == 'Moderate' %}
-                                        <span class="badge bg-warning text-dark">Moderate 🟡</span>
-                                        {% else %}
-                                        <span class="badge bg-danger text-white">Hard 🔴</span>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <strong>Duration:</strong>
-                                    <div><span class="badge bg-info text-dark">⏱️ {{ trek.duration }} Days</span></div>
-                                </div>
-                                <div class="col-6">
-                                    <strong>Max Altitude:</strong>
-                                    <div><span class="text-muted">{{ trek.altitude or 'N/A' }}</span></div>
-                                </div>
-                                <div class="col-6">
-                                    <strong>Length:</strong>
-                                    <div><span class="text-muted">{{ trek.length or 'N/A' }}</span></div>
-                                </div>
-                                <div class="col-6">
-                                    <strong>Dates:</strong>
-                                    <div><span class="text-muted small">{{ trek.start_date.strftime('%Y-%m-%d') }} to {{ trek.end_date.strftime('%Y-%m-%d') }}</span></div>
-                                </div>
-                                <div class="col-6">
-                                    <strong>Price:</strong>
-                                    <div><span class="text-success fw-bold">₹{{ "%.2f"|format(trek.price) if trek.price else '0.00' }}</span></div>
-                                </div>
-                                <div class="col-12">
-                                    <strong>Available Slots:</strong>
-                                    <div><span class="text-muted">{{ trek.available_slots }} / {{ trek.max_slots }} spots remaining</span></div>
-                                </div>
-                            </div>
-                            <div class="mb-3 text-dark">
-                                <strong>🛡️ Required Safety Equipment:</strong>
-                                <p class="text-secondary small mt-1 mb-0 bg-light p-2 rounded">{{ trek.safety_equipment or 'N/A' }}</p>
-                            </div>
+                             <h5 class="fw-bold mb-3 text-dark">Location: <span class="text-secondary fw-normal">{{ trek.location }}</span></h5>
+                             <div class="row g-3 mb-4 text-dark">
+                                 <div class="col-6">
+                                     <strong>Difficulty:</strong>
+                                     <div>
+                                         {% if trek.difficulty == 'Easy' %}
+                                         <span class="badge bg-success text-white">Easy</span>
+                                         {% elif trek.difficulty == 'Moderate' %}
+                                         <span class="badge bg-warning text-dark">Moderate</span>
+                                         {% else %}
+                                         <span class="badge bg-danger text-white">Hard</span>
+                                         {% endif %}
+                                     </div>
+                                 </div>
+                                 <div class="col-6">
+                                     <strong>Duration:</strong>
+                                     <div><span class="badge bg-info text-dark">{{ trek.duration }} Days</span></div>
+                                 </div>
+                                 <div class="col-6">
+                                     <strong>Max Altitude:</strong>
+                                     <div><span class="text-muted">{{ trek.altitude or 'N/A' }}</span></div>
+                                 </div>
+                                 <div class="col-6">
+                                     <strong>Length:</strong>
+                                     <div><span class="text-muted">{{ trek.length or 'N/A' }}</span></div>
+                                 </div>
+                                 <div class="col-6">
+                                     <strong>Dates:</strong>
+                                     <div><span class="text-muted small">{{ trek.start_date.strftime('%Y-%m-%d') }} to {{ trek.end_date.strftime('%Y-%m-%d') }}</span></div>
+                                 </div>
+                                 <div class="col-6">
+                                     <strong>Price:</strong>
+                                     <div><span class="text-success fw-bold">₹{{ "%.2f"|format(trek.price) if trek.price else '0.00' }}</span></div>
+                                 </div>
+                                 <div class="col-12">
+                                     <strong>Available Slots:</strong>
+                                     <div><span class="text-muted">{{ trek.available_slots }} / {{ trek.max_slots }} spots remaining</span></div>
+                                 </div>
+                             </div>
+                             <div class="mb-3 text-dark">
+                                 <strong>Required Safety Equipment:</strong>
+                                 <p class="text-secondary small mt-1 mb-0 bg-light p-2 rounded">{{ trek.safety_equipment or 'N/A' }}</p>
+                             </div>                       
                         </div>
                     </div>
                 </div>

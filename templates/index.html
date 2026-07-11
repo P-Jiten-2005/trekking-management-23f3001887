@@ -13,7 +13,7 @@
     <!-- Sticky Transparent Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top landing-nav shadow-sm">
         <div class="container">
-            <a class="navbar-brand fs-3" href="#hero">Eco-Hikes 🏔️</a>
+            <a class="navbar-brand fs-3" href="#hero">Eco-Hikes</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#landingNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -52,42 +52,36 @@
             <div class="row g-4 mt-4">
                 <div class="col-md-4 text-center">
                     <div class="p-4 rounded-4 shadow-sm border border-light h-100">
-                        <span class="fs-1 mb-3 d-block">🥾</span>
                         <h4 class="fw-bold">Curated Trails</h4>
                         <p class="text-muted">Unique routes tailored for various experience levels, ensuring both safety and adventure.</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="p-4 rounded-4 shadow-sm border border-light h-100">
-                        <span class="fs-1 mb-3 d-block">🤝</span>
                         <h4 class="fw-bold">Community First</h4>
                         <p class="text-muted">Direct interactions with native guides and overnight stays in mountain communities.</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="p-4 rounded-4 shadow-sm border border-light h-100">
-                        <span class="fs-1 mb-3 d-block">🌿</span>
                         <h4 class="fw-bold">Eco Conservation</h4>
                         <p class="text-muted">Low-impact travel practices aimed at keeping the mountains clean and conserving their beauty.</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="p-4 rounded-4 shadow-sm border border-light h-100">
-                        <span class="fs-1 mb-3 d-block">🏥</span>
                         <h4 class="fw-bold">Medical Assistance</h4>
                         <p class="text-muted">On-trail medical support, comprehensive first-aid kits, and regular health checks throughout the journey.</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="p-4 rounded-4 shadow-sm border border-light h-100">
-                        <span class="fs-1 mb-3 d-block">🚨</span>
                         <h4 class="fw-bold">Emergency Support</h4>
                         <p class="text-muted">24/7 emergency response protocols, satellite tracking, and rapid evacuation standby backups.</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="p-4 rounded-4 shadow-sm border border-light h-100">
-                        <span class="fs-1 mb-3 d-block">🚌</span>
                         <h4 class="fw-bold">Pick & Drop Transit</h4>
                         <p class="text-muted">Seamless transportation picking you up from the designated gather point and dropping you at the trek base point.</p>
                     </div>
@@ -123,7 +117,7 @@
                         <div class="card-body d-flex flex-column">
                              <h5 class="trek-card-title-maroon mb-3">{{ trek.name }}</h5>
                              <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3">
-                                 <span class="small text-muted">⭐ 5.0 | {{ (trek.id * 13) % 40 + 6 }} reviews</span>
+                                 <span class="small text-muted">Rating: 5.0 | {{ (trek.id * 13) % 40 + 6 }} reviews</span>
                                  <a href="#" class="trek-card-link-red" data-bs-toggle="modal" data-bs-target="#trekModal{{ trek.id }}">View Details</a>
                              </div>
                         </div>
@@ -173,11 +167,7 @@
             <span class="badge bg-success-subtle text-success px-3 py-2 mb-2 fs-6">Our Story</span>
             <h2 class="display-5 fw-bold text-dark mb-4">About Eco-Hikes</h2>
             <p class="lead text-muted col-md-8 mx-auto">Eco-Hikes was founded to change the way we experience mountain tourism. By emphasizing environmental awareness and direct support for mountain communities, we build trips that are meaningful, sustainable, and unforgettable.</p>
-            <div class="mt-5">
-                <span class="fs-3 text-success mx-2">🌲</span>
-                <span class="fs-3 text-success mx-2">🥾</span>
-                <span class="fs-3 text-success mx-2">🗻</span>
-            </div>
+
         </div>
     </section>
 
@@ -204,23 +194,23 @@
                             <img src="{{ trek.image_url if trek.image_url else url_for('static', filename='images/himalayan_mountains.jpg') }}" class="img-fluid rounded-4 w-100" style="height: 250px; object-fit: cover; border-radius: 16px;" alt="{{ trek.name }}">
                         </div>
                         <div class="col-md-7">
-                            <h5 class="fw-bold mb-3 text-dark">📍 Location: <span class="text-secondary fw-normal">{{ trek.location }}</span></h5>
+                            <h5 class="fw-bold mb-3 text-dark">Location: <span class="text-secondary fw-normal">{{ trek.location }}</span></h5>
                             <div class="row g-3 mb-4 text-dark">
                                 <div class="col-6">
                                     <strong>Difficulty:</strong>
                                     <div>
                                         {% if trek.difficulty == 'Easy' %}
-                                        <span class="badge bg-success text-white">Easy 🟢</span>
+                                        <span class="badge bg-success text-white">Easy</span>
                                         {% elif trek.difficulty == 'Moderate' %}
-                                        <span class="badge bg-warning text-dark">Moderate 🟡</span>
+                                        <span class="badge bg-warning text-dark">Moderate</span>
                                         {% else %}
-                                        <span class="badge bg-danger text-white">Hard 🔴</span>
+                                        <span class="badge bg-danger text-white">Hard</span>
                                         {% endif %}
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <strong>Duration:</strong>
-                                    <div><span class="badge bg-info text-dark">⏱️ {{ trek.duration }} Days</span></div>
+                                    <div><span class="badge bg-info text-dark">{{ trek.duration }} Days</span></div>
                                 </div>
                                 <div class="col-6">
                                     <strong>Max Altitude:</strong>
@@ -240,7 +230,7 @@
                                 </div>
                             </div>
                             <div class="mb-3 text-dark">
-                                <strong>🛡️ Required Safety Equipment:</strong>
+                                <strong>Required Safety Equipment:</strong>
                                 <p class="text-secondary small mt-1 mb-0 bg-light p-2 rounded">{{ trek.safety_equipment or 'N/A' }}</p>
                             </div>
                         </div>

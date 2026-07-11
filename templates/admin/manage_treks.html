@@ -47,8 +47,8 @@
                             <img src="{{ trek.image_url if trek.image_url else url_for('static', filename='images/himalayan_mountains.jpg') }}" alt="{{ trek.name }}" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
                             <div>
                                 <strong>{{ trek.name }}</strong><br>
-                                <small class="text-muted d-block" style="font-size: 0.8rem;">⛰️ Max: {{ trek.altitude or 'N/A' }} | 📏 Len: {{ trek.length or 'N/A' }} | 💰 Price: ₹{{ "%.2f"|format(trek.price) if trek.price else '0.00' }}</small>
-                                <small class="text-muted d-block" style="font-size: 0.75rem;">🛡️ Safety: {{ trek.safety_equipment or 'N/A' }}</small>
+                                <small class="text-muted d-block" style="font-size: 0.8rem;">Max: {{ trek.altitude or 'N/A' }} | Length: {{ trek.length or 'N/A' }} | Price: ₹{{ "%.2f"|format(trek.price) if trek.price else '0.00' }}</small>
+                                <small class="text-muted d-block" style="font-size: 0.75rem;">Safety: {{ trek.safety_equipment or 'N/A' }}</small>
                             </div>
                         </div>
                     </td>
@@ -79,11 +79,11 @@
                     </td>
                     <td>
                         {% if trek.end_date < today %}
-                        <span class="badge bg-secondary text-white">Past 🕰️</span>
+                        <span class="badge bg-secondary text-white">Past</span>
                         {% elif trek.start_date <= today and today <= trek.end_date %}
-                        <span class="badge bg-success text-white">Active 🏃♂️</span>
+                        <span class="badge bg-success text-white">Active</span>
                         {% else %}
-                        <span class="badge bg-info text-dark">Future 📅</span>
+                        <span class="badge bg-info text-dark">Future</span>
                         {% endif %}
                     </td>
                     <td>

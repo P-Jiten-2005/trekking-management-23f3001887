@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row align-items-center mb-4">
     <div class="col-md-8">
-        <h2 class="fw-bold">Welcome back, {{ current_user.name }}! 🥾</h2>
+        <h2 class="fw-bold">Welcome back, {{ current_user.name }}!</h2>
         <p class="text-muted mb-0">Manage your assigned trekking expeditions and participant lists.</p>
     </div>
     <div class="col-md-4 text-end">
@@ -31,7 +31,7 @@
             <h5 class="opacity-75">Next Departure</h5>
             {% if next_departure %}
                 <h4 class="fw-bold mt-2 mb-1 text-truncate">{{ next_departure.name }}</h4>
-                <p class="small mb-0 opacity-75">📅 Starts: {{ next_departure.start_date.strftime('%Y-%m-%d') }}</p>
+                <p class="small mb-0 opacity-75">Starts: {{ next_departure.start_date.strftime('%Y-%m-%d') }}</p>
             {% else %}
                 <h2 class="display-6 fw-bold my-2">None</h2>
                 <p class="small mb-0 opacity-75">No departures scheduled</p>
@@ -67,7 +67,7 @@
                                     <img src="{{ data.trek.image_url if data.trek.image_url else url_for('static', filename='images/himalayan_mountains.jpg') }}" alt="{{ data.trek.name }}" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
                                     <div>
                                         <strong>{{ data.trek.name }}</strong><br>
-                                        <small class="text-muted d-block" style="font-size: 0.8rem;">⛰️ Max: {{ data.trek.altitude or 'N/A' }} | 📏 Len: {{ data.trek.length or 'N/A' }} | 💰 Price: ₹{{ "%.2f"|format(data.trek.price) if data.trek.price else '0.00' }}</small>
+                                        <small class="text-muted d-block" style="font-size: 0.8rem;">Max: {{ data.trek.altitude or 'N/A' }} | Length: {{ data.trek.length or 'N/A' }} | Price: ₹{{ "%.2f"|format(data.trek.price) if data.trek.price else '0.00' }}</small>
                                     </div>
                                 </div>
                             </td>
