@@ -76,6 +76,7 @@ D:\Jiten\Trek/
     ├── 2026-07-02-trek-image-plan.md
     ├── 2026-07-03-trek-landing-plan.md
     ├── 2026-07-11-robust-input-validation-plan.md
+    ├── 2026-07-11-remove-all-emojis-plan.md
     └── superpowers/specs/
         ├── 2026-06-29-trekking-management-design.md
         ├── 2026-06-29-promote-staff-to-admin-design.md
@@ -86,7 +87,8 @@ D:\Jiten\Trek/
         ├── 2026-07-02-trek-price-spec.md
         ├── 2026-07-02-trek-image-spec.md
         ├── 2026-07-03-trek-landing-spec.md
-        └── 2026-07-11-robust-input-validation-spec.md
+        ├── 2026-07-11-robust-input-validation-spec.md
+        └── 2026-07-11-remove-all-emojis-spec.md
 ```
 
 ## 3. Database Schema (SQLite)
@@ -143,6 +145,7 @@ D:\Jiten\Trek/
 - Image Integration: Added `image_url` attribute to support cover pictures for treks, integrating card headers and thumbnails.
 - Featured Landing & Visual Card: Enabled a Featured Treks Showcase section on the main landing page. Fully overhauled the layout of treks cards in both landing page and trekker explorer dashboards to show visual overlay images matching the reference image specification (crimson ribbons, days/nights duration tags, ratings, and a wine-red details link launching a modal specification card).
 - Input Validation & Defensive Coding: Integrated try-except boundary validation blocks for all route castings. Enforced chronological dates constraint (`start_date <= end_date`). Appended backend and frontend regex validations to ensure edited user contact profiles adhere strictly to the Indian `+91` format.
+- Emoji Removal: Removed all graphical icons and emojis from template views and `README.md` file.
 
 ## 5. Next Steps / Actions
 - Stage new changes and push them to the remote GitHub repository.
