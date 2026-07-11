@@ -13,7 +13,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold">Contact Details</label>
-                    <input type="text" name="contact" class="form-control" value="{{ current_user.contact_details if current_user.contact_details else '' }}" placeholder="Phone number or emergency contact">
+                    <input type="tel" name="contact" class="form-control" value="{{ current_user.contact_details if current_user.contact_details else '' }}" placeholder="+91XXXXXXXXXX" pattern="^\+91\d{10}$" title="Must start with +91 followed by exactly 10 digits" required>
                 </div>
                 <button type="submit" class="btn btn-success w-100">Save Profile Changes</button>
             </form>
