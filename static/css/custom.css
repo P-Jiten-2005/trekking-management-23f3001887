@@ -287,25 +287,7 @@ html {
     }
 }
 
-/* Glassmorphic Navbar Overrides */
-.glass-navbar {
-    background: rgba(18, 38, 12, 0.85) !important;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-}
 
-.glass-navbar .nav-link {
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.8) !important;
-    transition: color 0.2s ease;
-}
-
-.glass-navbar .nav-link:hover {
-    color: #a3e635 !important; /* bright lime green active hover */
-}
 
 /* Premium Dashboard Metrics Cards */
 .metric-card {
