@@ -68,14 +68,108 @@ body {
     color: var(--neutral-dark);
 }
 
-.navbar {
-    background-color: var(--accent-color) !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+/* Dynamic Layout and Header Typography */
+.container-dashboard {
+    max-width: 1280px !important;
 }
 
-.navbar-brand {
-    font-weight: 700;
+.container-table {
+    max-width: 100% !important;
+    padding-left: var(--spacing-lg) !important;
+    padding-right: var(--spacing-lg) !important;
+}
+
+.container-form {
+    max-width: 800px !important;
+}
+
+.container h2.fw-bold, 
+.container-dashboard h2.fw-bold, 
+.container-table h2.fw-bold, 
+.container-form h2.fw-bold {
+    font-family: var(--font-family-base) !important;
+    font-size: 1.75rem !important;
+    font-weight: var(--font-weight-bold) !important;
+    color: var(--neutral-dark) !important;
+    margin-bottom: 4px !important;
+}
+
+.container h2.fw-bold + p.text-muted, 
+.container-dashboard h2.fw-bold + p.text-muted, 
+.container-table h2.fw-bold + p.text-muted, 
+.container-form h2.fw-bold + p.text-muted {
+    font-family: var(--font-family-base) !important;
+    font-size: var(--font-size-body) !important;
+    color: #64748b !important;
+    margin-top: 4px !important;
+    margin-bottom: 0 !important;
+}
+
+/* Global Navbar Styling (Eco-Hikes brand off-white/green-tint) */
+.glass-navbar {
+    background-color: #f0f5f1 !important; /* soft green-tinted neutral */
+    border-bottom: 1px solid rgba(15, 81, 50, 0.12) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    height: 64px !important;
+    padding: 0 !important;
+}
+
+.glass-navbar .navbar-brand {
+    color: var(--brand-primary) !important;
+    font-family: var(--font-family-base) !important;
+    font-weight: var(--font-weight-bold) !important;
+    font-size: var(--font-size-card) !important;
     letter-spacing: 0.5px;
+    height: 64px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
+.glass-navbar .nav-link {
+    color: #475569 !important;
+    font-family: var(--font-family-base) !important;
+    font-weight: var(--font-weight-normal) !important;
+    font-size: var(--font-size-body) !important;
+    padding: 0 var(--spacing-sm) !important;
+    height: 64px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    border-bottom: 2px solid transparent !important;
+    transition: color var(--transition-fast) ease !important;
+}
+
+.glass-navbar .nav-link:hover {
+    color: var(--brand-primary) !important;
+}
+
+.glass-navbar .nav-link.active,
+.glass-navbar .nav-link:focus {
+    color: var(--brand-primary) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    border-bottom: 2px solid var(--brand-primary) !important;
+    background-color: transparent !important;
+}
+
+.glass-navbar .navbar-text {
+    color: #64748b !important;
+    font-size: var(--font-size-caption) !important;
+}
+
+.glass-navbar .btn-outline-light {
+    border-color: var(--brand-primary) !important;
+    color: var(--brand-primary) !important;
+    height: 32px !important;
+    padding: 0 var(--spacing-sm) !important;
+    font-size: var(--font-size-caption) !important;
+    background-color: transparent !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    transition: all var(--transition-normal) ease !important;
+}
+
+.glass-navbar .btn-outline-light:hover {
+    background-color: var(--brand-primary) !important;
+    color: #ffffff !important;
 }
 
 .card {
@@ -385,11 +479,13 @@ html {
 /* Footer Redesign */
 .footer-custom {
     background-color: #12260c !important;
-    border-top: 2px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding-top: var(--spacing-xl) !important;
+    padding-bottom: var(--spacing-xl) !important;
 }
 
 .footer-link {
-    transition: color 0.2s ease, text-decoration 0.2s ease;
+    transition: color var(--transition-fast) ease, text-decoration var(--transition-fast) ease;
 }
 
 .footer-link:hover {
@@ -401,24 +497,24 @@ html {
     background-color: rgba(255, 255, 255, 0.05) !important;
     color: rgba(255, 255, 255, 0.8) !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 8px !important;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.2s ease-in-out !important;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius-button) !important;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-caption) !important;
+    transition: all var(--transition-normal) ease-in-out !important;
+    box-shadow: var(--shadow-base) !important;
 }
 
 .btn-footer:hover {
-    background-color: #1E7A44 !important;
+    background-color: var(--brand-primary) !important;
     color: #ffffff !important;
-    border-color: #1E7A44 !important;
+    border-color: var(--brand-primary) !important;
     transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(30, 122, 68, 0.3);
+    box-shadow: 0 4px 12px rgba(15, 81, 50, 0.2);
 }
 
 .btn-footer:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(30, 122, 68, 0.4) !important;
+    box-shadow: 0 0 0 3px rgba(15, 81, 50, 0.3) !important;
 }
 
 /* Standardized Dashboard Metric Cards */

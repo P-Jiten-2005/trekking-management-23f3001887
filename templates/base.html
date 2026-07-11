@@ -23,16 +23,16 @@
                 <ul class="navbar-nav me-auto">
                     {% if current_user.is_authenticated %}
                         {% if current_user.role == 'admin' %}
-                            <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.dashboard') }}">Dashboard</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.manage_treks') }}">Manage Treks</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.view_bookings') }}">All Bookings</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.user_management') }}">Users & Staff</a></li>
+                            <li class="nav-item"><a class="nav-link {% if request.path == url_for('admin.dashboard') %}active{% endif %}" href="{{ url_for('admin.dashboard') }}">Dashboard</a></li>
+                            <li class="nav-item"><a class="nav-link {% if request.path == url_for('admin.manage_treks') %}active{% endif %}" href="{{ url_for('admin.manage_treks') }}">Manage Treks</a></li>
+                            <li class="nav-item"><a class="nav-link {% if request.path == url_for('admin.view_bookings') %}active{% endif %}" href="{{ url_for('admin.view_bookings') }}">All Bookings</a></li>
+                            <li class="nav-item"><a class="nav-link {% if request.path == url_for('admin.user_management') %}active{% endif %}" href="{{ url_for('admin.user_management') }}">Users & Staff</a></li>
                         {% elif current_user.role == 'staff' %}
-                            <li class="nav-item"><a class="nav-link" href="{{ url_for('staff.dashboard') }}">Dashboard</a></li>
+                            <li class="nav-item"><a class="nav-link {% if request.path == url_for('staff.dashboard') %}active{% endif %}" href="{{ url_for('staff.dashboard') }}">Dashboard</a></li>
                         {% elif current_user.role == 'trekker' %}
-                            <li class="nav-item"><a class="nav-link" href="{{ url_for('trekker.dashboard') }}">Find Treks</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url_for('trekker.my_bookings') }}">My Bookings</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url_for('trekker.edit_profile') }}">My Profile</a></li>
+                            <li class="nav-item"><a class="nav-link {% if request.path == url_for('trekker.dashboard') %}active{% endif %}" href="{{ url_for('trekker.dashboard') }}">Find Treks</a></li>
+                            <li class="nav-item"><a class="nav-link {% if request.path == url_for('trekker.my_bookings') %}active{% endif %}" href="{{ url_for('trekker.my_bookings') }}">My Bookings</a></li>
+                            <li class="nav-item"><a class="nav-link {% if request.path == url_for('trekker.edit_profile') %}active{% endif %}" href="{{ url_for('trekker.edit_profile') }}">My Profile</a></li>
                         {% endif %}
                     {% endif %}
                 </ul>
@@ -48,7 +48,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container {% block container_class %}{% endblock %}">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
