@@ -1,4 +1,26 @@
+# AI / Development
+.agents/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Environment files
+.env.*
+!.env.example
+
+# Coverage
+.coverage
+coverage.xml
+
+# Ruff / Black / Pyright (if you use them)
+.ruff_cache/
+.pyright/
+
 # Byte-compiled / optimized / DLL files
+
 __pycache__/
 *.py[cod]
 *$py.class
