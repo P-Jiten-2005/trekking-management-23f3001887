@@ -122,11 +122,7 @@ Trek/
    ```
 
 2. **Access the Application**:
-   Open your browser and navigate to `http://127.0.0.1:5000`.
-
-3. **Administrator Credentials**:
-   - **Email**: `Jiten@trek.com`
-   - **Password**: `Jiten@123`
+   Open your browser and navigate to `http://127.0.0.1:1234`.
 
 ---
 
