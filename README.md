@@ -105,28 +105,24 @@ Trek/
    pip install -r requirements.txt
    ```
 
+4. **Initialize Environment Variables**:
+   Copy `.env.example` to `.env` and adjust the variables where necessary:
+   ```bash
+   cp .env.example .env
+   ```
+
 ---
 
 ## Running the Project
 
 1. **Start the Flask Application**:
-   Running the application will automatically create all SQLite database tables and seed demo data:
+   Running the application will automatically create all SQLite database tables and seed the system administrator credentials:
    ```bash
-   python app.py
+   python run.py
    ```
 
 2. **Access the Application**:
-   Open your browser and navigate to `http://127.0.0.1:5000`.
-
-3. **Seeded Accounts**:
-
-   | Role | Email | Password |
-   |------|-------|----------|
-   | Admin | `Jiten@trek.com` | `Jiten@123` |
-   | Staff | `vyeshwanth@trek.com` | `yesh@1234` |
-   | Trekker | `gupta14@gmail.com` | `gupta@123` |
-
-   Three sample treks (Valley of Flowers — Open, Kedarkantha Base Camp — Approved, Chadar Trek — Pending) and a sample booking are also seeded on first run.
+   Open your browser and navigate to `http://127.0.0.1:1234`.
 
 ---
 
