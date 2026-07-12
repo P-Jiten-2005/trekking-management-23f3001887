@@ -21,4 +21,4 @@ if __name__ == '__main__':
             db.session.add(admin)
             db.session.commit()
             print("Admin user seeded.")
-    app.run(debug=True)
+    app.run(host='127.0.0.1', port = 1234,debug=True)
