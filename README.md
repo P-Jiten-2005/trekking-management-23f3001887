@@ -1,6 +1,6 @@
-# HikerHub - Trekking Management System
+# Eco-Hikes - Trekking Management System
 
-**HikerHub** is a web application that helps manage trekking activities. It allows users to book treks, agencies to organize trips, guides to manage assigned treks, and participants to track their bookings. The system brings all these features together in one place, making trek management easier and more organized.
+**Eco-Hikes** is a web application that helps manage trekking activities. It allows users to book treks, agencies to organize trips, guides to manage assigned treks, and participants to track their bookings. The system brings all these features together in one place, making trek management easier and more organized.
 
 ---
 
@@ -118,7 +118,7 @@ Trek/
 1. **Start the Flask Application**:
    Running the application will automatically create all SQLite database tables and seed the system administrator credentials:
    ```bash
-   python run.py
+   python app.py
    ```
 
 2. **Access the Application**:
