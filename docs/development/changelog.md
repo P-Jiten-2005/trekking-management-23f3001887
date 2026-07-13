@@ -269,3 +269,15 @@ This file documents the chronological conversation history and technical changes
   - Generated a verification summary report at `D:\Jiten\Trek\modernization-task-3-report.md`.
 - **Verification**: Confirmed that all **12/12 unit tests pass successfully** (`OK`).
 
+## Turn 32 (Project Syllabus Alignment & Recommended Features)
+- **User Prompt**: Provided the project document text to check and align functionalities.
+- **Agent Action**:
+  - Audited the codebase against the project specification.
+  - Implemented the missing **Admin Edit Trek** core functionality by adding the `'edit'` POST action in `routes/admin.py` and the `#editModal{{ trek.id }}` layout inside `templates/admin/manage_treks.html`.
+  - Added support for the `"Started"` trek status choice for guides in both `templates/admin/manage_treks.html` and `templates/staff/edit_trek.html`.
+  - Implemented automatic transition of active bookings to `'Completed'` status when a staff member or administrator marks a trek as Completed, resolving the participant history update mechanism.
+  - Integrated dynamic **Trekking Statistics Charts** inside `templates/admin/dashboard.html` utilizing Chart.js to render a visual bar chart of booking count statistics.
+  - Built a comprehensive REST JSON API blueprint `/api` inside `routes/api.py` serving data for treks, bookings, and users, and registered it in the Flask app factory.
+- **Verification**: Added automated test coverage cases (`test_admin_edit_trek`, `test_api_resources`, and `test_booking_auto_completion_on_trek_completion`) inside `tests/test_app.py`, verifying that all **19/19 unit tests pass successfully** (`OK`).
+- **Git Actions**: Staged, committed, and pushed all updates and specs to origin `main`.
+
