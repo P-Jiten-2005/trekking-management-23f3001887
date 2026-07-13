@@ -28,6 +28,9 @@ def create_app():
     from routes.trekker import trekker_bp
     app.register_blueprint(trekker_bp)
 
+    from routes.api import api_bp
+    app.register_blueprint(api_bp)
+
     @app.route('/')
     def index():
         from app.models import Trek

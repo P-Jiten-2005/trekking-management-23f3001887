@@ -19,6 +19,20 @@ def dashboard():
     pending_staff = User.query.filter_by(role='staff', is_approved=False).all()
     upcoming_treks = Trek.query.filter(Trek.status.in_(['Approved', 'Open']), Trek.start_date >= date.today()).order_by(Trek.start_date.asc()).limit(5).all()
 
+    # Popular treks statistics for Chart
+    from sqlalchemy import func
+    popular_treks = db.session.query(
+        Trek.name,
+        func.count(Booking.id).label('booking_count')
+    ).join(Booking, Trek.id == Booking.trek_id)\
+     .filter(Booking.status == 'Booked')\
+     .group_by(Trek.id)\
+     .order_by(func.count(Booking.id).desc())\
+     .limit(5).all()
+
+    chart_labels = [pt[0] for pt in popular_treks]
+    chart_data = [pt[1] for pt in popular_treks]
+
     return render_template(
         'admin/dashboard.html',
         total_treks=total_treks,
@@ -27,7 +41,9 @@ def dashboard():
         total_bookings=total_bookings,
         recent_bookings=recent_bookings,
         pending_staff=pending_staff,
-        upcoming_treks=upcoming_treks
+        upcoming_treks=upcoming_treks,
+        chart_labels=chart_labels,
+        chart_data=chart_data
     )
 
 @admin_bp.route('/admin/treks', methods=['GET', 'POST'])
@@ -91,6 +107,68 @@ def manage_treks():
             trek.status = 'Approved'
             db.session.commit()
             flash('Trek approved successfully.', 'success')
+            return redirect(url_for('admin.manage_treks'))
+
+        elif action == 'edit':
+            try:
+                trek_id = int(request.form.get('trek_id'))
+                trek = Trek.query.get_or_404(trek_id)
+
+                name = request.form.get('name')
+                location = request.form.get('location')
+                difficulty = request.form.get('difficulty')
+                duration = int(request.form.get('duration'))
+                max_slots = int(request.form.get('max_slots'))
+                available_slots = int(request.form.get('available_slots'))
+                start_date = datetime.strptime(request.form.get('start_date'), '%Y-%m-%d').date()
+                end_date = datetime.strptime(request.form.get('end_date'), '%Y-%m-%d').date()
+                
+                safety_equipment = request.form.get('safety_equipment')
+                altitude = request.form.get('altitude')
+                length = request.form.get('length')
+                price_val = request.form.get('price')
+                price = float(price_val) if price_val else 0.0
+                image_url = request.form.get('image_url')
+                status = request.form.get('status')
+                staff_id = request.form.get('assigned_staff_id')
+                assigned_staff_id = int(staff_id) if staff_id else None
+            except (ValueError, TypeError):
+                flash('Invalid input formats provided.', 'danger')
+                return redirect(url_for('admin.manage_treks'))
+
+            if start_date > end_date:
+                flash('Start date cannot be after end date.', 'danger')
+                return redirect(url_for('admin.manage_treks'))
+            if duration <= 0 or max_slots <= 0 or available_slots < 0 or price < 0:
+                flash('Duration, slots, and price must be positive values.', 'danger')
+                return redirect(url_for('admin.manage_treks'))
+
+            bookings_count = Booking.query.filter_by(trek_id=trek.id, status='Booked').count()
+            if available_slots + bookings_count > max_slots:
+                flash(f'Total slots (Bookings: {bookings_count} + Available: {available_slots}) cannot exceed capacity ({max_slots}).', 'danger')
+                return redirect(url_for('admin.manage_treks'))
+
+            trek.name = name
+            trek.location = location
+            trek.difficulty = difficulty
+            trek.duration = duration
+            trek.max_slots = max_slots
+            trek.available_slots = available_slots
+            trek.start_date = start_date
+            trek.end_date = end_date
+            trek.safety_equipment = safety_equipment
+            trek.altitude = altitude
+            trek.length = length
+            trek.price = price
+            trek.image_url = image_url
+            trek.status = status
+            trek.assigned_staff_id = assigned_staff_id
+
+            if status == 'Completed':
+                Booking.query.filter_by(trek_id=trek.id, status='Booked').update({'status': 'Completed'})
+
+            db.session.commit()
+            flash('Trek updated successfully.', 'success')
             return redirect(url_for('admin.manage_treks'))
 
         elif action == 'delete':

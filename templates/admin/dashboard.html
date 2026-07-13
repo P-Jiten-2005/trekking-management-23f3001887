@@ -56,6 +56,17 @@
     </div>
 </div>
 
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card action-card p-4">
+            <h4 class="fw-bold mb-3">Popular Treks Bookings Chart</h4>
+            <div style="height: 300px; position: relative;">
+                <canvas id="popularTreksChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row g-4">
     <!-- Left column: Tables -->
     <div class="col-lg-8">
@@ -159,4 +170,55 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const canvas = document.getElementById('popularTreksChart');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const labels = {{ chart_labels | tojson }};
+        const data = {{ chart_data | tojson }};
+        
+        if (labels.length === 0) {
+            ctx.font = "16px Outfit, sans-serif";
+            ctx.fillStyle = "#888";
+            ctx.textAlign = "center";
+            ctx.fillText("No active bookings recorded yet to display statistics.", canvas.width/2, canvas.height/2);
+            return;
+        }
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Bookings Count',
+                    data: data,
+                    backgroundColor: 'rgba(30, 122, 68, 0.75)',
+                    borderColor: 'rgba(30, 122, 68, 1)',
+                    borderWidth: 1.5,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    });
+</script>
 {% endblock %}

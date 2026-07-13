@@ -28,6 +28,7 @@
                         <option value="Approved" selected>Approved (Ready to open)</option>
                         {% endif %}
                         <option value="Open" {% if trek.status == 'Open' %}selected{% endif %}>Open (Accepting bookings)</option>
+                        <option value="Started" {% if trek.status == 'Started' %}selected{% endif %}>Started</option>
                         <option value="Closed" {% if trek.status == 'Closed' %}selected{% endif %}>Closed (No new bookings)</option>
                         <option value="Completed" {% if trek.status == 'Completed' %}selected{% endif %}>Completed</option>
                     </select>

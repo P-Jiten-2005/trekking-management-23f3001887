@@ -70,6 +70,8 @@ def edit_trek(trek_id):
 
         trek.available_slots = slots
         trek.status = status
+        if status == 'Completed':
+            Booking.query.filter_by(trek_id=trek.id, status='Booked').update({'status': 'Completed'})
         db.session.commit()
         flash('Trek details updated successfully.', 'success')
         return redirect(url_for('staff.dashboard'))

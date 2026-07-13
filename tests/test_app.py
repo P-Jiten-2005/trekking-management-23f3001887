@@ -528,5 +528,123 @@ class TrekAppTestCase(unittest.TestCase):
             self.assertIn(b'Trek A', response.data)
             self.assertNotIn(b'<span>Trek B</span>', response.data)
 
+    def test_admin_edit_trek(self):
+        """Verify Admin can edit all trek details."""
+        trek = Trek(
+            name='Original Trek', location='Himalayas', difficulty='Easy', duration=4,
+            max_slots=10, available_slots=10, start_date=date(2026, 8, 1), end_date=date(2026, 8, 5),
+            status='Approved', price=5000.0, image_url='https://images.unsplash.com/photo-default'
+        )
+        db.session.add(trek)
+        db.session.commit()
+
+        with self.client:
+            self.client.post('/login', data={'email': 'Jiten@trek.com', 'password': 'Jiten@123'})
+            response = self.client.post('/admin/treks', data={
+                'action': 'edit',
+                'trek_id': trek.id,
+                'name': 'Updated Trek Name',
+                'location': 'Karakoram',
+                'difficulty': 'Moderate',
+                'duration': 5,
+                'max_slots': 12,
+                'available_slots': 12,
+                'start_date': '2026-08-02',
+                'end_date': '2026-08-07',
+                'altitude': '15,000 ft',
+                'length': '30 km',
+                'safety_equipment': 'Crampons, Rope',
+                'price': '6000.0',
+                'image_url': 'https://images.unsplash.com/photo-updated',
+                'status': 'Open',
+                'assigned_staff_id': ''
+            }, follow_redirects=True)
+            self.assertIn(b'Trek updated successfully', response.data)
+            
+            db_trek = Trek.query.get(trek.id)
+            self.assertEqual(db_trek.name, 'Updated Trek Name')
+            self.assertEqual(db_trek.location, 'Karakoram')
+            self.assertEqual(db_trek.difficulty, 'Moderate')
+            self.assertEqual(db_trek.duration, 5)
+            self.assertEqual(db_trek.max_slots, 12)
+            self.assertEqual(db_trek.available_slots, 12)
+            self.assertEqual(db_trek.start_date, date(2026, 8, 2))
+            self.assertEqual(db_trek.end_date, date(2026, 8, 7))
+            self.assertEqual(db_trek.altitude, '15,000 ft')
+            self.assertEqual(db_trek.length, '30 km')
+            self.assertEqual(db_trek.safety_equipment, 'Crampons, Rope')
+            self.assertEqual(db_trek.price, 6000.0)
+            self.assertEqual(db_trek.image_url, 'https://images.unsplash.com/photo-updated')
+            self.assertEqual(db_trek.status, 'Open')
+
+    def test_api_resources(self):
+        """Verify REST JSON API endpoints return valid JSON response."""
+        trek = Trek(
+            name='API Trek', location='Himalayas', difficulty='Easy', duration=4,
+            max_slots=10, available_slots=10, start_date=date(2026, 8, 1), end_date=date(2026, 8, 5),
+            status='Approved', price=5000.0, image_url='https://images.unsplash.com/photo-default'
+        )
+        db.session.add(trek)
+        db.session.commit()
+
+        with self.client:
+            # 1. GET /api/treks
+            response = self.client.get('/api/treks')
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.content_type, 'application/json')
+            self.assertIn(b'API Trek', response.data)
+
+            # 2. GET /api/treks/<id>
+            response = self.client.get(f'/api/treks/{trek.id}')
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.content_type, 'application/json')
+            self.assertIn(b'API Trek', response.data)
+
+            # 3. GET /api/users
+            response = self.client.get('/api/users')
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.content_type, 'application/json')
+            self.assertIn(b'Jiten@trek.com', response.data)
+
+            # 4. GET /api/bookings
+            response = self.client.get('/api/bookings')
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.content_type, 'application/json')
+
+    def test_booking_auto_completion_on_trek_completion(self):
+        """Verify that marking a trek as completed updates booking status to Completed."""
+        staff = User(email='staff_comp@trek.com', role='staff', name='Staff Comp', is_approved=True)
+        staff.set_password('password')
+        db.session.add(staff)
+        db.session.commit()
+
+        trek = Trek(
+            name='Comp Trek', location='Himalayas', difficulty='Easy', duration=4,
+            max_slots=5, available_slots=4, start_date=date.today(), end_date=date.today() + timedelta(days=3),
+            status='Open', assigned_staff_id=staff.id, price=5000.0
+        )
+        db.session.add(trek)
+        db.session.commit()
+
+        trekker = User(email='trekker_comp@trek.com', role='trekker', name='Trekker Comp', is_approved=True)
+        trekker.set_password('password')
+        db.session.add(trekker)
+        db.session.commit()
+
+        booking = Booking(user_id=trekker.id, trek_id=trek.id, status='Booked')
+        db.session.add(booking)
+        db.session.commit()
+
+        with self.client:
+            self.client.post('/login', data={'email': 'staff_comp@trek.com', 'password': 'password'})
+            response = self.client.post(f'/staff/trek/{trek.id}/edit', data={
+                'available_slots': 4,
+                'status': 'Completed'
+            }, follow_redirects=True)
+            self.assertIn(b'Trek details updated successfully', response.data)
+
+            db_booking = Booking.query.get(booking.id)
+            self.assertEqual(db_booking.status, 'Completed')
+
 if __name__ == '__main__':
     unittest.main()
